@@ -33,6 +33,9 @@ Auth::routes([
 ]);
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home-page');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/services', 'services')->name('services');
+    Route::get('/contact', 'contact')->name('contact');
 });
 
 

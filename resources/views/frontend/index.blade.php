@@ -1,4 +1,4 @@
- @include('frontend.layouts.app')
+ @extends('frontend.layouts.app')
  @section('content')
  <!-- Carousel Start -->
     <div class="container-fluid p-0">
