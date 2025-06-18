@@ -77,7 +77,7 @@
 
                         </ul>
                     </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('offer.index', 'offer.create', 'offer.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
+                    {{-- <li class="sidebar-list" style="{{ request()->routeIs('offer.index', 'offer.create', 'offer.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
                             class="sidebar-link sidebar-title link-nav" href="{{ route('offer.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
@@ -98,10 +98,10 @@
                         </a>
                         <ul class="sidebar-submenu {{ request()->routeIs('why-us-banner.index', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'd-block' : '' }}">
                             <li><a style="{{ request()->routeIs('why-us-banner.index') ? 'background-color: #708090;' : '' }}" href="{{ route('why-us-banner.index') }}">Why Us Banner </a></li>
-                            {{-- <li><a style="{{ request()->routeIs('businessdetail.index') ? 'background-color: #708090;' : '' }}" href="{{ route('businessdetail.index') }}">Business Detail</a></li> --}}
+                            <li><a style="{{ request()->routeIs('businessdetail.index') ? 'background-color: #708090;' : '' }}" href="{{ route('businessdetail.index') }}">Business Detail</a></li>
 
                         </ul>
-                    </li>
+                    </li> --}}
                     {{--<li class="sidebar-list" style="{{ request()->routeIs('contact.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"></i><a
                             class="sidebar-link sidebar-title link-nav" href="{{ route('contact.index') }}">
                             <svg class="stroke-icon">

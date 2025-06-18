@@ -94,6 +94,13 @@
             text-decoration: none;
         }
 
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 480px) {
             .login-container {
@@ -125,11 +132,21 @@
             <h2>Login</h2>
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required />
+                <input type="email" name="email" id="email" value="{{ old('email') }}" />
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" required />
+                <input type="password" name="password" id="password" />
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
             <button type="submit">Login</button>
         </form>

@@ -30,6 +30,7 @@
     <link href="{{asset('frontend/css/style.css')}}" rel="stylesheet">
 </head>
 <body>
+    @include('sweetalert::alert')
     @include('frontend.layouts.header')
 
     @yield('content')

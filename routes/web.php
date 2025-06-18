@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\BannerController;
+use App\Http\Controllers\Dashboard\ConfigurationController;
 use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -36,6 +37,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/about', 'about')->name('about');
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact');
+    Route::post('store/contact',  'storeContact')->name('store.contact');
 });
 
 
@@ -65,4 +67,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     //why-us banner 
     Route::get('/why-us-banner', [WhyUsBannerController::class, 'index'])->name('why-us-banner.index');
     Route::post('/why-us-banner/update', [WhyUsBannerController::class, 'update'])->name('why-us-banner.update');
+
+    Route::get('/site-settings', [ConfigurationController::class, 'getConfiguration'])->name('settings');
+    Route::post('/site-settings', [ConfigurationController::class, 'postConfiguration'])->name('settings.update');
 });
