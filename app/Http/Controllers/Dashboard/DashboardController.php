@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\EnquiryMessage;
 use App\Models\Financial;
 use App\Models\Media;
 use App\Models\Message;
@@ -18,8 +19,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $contactCount = Contact::count();  
-        return view('dashboard.index', compact('contactCount'));
+        $contactCount = Contact::count(); 
+        $enquiryMessageCount = EnquiryMessage::count(); 
+        $testimonialCount = Testimonial::count();
+        return view('dashboard.index', compact('contactCount', 'enquiryMessageCount', 'testimonialCount'));
     }
 
     public function account()

@@ -85,6 +85,26 @@
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
                             </svg><span>Contact</span></a>
                     </li>
+                    <li
+                        class="sidebar-list {{ request()->routeIs('enquiry-banner.index', 'enquiry-message.index') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
+                            </svg>
+                            <span>Enquiry</span>
+                        </a>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('enquiry-banner.index', 'enquiry-message.index') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('enquiry-banner.index') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('enquiry-banner.index') }}">Enquiry Banner </a></li>
+                            <li><a style="{{ request()->routeIs('enquiry-message.index') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('enquiry-message.index') }}">Enquiry Message</a></li>
+
+                        </ul>
+                    </li>
                     <li class="sidebar-list"
                         style="{{ request()->routeIs('offer.index', 'offer.create', 'offer.edit') ? 'background-color: #708090;' : '' }}">
                         <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
@@ -124,11 +144,12 @@
                                     href="{{ route('service-category.index') }}">Services Category </a></li>
                             <li><a style="{{ request()->routeIs('services.index', 'services.create', 'services.edit') ? 'background-color: #708090;' : '' }}"
                                     href="{{ route('services.index') }}">Services</a></li>
-
                         </ul>
                     </li>
-                     <li class="sidebar-list" style="{{ request()->routeIs('settings') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"></i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('settings') }}">
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('settings') ? 'background-color: #708090;' : '' }}"><i
+                            class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('settings') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
                             </svg>

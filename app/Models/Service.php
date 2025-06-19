@@ -22,4 +22,8 @@ class Service extends Model
     {
         return $this->belongsTo(ServiceCategory::class);
     }
+    public function enquiryMessages()
+    {
+        return $this->hasMany(EnquiryMessage::class);
+    }
 }

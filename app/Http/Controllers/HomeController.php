@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\EnquiryMessage;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         $contactCount = Contact::count();
-        return view('dashboard.index', compact('contactCount'));
+        $enquiryMessageCount = EnquiryMessage::count();
+        $testimonialCount = Testimonial::count();
+        return view('dashboard.index', compact('contactCount', 'enquiryMessageCount', 'testimonialCount'));
     }
 }

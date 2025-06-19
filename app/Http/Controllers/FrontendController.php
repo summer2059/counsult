@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class FrontendController extends Controller
 
     public function index()
     {
-        return view('frontend.index');
+        $services = Service::where('status', 1)->latest()->get();
+        return view('frontend.index', compact('services'));
     }
     public function about()
     {

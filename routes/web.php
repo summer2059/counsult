@@ -7,6 +7,8 @@ use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\EnquiryBannerController;
+use App\Http\Controllers\Dashboard\EnquiryMessageController;
 use App\Http\Controllers\Dashboard\QuickLinksController;
 use App\Http\Controllers\Dashboard\ServiceCategoryController;
 use App\Http\Controllers\Dashboard\ServicesController;
@@ -49,6 +51,14 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::post('store/contact',  'storeContact')->name('store.contact');
 });
+// Route::controller(VacancyFormController::class)->group(function () {
+//     Route::post('/career/store', 'storeVacancy')->name('store.vacancy');
+// });
+
+Route::controller(EnquiryMessageController::class)->group(function(){
+    Route::post('/enquiry-message/store', 'store')->name('store.enquiry-message');
+});
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -59,16 +69,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::post('/update-profile', [DashboardController::class, 'update'])->name('profile.update');
     //banner
     Route::resource('/banner', BannerController::class);
-    Route::post('/banner/{id}/toggle-status', [BannerController::class, 'toggleStatus'])->name('banner.toggle-status');
     //consult-banner
     Route::get('/consult-banner', [ConsultBannerController::class, 'index'])->name('consult-banner.index');
     Route::post('/consult-banner/update', [ConsultBannerController::class, 'update'])->name('consult-banner.update');
+    Route::get('/enquiry-banner', [EnquiryBannerController::class,'index'])->name('enquiry-banner.index');
+    Route::post('/enquiry-banner/update', [EnquiryBannerController::class, 'update'])->name('enquiry-banner.update');
+    //why-us
     //consult-detail
     Route::resource('/consult-detail', ConsultDetailController::class);
-    Route::post('/consult-detail/{id}/toggle-status', [ConsultDetailController::class, 'toggleStatus'])->name('consult-detail.toggle-status');
     //offer
     Route::resource('/offer', WeOfferController::class);
-    Route::post('/offer/{id}/toggle-status', [WeOfferController::class, 'toggleStatus'])->name('offer.toggle-status');
     //why-us banner 
     Route::get('/why-us-banner', [WhyUsBannerController::class, 'index'])->name('why-us-banner.index');
     Route::post('/why-us-banner/update', [WhyUsBannerController::class, 'update'])->name('why-us-banner.update');
@@ -88,4 +98,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('/testimoinal', TestimonialController::class);
     Route::resource('/team', TeamController::class);
     Route::resource('/quick-links', QuickLinksController::class);
+    Route::resource('/enquiry-message', EnquiryMessageController::class);
 });
