@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\CosultBanner;
+use App\Models\CosultDetail;
 use App\Models\Service;
+use App\Models\WeOffer;
+use App\Models\WhyUs;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 
@@ -21,7 +26,12 @@ class FrontendController extends Controller
     public function index()
     {
         $services = Service::where('status', 1)->latest()->get();
-        return view('frontend.index', compact('services'));
+        $banner = Banner::where('status',1)->orderBy('priority', 'asc')->latest()->get();
+        $cb = CosultBanner::first();
+        $consult = CosultDetail::where('status', 1)->latest()->get();
+        $offer = WeOffer::where('status', 1)->latest()->get();
+        $fb = WhyUs::first();
+        return view('frontend.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
     }
     public function about()
     {

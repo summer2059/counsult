@@ -29,15 +29,18 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            @if($fb && $fb->title && $fb->description && $fb->image)
+                <div class="col-lg-4">
                 <div class="d-block bg-primary h-100 text-center">
-                    <img class="img-fluid" src="{{asset('frontend/img/feature.jpg')}}" alt="">
+                    <img class="img-fluid" src="{{asset('uploads/images/' . $fb->image)}}" alt="">
                     <div class="p-4">
-                        <p class="text-white mb-4">Clita nonumy sanctus nonumy et clita tempor, et sea amet ut et sadipscing rebum amet takimata amet, sed accusam eos eos dolores dolore et. Et ea ea dolor rebum invidunt clita eos. Sea accusam stet stet ipsum, sit ipsum et ipsum kasd</p>
-                        <a href="" class="btn btn-light py-md-3 px-md-5 rounded-pill mb-2">Learn More</a>
+                        <p class="text-white mb-4">{!! $fb->description !!}</p>
+                        {{-- <a href="" class="btn btn-light py-md-3 px-md-5 rounded-pill mb-2">Learn More</a> --}}
                     </div>
                 </div>
             </div>
+            @endif
+            
             <div class="col-lg-4">
                 <div class="row g-5">
                     <div class="col-12">
