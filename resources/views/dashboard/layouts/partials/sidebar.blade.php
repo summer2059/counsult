@@ -111,22 +111,40 @@
                         </ul>
                     </li>
                     
-                    {{--<li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                    <li class="sidebar-list {{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit', 'services.index', 'services.create', 'services.edit') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
                             </svg>
                             <svg class="fill-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
                             </svg>
-                            <span>Easy Step</span>
+                            <span>Services</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a style="{{ request()->routeIs('step.index') ? 'background-color: #708090;' : '' }}" href="{{ route('step.index') }}">Step </a></li>
-                            <li><a style="{{ request()->routeIs('method.index') ? 'background-color: #708090;' : '' }}" href="{{ route('method.index') }}">Method</a></li>
+                        <ul class="sidebar-submenu {{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit', 'services.index', 'services.create', 'services.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('service-category.index') }}">Services Category </a></li>
+                            <li><a style="{{ request()->routeIs('services.index', 'services.create', 'services.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('services.index') }}">Services</a></li>
 
                         </ul>
-                    </li> --}}
+                    </li>
+                    <li class="sidebar-list" style="{{ request()->routeIs('team.index', 'team.create', 'team.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
+                            class="sidebar-link sidebar-title link-nav" href="{{ route('team.index') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
+                            </svg><span>Team </span></a>
+                    </li>
+                    <li class="sidebar-list" style="{{ request()->routeIs('testimoinal.index', 'testimoinal.create', 'testimoinal.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
+                            class="sidebar-link sidebar-title link-nav" href="{{ route('testimoinal.index') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
+                            </svg><span>Testimonial </span></a>
+                    </li>
                     {{-- <li class="sidebar-list" style="{{ request()->routeIs('feedback.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
                             class="sidebar-link sidebar-title link-nav" href="{{ route('feedback.index') }}">
                             <svg class="stroke-icon">

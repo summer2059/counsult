@@ -8,6 +8,9 @@ use App\Http\Controllers\Dashboard\ConsultDetailController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ServiceCategoryController;
+use App\Http\Controllers\Dashboard\ServicesController;
+use App\Http\Controllers\Dashboard\TeamController;
+use App\Http\Controllers\Dashboard\TestimonialController;
 use App\Http\Controllers\Dashboard\WeOfferController;
 use App\Http\Controllers\Dashboard\WhyUsBannerController;
 use App\Http\Controllers\Dashboard\WhyUsController;
@@ -87,4 +90,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
 
     //service category
     Route::resource('/service-category', ServiceCategoryController::class);
+
+    //services
+    Route::resource('/services', ServicesController::class);
+
+    //testimonial
+    Route::resource('/testimoinal', TestimonialController::class);
+    Route::resource('/team', TeamController::class);
 });
