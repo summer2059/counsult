@@ -72,8 +72,8 @@
         <div class="card-toolbar mb-4">
             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 
-                <a href="{{ route('consult-detail.create') }}" class="btn btn-sm btn-primary">
-                    Add Consult Detail
+                <a href="{{ route('whyus-detail.create') }}" class="btn btn-sm btn-primary">
+                    Add why Us Detail
                 </a>
             </div>
         </div>
@@ -84,7 +84,7 @@
                 <div class="card-title">
                     <!--begin::Search-->
                     <div class="d-flex align-items-center position-relative my-1">
-                        <h4>Consult Detail List</h4>
+                        <h4>why Us Detail List</h4>
                     </div>
                     <!--end::Search-->
                 </div>
@@ -128,7 +128,7 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('consult-detail.index') }}",
+                ajax: "{{ route('whyus-detail.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
@@ -161,7 +161,7 @@
                                         <label class="toggle-status">
                                             <input type="checkbox" class="status-toggle" 
                                             data-id="${row.id}" 
-                                            data-model="CosultDetail" 
+                                            data-model="WhyusDetail" 
                                             ${data ? 'checked' : ''} />
                                             <span class="slider">
                                             <span class="off-text">Off</span>
@@ -230,6 +230,8 @@
                     }
                 });
             });
+
+
         });
     </script>
 @endpush

@@ -157,20 +157,23 @@
                         data: 'status',
                         name: 'status',
                         render: function(data, type, row) {
-                            // Return toggle switch HTML for status
                             return `
-                            <label class="toggle-status">
-                                <input type="checkbox" class="status-toggle" data-id="${row.id}" ${data ? 'checked' : ''} />
-                                <span class="slider">
-                                    <span class="off-text">Off</span>
-                                    <span class="on-text">On</span>
-                                </span>
-                            </label>
-                        `;
+                                        <label class="toggle-status">
+                                            <input type="checkbox" class="status-toggle" 
+                                            data-id="${row.id}" 
+                                            data-model="WeOffer" 
+                                            ${data ? 'checked' : ''} />
+                                            <span class="slider">
+                                            <span class="off-text">Off</span>
+                                            <span class="on-text">On</span>
+                                            </span>
+                                        </label>
+                                    `;
                         },
                         orderable: false,
                         searchable: false
                     },
+
 
                     {
                         data: 'created_at',
@@ -188,12 +191,13 @@
                 ]
             });
             $(document).on('change', '.status-toggle', function() {
-                const bannerId = $(this).data('id');
-                const status = $(this).prop('checked') ? 1 : 0; // Get the new status (1 for On, 0 for Off)
+                const id = $(this).data('id');
+                const model = $(this).data('model');
+                const status = $(this).prop('checked') ? 1 : 0;
                 const button = $(this);
 
                 $.ajax({
-                    url: `/dashboard/offer/${bannerId}/toggle-status`,
+                    url: `toggle-status/${model}/${id}`,
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -205,6 +209,8 @@
                                 icon: 'success',
                                 title: 'Success',
                                 text: 'Status updated successfully!',
+                                timer: 1500,
+                                showConfirmButton: true
                             });
                         } else {
                             Swal.fire({
@@ -212,8 +218,6 @@
                                 title: 'Error',
                                 text: response.message,
                             });
-
-                            // Revert the toggle button state if update fails
                             button.prop('checked', !status);
                         }
                     },
@@ -223,8 +227,6 @@
                             title: 'Error',
                             text: 'An error occurred while updating the status.',
                         });
-
-                        // Revert the toggle button state if request fails
                         button.prop('checked', !status);
                     }
                 });

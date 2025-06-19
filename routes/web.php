@@ -1,14 +1,19 @@
 <?php
 
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\ConfigurationController;
 use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
+use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\ServiceCategoryController;
 use App\Http\Controllers\Dashboard\WeOfferController;
 use App\Http\Controllers\Dashboard\WhyUsBannerController;
 use App\Http\Controllers\Dashboard\WhyUsController;
+use App\Http\Controllers\Dashboard\WhyUsDetailController;
 use App\Http\Controllers\FrontendController;
+use App\Models\ServiceCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +73,18 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::get('/why-us-banner', [WhyUsBannerController::class, 'index'])->name('why-us-banner.index');
     Route::post('/why-us-banner/update', [WhyUsBannerController::class, 'update'])->name('why-us-banner.update');
 
+    //contact 
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
     Route::get('/site-settings', [ConfigurationController::class, 'getConfiguration'])->name('settings');
     Route::post('/site-settings', [ConfigurationController::class, 'postConfiguration'])->name('settings.update');
+
+    //toggle status
+    Route::post('/toggle-status/{model}/{id}', [CommonController::class, 'toggleStatus'])->name('toggle-status');
+
+    //why-us detail
+    Route::resource('/whyus-detail', WhyUsDetailController::class);
+
+    //service category
+    Route::resource('/service-category', ServiceCategoryController::class);
 });

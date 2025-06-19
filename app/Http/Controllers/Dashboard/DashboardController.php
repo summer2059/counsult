@@ -18,8 +18,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-       
-        return view('dashboard.index');
+        $contactCount = Contact::count();  
+        return view('dashboard.index', compact('contactCount'));
     }
 
     public function account()

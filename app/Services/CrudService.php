@@ -158,4 +158,14 @@ class CrudService{
         return trim($title, $seprator);
 
     }
+    public function toggleStatus($modelName, $id)
+    {
+        $modelClass = "App\\Models\\$modelName";
+        $model = $modelClass::findOrFail($id);
+        $model->status = !$model->status;
+        $model->save();
+
+        return $model;
+    }
+
 }
