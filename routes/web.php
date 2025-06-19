@@ -7,9 +7,11 @@ use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
 use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\QuickLinksController;
 use App\Http\Controllers\Dashboard\ServiceCategoryController;
 use App\Http\Controllers\Dashboard\ServicesController;
 use App\Http\Controllers\Dashboard\TeamController;
+use App\Http\Controllers\Dashboard\TestimonialBannerController;
 use App\Http\Controllers\Dashboard\TestimonialController;
 use App\Http\Controllers\Dashboard\WeOfferController;
 use App\Http\Controllers\Dashboard\WhyUsBannerController;
@@ -55,46 +57,35 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::get('/index', [DashboardController::class, 'index'])->name('index');
     Route::get('/update-account', [DashboardController::class, 'account'])->name('update-account');
     Route::post('/update-profile', [DashboardController::class, 'update'])->name('profile.update');
-
     //banner
     Route::resource('/banner', BannerController::class);
     Route::post('/banner/{id}/toggle-status', [BannerController::class, 'toggleStatus'])->name('banner.toggle-status');
-
     //consult-banner
     Route::get('/consult-banner', [ConsultBannerController::class, 'index'])->name('consult-banner.index');
     Route::post('/consult-banner/update', [ConsultBannerController::class, 'update'])->name('consult-banner.update');
-
     //consult-detail
     Route::resource('/consult-detail', ConsultDetailController::class);
     Route::post('/consult-detail/{id}/toggle-status', [ConsultDetailController::class, 'toggleStatus'])->name('consult-detail.toggle-status');
-
     //offer
     Route::resource('/offer', WeOfferController::class);
     Route::post('/offer/{id}/toggle-status', [WeOfferController::class, 'toggleStatus'])->name('offer.toggle-status');
-
     //why-us banner 
     Route::get('/why-us-banner', [WhyUsBannerController::class, 'index'])->name('why-us-banner.index');
     Route::post('/why-us-banner/update', [WhyUsBannerController::class, 'update'])->name('why-us-banner.update');
-
+    Route::get('/testimonial-banner', [TestimonialBannerController::class, 'index'])->name('testimonial-banner.index');
+    Route::post('/testimonial-banner/update', [TestimonialBannerController::class, 'update'])->name('testimonial-banner.update');
     //contact 
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-
     Route::get('/site-settings', [ConfigurationController::class, 'getConfiguration'])->name('settings');
     Route::post('/site-settings', [ConfigurationController::class, 'postConfiguration'])->name('settings.update');
-
     //toggle status
     Route::post('/toggle-status/{model}/{id}', [CommonController::class, 'toggleStatus'])->name('toggle-status');
-
     //why-us detail
     Route::resource('/whyus-detail', WhyUsDetailController::class);
-
     //service category
     Route::resource('/service-category', ServiceCategoryController::class);
-
-    //services
     Route::resource('/services', ServicesController::class);
-
-    //testimonial
     Route::resource('/testimoinal', TestimonialController::class);
     Route::resource('/team', TeamController::class);
+    Route::resource('/quick-links', QuickLinksController::class);
 });

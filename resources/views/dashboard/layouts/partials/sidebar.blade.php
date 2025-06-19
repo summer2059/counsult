@@ -1,7 +1,6 @@
 <div class="sidebar-wrapper" data-layout="stroke-svg">
     <div>
-        <div class="logo-wrapper "><a href="#"><img class="img-fluid logo_img"
-                    src="" alt=""></a>
+        <div class="logo-wrapper "><a href="#"><img class="img-fluid logo_img" src="" alt=""></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar">
                 <svg class="stroke-icon sidebar-toggle status_toggle middle">
@@ -12,14 +11,14 @@
                 </svg>
             </div>
         </div>
-        <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid logo_icon"
-                    src="" alt=""></a></div>
+        <div class="logo-icon-wrapper"><a href="#"><img class="img-fluid logo_icon" src=""
+                    alt=""></a></div>
         <nav class="sidebar-main">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="sidebar-menu">
                 <ul class="sidebar-links" id="simple-bar">
-                    <li class="back-btn"><a href="#"><img class="img-fluid logo_icon"
-                                src="" alt=""></a>
+                    <li class="back-btn"><a href="#"><img class="img-fluid logo_icon" src=""
+                                alt=""></a>
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                 aria-hidden="true"></i></div>
                     </li>
@@ -33,8 +32,10 @@
                             <h6 class="lan-1">General</h6>
                         </div>
                     </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('index') }}">
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('index') ? 'background-color: #708090;' : '' }}"><i
+                            class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
                             </svg>
@@ -42,17 +43,10 @@
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>Dashboard </span></a>
                     </li>
-                    {{-- <li class="sidebar-list" style="{{ request()->routeIs('about-us.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"></i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('about-us.index') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
-                            </svg><span>About Us</span></a>
-                    </li> --}}
-                    <li class="sidebar-list" style="{{ request()->routeIs('banner.index', 'banner.create', 'banner.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('banner.index') }}">
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('banner.index', 'banner.create', 'banner.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('banner.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
                             </svg>
@@ -60,16 +54,8 @@
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>Banner </span></a>
                     </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('contact.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"></i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('contact.index') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
-                            </svg><span>Contact</span></a>
-                    </li>
-                    <li class="sidebar-list {{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'open' : '' }}">
+                    <li
+                        class="sidebar-list {{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'open' : '' }}">
                         <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
@@ -79,14 +65,30 @@
                             </svg>
                             <span>Consult</span>
                         </a>
-                        <ul class="sidebar-submenu {{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'd-block' : '' }}">
-                            <li><a style="{{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('consult-banner.index') }}">Counsult Banner </a></li>
-                            <li><a style="{{ request()->routeIs('consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('consult-detail.index') }}">Counsult Banner</a></li>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('consult-banner.index') }}">Counsult Banner </a></li>
+                            <li><a style="{{ request()->routeIs('consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('consult-detail.index') }}">Counsult Banner</a></li>
 
                         </ul>
                     </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('offer.index', 'offer.create', 'offer.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('offer.index') }}">
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('contact.index') ? 'background-color: #708090;' : '' }}"><i
+                            class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('contact.index') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
+                            </svg><span>Contact</span></a>
+                    </li>
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('offer.index', 'offer.create', 'offer.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('offer.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
                             </svg>
@@ -94,24 +96,19 @@
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>Offer </span></a>
                     </li>
-                     <li class="sidebar-list {{ request()->routeIs('why-us-banner.index', 'whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'open' : '' }}">
-                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('quick-links.index', 'quick-links.create', 'quick-links.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('quick-links.index') }}">
                             <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
                             </svg>
                             <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
-                            </svg>
-                            <span>Why Us</span>
-                        </a>
-                        <ul class="sidebar-submenu {{ request()->routeIs('why-us-banner.index', 'whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'd-block' : '' }}">
-                            <li><a style="{{ request()->routeIs('why-us-banner.index') ? 'background-color: #708090;' : '' }}" href="{{ route('why-us-banner.index') }}">Why Us Banner </a></li>
-                            <li><a style="{{ request()->routeIs('whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('whyus-detail.index') }}">Why Us Detail</a></li>
-
-                        </ul>
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
+                            </svg><span>Quick Links </span></a>
                     </li>
-                    
-                    <li class="sidebar-list {{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit', 'services.index', 'services.create', 'services.edit') ? 'open' : '' }}">
+                    <li
+                        class="sidebar-list {{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit', 'services.index', 'services.create', 'services.edit') ? 'open' : '' }}">
                         <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
@@ -121,14 +118,29 @@
                             </svg>
                             <span>Services</span>
                         </a>
-                        <ul class="sidebar-submenu {{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit', 'services.index', 'services.create', 'services.edit') ? 'd-block' : '' }}">
-                            <li><a style="{{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('service-category.index') }}">Services Category </a></li>
-                            <li><a style="{{ request()->routeIs('services.index', 'services.create', 'services.edit') ? 'background-color: #708090;' : '' }}" href="{{ route('services.index') }}">Services</a></li>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit', 'services.index', 'services.create', 'services.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('service-category.index', 'service-category.create', 'service-category.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('service-category.index') }}">Services Category </a></li>
+                            <li><a style="{{ request()->routeIs('services.index', 'services.create', 'services.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('services.index') }}">Services</a></li>
 
                         </ul>
                     </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('team.index', 'team.create', 'team.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('team.index') }}">
+                     <li class="sidebar-list" style="{{ request()->routeIs('settings') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"></i><a
+                            class="sidebar-link sidebar-title link-nav" href="{{ route('settings') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
+                            </svg><span>Site Settings</span></a>
+                    </li>
+
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('team.index', 'team.create', 'team.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('team.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
                             </svg>
@@ -136,68 +148,29 @@
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>Team </span></a>
                     </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('testimoinal.index', 'testimoinal.create', 'testimoinal.edit') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('testimoinal.index') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
-                            </svg><span>Testimonial </span></a>
-                    </li>
-                    {{-- <li class="sidebar-list" style="{{ request()->routeIs('feedback.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('feedback.index') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
-                            </svg><span>Feedback </span></a>
-                    </li> --}}
-                    {{-- <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                    <li
+                        class="sidebar-list {{ request()->routeIs('why-us-banner.index', 'whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
                             </svg>
                             <svg class="fill-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
                             </svg>
-                            <span>Feedback</span>
+                            <span>Testimonial</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a style="{{ request()->routeIs('feedback.index') ? 'background-color: #708090;' : '' }}" href="{{ route('feedback.index') }}">Feedback </a></li>
-                            <li><a style="{{ request()->routeIs('testimoinal.index') ? 'background-color: #708090;' : '' }}" href="{{ route('testimoinal.index') }}">Testimoinal</a></li>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('testimonial-banner.index', 'testimoinal.index', 'testimoinal.create', 'testimoinal.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('testimonial-banner.index') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('testimonial-banner.index') }}">Testimonial Banner </a></li>
+                            <li><a style="{{ request()->routeIs('testimoinal.index', 'testimoinal.create', 'testimoinal.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('testimoinal.index') }}">Testimonial</a></li>
 
                         </ul>
                     </li>
-                    
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
-                            </svg>
-                            <span>Financial</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a style="{{ request()->routeIs('finance.index') ? 'background-color: #708090;' : '' }}" href="{{ route('finance.index') }}">Finance </a></li>
-                            <li><a style="{{ request()->routeIs('financialdetail.index') ? 'background-color: #708090;' : '' }}" href="{{ route('financialdetail.index') }}">Finance Details</a></li>
-
-                        </ul>
-                    </li>
-                    <li class="sidebar-list" style="{{ request()->routeIs('question.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('question.index') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
-                            </svg><span>Question </span></a>
-                    </li>
-                    <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title">
+                    <li
+                        class="sidebar-list {{ request()->routeIs('why-us-banner.index', 'whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
                             </svg>
@@ -206,32 +179,16 @@
                             </svg>
                             <span>Why Us</span>
                         </a>
-                        <ul class="sidebar-submenu">
-                            <li><a style="{{ request()->routeIs('whyus.index') ? 'background-color: #708090;' : '' }}" href="{{ route('whyus.index') }}">Why US </a></li>
-                            <li><a style="{{ request()->routeIs('whyusdetail.index') ? 'background-color: #708090;' : '' }}" href="{{ route('whyusdetail.index') }}">Why Us Details</a></li>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('why-us-banner.index', 'whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('why-us-banner.index') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('why-us-banner.index') }}">Why Us Banner </a></li>
+                            <li><a style="{{ request()->routeIs('whyus-detail.index', 'whyus-detail.create', 'whyus-detail.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('whyus-detail.index') }}">Why Us Detail</a></li>
 
                         </ul>
                     </li>
 
-                    <li class="sidebar-list" style="{{ request()->routeIs('settings') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('settings') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
-                            </svg><span>Site Settings </span></a>
-                    </li> --}}
-                    {{-- <li class="sidebar-list" style="{{ request()->routeIs('testimoinal.index') ? 'background-color: #708090;' : '' }}"><i class="fa fa-thumb-tack"> </i><a
-                            class="sidebar-link sidebar-title link-nav" href="{{ route('testimoinal.index') }}">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
-                            </svg><span>Testimonial </span></a>
-                    </li> --}}
-                    
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
