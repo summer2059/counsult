@@ -1,9 +1,6 @@
 <?php
 
 use App\Models\Configuration;
-use App\Models\OfferCategory;
-use App\Models\Page;
-use App\Models\QuickLinks;
 
 function getConfiguration($key){
     $config = Configuration::where('configuration_key', '=', $key)->first();

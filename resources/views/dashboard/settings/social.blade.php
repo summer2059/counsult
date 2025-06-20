@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('android_app_link') ? ' has-error' : '' }}">
+                   {{-- <div class="form-group{{ $errors->has('android_app_link') ? ' has-error' : '' }}">
                         <label for="android_app_link" class="col-sm-2 control-label">Android App Link</label>
                         <div class="col-sm-10">
                             <input type="text" name="android_app_link" class="form-control" id="android_app_link"
@@ -67,7 +67,7 @@
                                 </span> 
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
 
 
                  

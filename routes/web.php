@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Dashboard\BannerController;
+use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\ConfigurationController;
 use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
@@ -98,4 +99,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('/team', TeamController::class);
     Route::resource('/quick-links', QuickLinksController::class);
     Route::resource('/enquiry-message', EnquiryMessageController::class);
+    Route::resource('/blog-category', BlogCategoryController::class);
 });
