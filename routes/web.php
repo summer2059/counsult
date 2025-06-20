@@ -50,10 +50,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/services', 'services')->name('services');
     Route::get('/contact', 'contact')->name('contact');
     Route::post('store/contact',  'storeContact')->name('store.contact');
+    Route::get('/blog', 'blog')->name('blog');
+    Route::get('/blogdetail', 'blogDetails')->name('blogdetail');
 });
-// Route::controller(VacancyFormController::class)->group(function () {
-//     Route::post('/career/store', 'storeVacancy')->name('store.vacancy');
-// });
 
 Route::controller(EnquiryMessageController::class)->group(function(){
     Route::post('/enquiry-message/store', 'store')->name('store.enquiry-message');

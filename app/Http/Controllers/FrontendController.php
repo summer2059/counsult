@@ -67,4 +67,12 @@ class FrontendController extends Controller
 
         return redirect()->back();
     }
+    public function blog()
+    {
+        return view('frontend.blog');
+    }
+    public function blogDetails()
+    {
+        return view('frontend.blogdetail');
+    }
 }
