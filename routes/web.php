@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
+use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\ConfigurationController;
 use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\Dashboard\WhyUsBannerController;
 use App\Http\Controllers\Dashboard\WhyUsController;
 use App\Http\Controllers\Dashboard\WhyUsDetailController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\JapanController;
+use App\Http\Controllers\NepaliController;
 use App\Models\ServiceCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,7 +62,13 @@ Route::controller(EnquiryMessageController::class)->group(function(){
     Route::post('/enquiry-message/store', 'store')->name('store.enquiry-message');
 });
 
+Route::controller(NepaliController::class)->group(function () {
+    Route::get('/np', 'np_index')->name('np.index');
+});
 
+Route::controller(JapanController::class)->group(function () {
+    Route::get('/jp', 'jp_index')->name('jp.index');
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
@@ -100,4 +109,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('/quick-links', QuickLinksController::class);
     Route::resource('/enquiry-message', EnquiryMessageController::class);
     Route::resource('/blog-category', BlogCategoryController::class);
+    Route::resource('/blog', BlogController::class);
 });

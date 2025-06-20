@@ -55,6 +55,25 @@
                             </svg><span>Banner </span></a>
                     </li>
                     <li
+                        class="sidebar-list {{ request()->routeIs('blog-category.index', 'blog-category.create', 'blog-category.edit', 'blog.index', 'blog.create', 'blog.edit') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
+                            </svg>
+                            <span>Blog</span>
+                        </a>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('blog-category.index', 'blog-category.create', 'blog-category.edit', 'blog.index', 'blog.create', 'blog.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('blog-category.index', 'blog-category.create', 'blog-category.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('blog-category.index') }}">Blog Category </a></li>
+                            <li><a style="{{ request()->routeIs('blog.index', 'blog.create', 'blog.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('blog.index') }}">Blog</a></li>
+                        </ul>
+                    </li>
+                    <li
                         class="sidebar-list {{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'open' : '' }}">
                         <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
