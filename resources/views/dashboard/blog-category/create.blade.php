@@ -44,16 +44,6 @@
 
                     </div>
 
-                    <div class="col-12 mb-3">
-                        <label for="titleInput">Title (NP)</label>
-                        <input class="form-control @error('np_title') is-invalid @enderror" id="titleInput" type="text"
-                            name="np_title" value="{{ old('np_title') }}">
-
-                        @error('np_title')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-
-                    </div>
 
                     <div class="col-12 mb-3">
                         <label for="status">Status</label>

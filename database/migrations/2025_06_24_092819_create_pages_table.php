@@ -11,25 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('careers', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
-            $table->string('description')->nullable();
-            $table->string('position')->nullable();
-            $table->string('location')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
+            $table->longText('description')->nullable();
             $table->string('jp_title')->nullable();
             $table->string('jp_slug')->nullable();
-            $table->string('jp_description')->nullable();
-            $table->string('jp_position')->nullable();
-            $table->string('jp_location')->nullable();
-            $table->date('jp_start_date')->nullable();
-            $table->date('jp_end_date')->nullable();
+            $table->longText('jp_description')->nullable();
+            $table->boolean('status')->default(0);
             $table->unsignedBigInteger('type_id')->nullable();
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }
@@ -39,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('careers');
+        Schema::dropIfExists('pages');
     }
 };

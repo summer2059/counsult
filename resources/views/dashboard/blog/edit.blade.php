@@ -57,10 +57,7 @@
                         <input class="form-control" name="title" value="{{ old('title', $data->title) }}">
                     </div>
 
-                    <div class="col-12 mb-3 lang-field lang-nepali d-none">
-                        <label>Title (Nepali)</label>
-                        <input class="form-control" name="np_title" value="{{ old('np_title', $data->np_title) }}">
-                    </div>
+                    
 
                     <div class="col-12 mb-3 lang-field lang-japanese d-none">
                         <label>Title (Japanese)</label>
@@ -73,10 +70,7 @@
                         <textarea class="form-control summernote" name="description">{{ old('description', $data->description) }}</textarea>
                     </div>
 
-                    <div class="col-12 mb-3 lang-field lang-nepali d-none">
-                        <label>Description (Nepali)</label>
-                        <textarea class="form-control summernote" name="np_description">{{ old('np_description', $data->np_description) }}</textarea>
-                    </div>
+                    
 
                     <div class="col-12 mb-3 lang-field lang-japanese d-none">
                         <label>Description (Japanese)</label>
@@ -148,7 +142,6 @@
             function updateCategoryLabels(lang) {
                 $('#categorySelect option').each(function() {
                     let label = $(this).data('title');
-                    if (lang === 'nepali') label = $(this).data('np_title');
                     if (lang === 'japanese') label = $(this).data('jp_title');
                     $(this).text(label || 'N/A');
                 });
