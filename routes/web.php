@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\ContactController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EnquiryBannerController;
 use App\Http\Controllers\Dashboard\EnquiryMessageController;
+use App\Http\Controllers\Dashboard\PageController;
 use App\Http\Controllers\Dashboard\QuickLinksController;
 use App\Http\Controllers\Dashboard\ServiceCategoryController;
 use App\Http\Controllers\Dashboard\ServicesController;
@@ -62,6 +63,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/career', 'career')->name('career');
     Route::get('/career-detail/{slug}', 'careerDetails')->name('career-detail');
     Route::post('/store/career', 'storeCareer')->name('store.career');
+    Route::get('/page/{slug}', 'page')->name('page');
 });
 
 Route::controller(EnquiryMessageController::class)->group(function(){
@@ -83,6 +85,7 @@ Route::controller(JapanController::class)->group(function () {
     Route::get('/jp/career', 'career')->name('jp.career');
     Route::get('/jp/career-detail/{slug}', 'careerDetails')->name('jp.career-detail');
     Route::post('/jp/store/career', 'storeCareer')->name('jp.store.career');
+    Route::get('/jp/page/{slug}', 'page')->name('jp.page');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -127,4 +130,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('/blog', BlogController::class);
     Route::resource('/career', CareerController::class);
     Route::resource('/career-form', CareerFormController::class);
+    Route::resource('/page', PageController::class);
 });

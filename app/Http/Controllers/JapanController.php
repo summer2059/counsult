@@ -7,6 +7,7 @@ use App\Models\Career;
 use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
+use App\Models\Page;
 use App\Models\Service;
 use App\Models\WeOffer;
 use App\Models\WhyUs;
@@ -122,5 +123,11 @@ class JapanController extends Controller
     }
 
         return redirect()->back();
+    }
+    public function page($slug)
+    {
+        $page = Page::where('jp_slug', $slug)->first();
+        return view('japan.page', compact('page'));
+
     }
 }

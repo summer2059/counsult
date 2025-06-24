@@ -15,5 +15,7 @@ class Type extends Model
     public function careerforms(){
         return $this->hasMany(CareerForm::class);
     }
-
+    public function pages(){
+        return $this->hasMany(Page::class);
+    }
 }

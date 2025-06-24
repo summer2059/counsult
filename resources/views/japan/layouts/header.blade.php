@@ -3,9 +3,12 @@
         <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
             <div class="d-inline-flex align-items-center">
                 <a class="text-body py-2 pe-3 border-end" href=""><small>FAQs</small></a>
-                <a class="text-body py-2 px-3 border-end" href=""><small>Support</small></a>
+                @foreach(getPageJP() as $page)
+                    <a class="text-body py-2 px-3 border-end" href="{{ route('jp.page', $page->jp_slug) }}"><small>{{ $page->jp_title }}</small></a>
+                @endforeach
+                {{-- <a class="text-body py-2 px-3 border-end" href=""><small>Support</small></a>
                 <a class="text-body py-2 px-3 border-end" href=""><small>Privacy</small></a>
-                <a class="text-body py-2 px-3 border-end" href=""><small>Policy</small></a>
+                <a class="text-body py-2 px-3 border-end" href=""><small>Policy</small></a> --}}
                 <a class="text-body py-2 ps-3" href="{{route('jp.career')}}"><small>キャリア</small></a>
             </div>
         </div>
