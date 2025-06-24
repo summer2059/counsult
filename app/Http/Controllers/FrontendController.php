@@ -39,7 +39,13 @@ class FrontendController extends Controller
     }
     public function about()
     {
-        return view('frontend.about');
+        $services = Service::where('status', 1)->latest()->get();
+        $banner = Banner::where('status',1)->orderBy('priority', 'asc')->latest()->get();
+        $cb = CosultBanner::first();
+        $consult = CosultDetail::where('status', 1)->latest()->get();
+        $offer = WeOffer::where('status', 1)->latest()->get();
+        $fb = WhyUs::first();
+        return view('frontend.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
     }
     public function services(){
         return view('frontend.service');

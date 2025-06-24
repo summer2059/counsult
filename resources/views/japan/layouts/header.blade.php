@@ -48,6 +48,8 @@
                 class="nav-item nav-link {{ request()->routeIs('jp.services') ? 'active' : '' }}">サービス</a>
             <a href="{{ route('jp.contact') }}"
                 class="nav-item nav-link {{ request()->routeIs('jp.contact') ? 'active' : '' }}">お問い合わせ</a>
+            <a href="{{ route('jp.blog') }}"
+                class="nav-item nav-link {{ request()->routeIs('jp.blog') ? 'active' : '' }}">ブログ</a>
 
             <!-- Language Dropdown -->
             <div class="nav-item dropdown">

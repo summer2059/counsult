@@ -89,6 +89,8 @@ Route::controller(JapanController::class)->group(function () {
     Route::post('/jp/store/career', 'storeCareer')->name('jp.store.career');
     Route::get('/jp/page/{slug}', 'page')->name('jp.page');
     Route::get('/jp/faqs', 'jpFaqs')->name('jp.faqs');
+    Route::get('/jp/blog', 'jpBlog')->name('jp.blog');
+    Route::get('/jp/blogdetail', 'jpBlogDetails')->name('jp.blogdetail');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
