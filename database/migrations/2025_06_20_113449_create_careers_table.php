@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('careers', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('jp_title')->nullable();
+            $table->string('jp_slug')->nullable();
+            $table->text('description')->nullable();
+            $table->text('jp_description')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }
