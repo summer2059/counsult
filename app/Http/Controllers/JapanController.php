@@ -7,6 +7,7 @@ use App\Models\Career;
 use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
+use App\Models\FAQs;
 use App\Models\Page;
 use App\Models\Service;
 use App\Models\WeOffer;
@@ -130,4 +131,8 @@ class JapanController extends Controller
         return view('japan.page', compact('page'));
 
     }
+    public function jpFaqs() {
+    $faqs = FAQs::where('status', 1)->where('type_id', 2)->latest()->get();
+    return view('japan.faqs', compact('faqs'));
+}
 }

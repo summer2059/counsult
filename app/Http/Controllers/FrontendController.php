@@ -7,6 +7,7 @@ use App\Models\Career;
 use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
+use App\Models\FAQs;
 use App\Models\Page;
 use App\Models\Service;
 use App\Models\WeOffer;
@@ -130,5 +131,9 @@ class FrontendController extends Controller
         $page = Page::where('slug', $slug)->first();
         return view('frontend.page', compact('page'));
 
+    }
+    public function faqs(){
+        $faqs = FAQs::where('status', 1)->where('type_id', 1)->latest()->get();
+        return view('frontend.faqs', compact('faqs'));
     }
 }

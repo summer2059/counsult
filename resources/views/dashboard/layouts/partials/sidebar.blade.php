@@ -145,6 +145,17 @@
                         </ul>
                     </li>
                     <li class="sidebar-list"
+                        style="{{ request()->routeIs('faqs.index', 'faqs.create', 'faqs.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('faqs.index') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
+                            </svg><span>FAQ'S </span></a>
+                    </li>
+                    <li class="sidebar-list"
                         style="{{ request()->routeIs('offer.index', 'offer.create', 'offer.edit') ? 'background-color: #708090;' : '' }}">
                         <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
                             href="{{ route('offer.index') }}">
@@ -154,6 +165,17 @@
                             <svg class="fill-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>Offer </span></a>
+                    </li>
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('page.index', 'page.create', 'page.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('page.index') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
+                            </svg><span>Pages </span></a>
                     </li>
                     <li class="sidebar-list"
                         style="{{ request()->routeIs('quick-links.index', 'quick-links.create', 'quick-links.edit') ? 'background-color: #708090;' : '' }}">
