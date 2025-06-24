@@ -18,4 +18,7 @@ class Type extends Model
     public function pages(){
         return $this->hasMany(Page::class);
     }
+    public function faqs(){
+        return $this->hasMany(FAQs::class);
+    }
 }
