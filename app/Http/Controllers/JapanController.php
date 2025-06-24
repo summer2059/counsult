@@ -78,7 +78,7 @@ class JapanController extends Controller
     }
     public function career()
     {
-        $career = Career::where('status', 1)->where('type_id', 2)->latest()->get();
+        $career = Career::where('status', 1)->whereDate('end_date', '>=', now()->toDateString())->whereDate('start_date', '<=', now()->toDateString())->where('type_id', 2)->latest()->get();
         return view('japan.career', compact('career'));
     }
     public function careerDetails($slug)

@@ -79,7 +79,7 @@ class FrontendController extends Controller
     }
     public function career()
     {
-        $career = Career::where('status', 1)->where('type_id', 1)->latest()->get();
+        $career = Career::where('status', 1)->whereDate('end_date', '>=', now()->toDateString())->whereDate('start_date', '<=', now()->toDateString())->where('type_id', 1)->latest()->get();
         return view('frontend.career', compact('career'));
     }
     public function careerDetails($slug)
