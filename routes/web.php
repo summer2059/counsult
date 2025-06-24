@@ -4,6 +4,7 @@ use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Dashboard\BannerController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
+use App\Http\Controllers\Dashboard\CareerController;
 use App\Http\Controllers\Dashboard\ConfigurationController;
 use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
@@ -56,6 +57,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('store/contact',  'storeContact')->name('store.contact');
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/blogdetail', 'blogDetails')->name('blogdetail');
+    Route::get('/career', 'career')->name('career');
+    Route::get('/career-detail/{slug}', 'careerDetails')->name('career-detail');
+    Route::post('/store/career', 'storeCareer')->name('store.career');
 });
 
 Route::controller(EnquiryMessageController::class)->group(function(){
@@ -68,6 +72,15 @@ Route::controller(NepaliController::class)->group(function () {
 
 Route::controller(JapanController::class)->group(function () {
     Route::get('/jp', 'jp_index')->name('jp.index');
+    Route::get('/jp/about', 'about')->name('jp.about');
+    Route::get('/jp/services', 'services')->name('jp.services');
+    Route::get('/jp/contact', 'contact')->name('jp.contact');
+    Route::post('/jp/store/contact',  'storeContact')->name('jp.store.contact');
+    Route::get('/jp/blog', 'blog')->name('jp.blog');
+    Route::get('/jp/blogdetail', 'blogDetails')->name('jp.blogdetail');
+    Route::get('/jp/career', 'career')->name('jp.career');
+    Route::get('/jp/career-detail/{slug}', 'careerDetails')->name('jp.career-detail');
+    Route::post('/jp/store/career', 'storeCareer')->name('jp.store.career');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -110,4 +123,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('/enquiry-message', EnquiryMessageController::class);
     Route::resource('/blog-category', BlogCategoryController::class);
     Route::resource('/blog', BlogController::class);
+    Route::resource('/career', CareerController::class);
 });

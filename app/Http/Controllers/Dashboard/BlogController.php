@@ -35,8 +35,6 @@ class BlogController extends Controller
                     if (!$category) return 'N/A';
 
                     switch ($data->type) {
-                        case 'nepali':
-                            return $category->np_title ?? $category->title;
                         case 'japanese':
                             return $category->jp_title ?? $category->title;
                         default:
@@ -44,9 +42,7 @@ class BlogController extends Controller
                     }
                 })
                 ->addColumn('title', function ($data) {
-                    if ($data->type === 'nepali') {
-                        return $data->np_title ?? 'N/A';
-                    } elseif ($data->type === 'japanese') {
+                    if ($data->type === 'japanese') {
                         return $data->jp_title ?? 'N/A';
                     }
                     return $data->title ?? 'N/A';
@@ -75,7 +71,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:english,nepali,japanese',
+            'type' => 'required|in:english,japanese',
             'blog_category_id' => 'required|exists:blog_categories,id',
             'image' => 'required',
         ]);
@@ -88,14 +84,6 @@ class BlogController extends Controller
         ];
 
         switch ($request->type) {
-            case 'nepali':
-                $request->validate([
-                    'np_title' => 'required|string',
-                    'np_description' => 'required|string',
-                ]);
-                $data['np_title'] = $request->np_title;
-                $data['np_description'] = $request->np_description;
-                break;
 
             case 'japanese':
                 $request->validate([
@@ -145,14 +133,6 @@ class BlogController extends Controller
         ];
 
         switch ($request->type) {
-            case 'nepali':
-                $request->validate([
-                    'np_title' => 'required|string',
-                    'np_description' => 'required|string',
-                ]);
-                $data['np_title'] = $request->np_title;
-                $data['np_description'] = $request->np_description;
-                break;
 
             case 'japanese':
                 $request->validate([

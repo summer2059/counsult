@@ -103,9 +103,8 @@
                     <thead>
                         <tr class="text-start text-black-500 fw-bold fs-7 text-uppercase gs-0">
                             <th>S.N</th>
-                            <th>Title</th>
+                            <th>English Title</th>
                             <th>Japanese Title</th>
-                            <th>Nepalese Title</th>
                             <th>Status</th>
                             <th>Created Date</th>
                             <th class="min-w-70px">Actions</th>
@@ -141,10 +140,6 @@
                     {
                         data: 'jp_title',
                         name: 'jp_title'
-                    },
-                    {
-                        data: 'np_title',
-                        name: 'np_title'
                     },
                     {
                         data: 'status',

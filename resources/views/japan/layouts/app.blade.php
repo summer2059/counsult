@@ -31,10 +31,10 @@
 </head>
 <body>
     @include('sweetalert::alert')
-    @include('frontend.layouts.header')
+    @include('japan.layouts.header')
 
     @yield('content')
 </body>
-@include('frontend.layouts.footer')
+@include('japan.layouts.footer')
 @stack('js')
 </html>

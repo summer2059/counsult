@@ -23,7 +23,6 @@
                         <label for="type">Language</label>
                         <select name="type" id="type" class="form-control">
                             <option value="english" {{ old('type') === 'english' ? 'selected' : '' }}>English</option>
-                            <option value="nepali" {{ old('type') === 'nepali' ? 'selected' : '' }}>Nepali</option>
                             <option value="japanese" {{ old('type') === 'japanese' ? 'selected' : '' }}>Japanese</option>
                         </select>
                         @error('type')
@@ -38,7 +37,6 @@
                             @foreach ($categories as $cate)
                                 <option value="{{ $cate->id }}"
                                     data-title="{{ $cate->title }}"
-                                    data-np_title="{{ $cate->np_title }}"
                                     data-jp_title="{{ $cate->jp_title }}"
                                     {{ old('blog_category_id') == $cate->id ? 'selected' : '' }}>
                                     {{ $cate->title }}
@@ -56,10 +54,7 @@
                         <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                     </div>
 
-                    <div class="col-12 mb-3 lang-field lang-nepali d-none">
-                        <label for="np_title">Title (Nepali)</label>
-                        <input type="text" class="form-control" name="np_title" value="{{ old('np_title') }}">
-                    </div>
+                    
 
                     <div class="col-12 mb-3 lang-field lang-japanese d-none">
                         <label for="jp_title">Title (Japanese)</label>
@@ -72,10 +67,6 @@
                         <textarea name="description" class="form-control summernote">{{ old('description') }}</textarea>
                     </div>
 
-                    <div class="col-12 mb-3 lang-field lang-nepali d-none">
-                        <label for="np_description">Description (Nepali)</label>
-                        <textarea name="np_description" class="form-control summernote">{{ old('np_description') }}</textarea>
-                    </div>
 
                     <div class="col-12 mb-3 lang-field lang-japanese d-none">
                         <label for="jp_description">Description (Japanese)</label>
@@ -145,12 +136,9 @@
             function updateCategoryLabels(lang) {
                 $('#categorySelect option').each(function () {
                     let defaultTitle = $(this).data('title');
-                    let npTitle = $(this).data('np_title');
                     let jpTitle = $(this).data('jp_title');
                     let label = defaultTitle;
-
-                    if (lang === 'nepali' && npTitle) label = npTitle;
-                    else if (lang === 'japanese' && jpTitle) label = jpTitle;
+                    if (lang === 'japanese' && jpTitle) label = jpTitle;
 
                     $(this).text(label);
                 });

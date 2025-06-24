@@ -13,9 +13,7 @@
 
                 <dt class="col-sm-3 font-weight-bold">Category</dt>
                 <dd class="col-sm-9">
-                    @if($blog->type == 'nepali')
-                        {{ $blog->blogCategory->np_title ?? 'N/A' }}
-                    @elseif($blog->type == 'japanese')
+                    @if($blog->type == 'japanese')
                         {{ $blog->blogCategory->jp_title ?? 'N/A' }}
                     @else
                         {{ $blog->blogCategory->title ?? 'N/A' }}
@@ -27,9 +25,7 @@
 
                 <dt class="col-sm-3 font-weight-bold">Title</dt>
                 <dd class="col-sm-9">
-                    @if($blog->type == 'nepali')
-                        {{ $blog->np_title }}
-                    @elseif($blog->type == 'japanese')
+                    @if($blog->type == 'japanese')
                         {{ $blog->jp_title }}
                     @else
                         {{ $blog->title }}
@@ -39,9 +35,7 @@
                 <dt class="col-sm-3 font-weight-bold">Description</dt>
                 <dd class="col-sm-9">
                     <div class="border rounded p-3" style="white-space: pre-wrap;">
-                        @if($blog->type == 'nepali')
-                            {!! $blog->np_description !!}
-                        @elseif($blog->type == 'japanese')
+                        @if($blog->type == 'japanese')
                             {!! $blog->jp_description !!}
                         @else
                             {!! $blog->description !!}
