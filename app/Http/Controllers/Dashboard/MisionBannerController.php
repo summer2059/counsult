@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConsultRequest;
-use App\Models\TestimonialBanner;
+use App\Models\MisionBanner;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class TestimonialBannerController extends Controller
+class MisionBannerController extends Controller
 {
     protected $crudService;
     protected $modelName;
@@ -17,13 +17,13 @@ class TestimonialBannerController extends Controller
     public function __construct(CrudService $crudService)
     {
         $this->crudService = $crudService;
-        $this->modelName = 'TestimonialBanner';
+        $this->modelName = 'MisionBanner';
     }
 
     public function index()
     {
-        $tb = TestimonialBanner::first();
-        return view('dashboard.testimonial-banner.index', compact('tb'));
+        $tb = MisionBanner::first();
+        return view('dashboard.mission-banner.index', compact('tb'));
     }
 
     public function update(ConsultRequest $request)
@@ -42,7 +42,7 @@ class TestimonialBannerController extends Controller
         if ($request->id) {
             try {
                 $data = $this->crudService->update($this->modelName, $request->id, $dbData);
-                toast('Consult Banner updated successfully', 'success');
+                toast('Mission Banner updated successfully', 'success');
                 return back()->withInput();
             } catch (\Exception $e) {
                 Log::error('Error: ' . $e->getMessage(), ['exception' => $e, 'trace' => $e->getTraceAsString()]);
@@ -53,7 +53,7 @@ class TestimonialBannerController extends Controller
 
         try {
             $data = $this->crudService->create($this->modelName, $dbData);
-            toast('Consult Banner added successfully', 'success'); 
+            toast('Mission Banner added successfully', 'success'); 
             return back()->withInput();
         } catch (\Exception $e) {
             Log::error('Error: ' . $e->getMessage(), ['exception' => $e, 'trace' => $e->getTraceAsString()]);

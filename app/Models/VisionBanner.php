@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TestimonialBanner extends Model
+class VisionBanner extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -16,11 +16,10 @@ class TestimonialBanner extends Model
         'jp_slug',
         'image2',
     ];
-    public function getImage(){
+     public function getImage(){
         return asset('uploads/images/' . $this->image);
     }
     public function getImage2(){
         return asset('uploads/images2/' . $this->image2);
     }
-
 }

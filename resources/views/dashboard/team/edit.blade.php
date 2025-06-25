@@ -25,8 +25,17 @@
                     @csrf
                     @method('PATCH')
 
-                    <!-- Title Input -->
                     <div class="col-12 mb-3">
+                        <label for="type_id">Language</label>
+                        <select class="form-control" disabled>
+                            <option value="{{ $team->type_id }}">{{ ucfirst($team->type->type) }}</option>
+                        </select>
+                        <input type="hidden" name="type" value="{{ $team->type->type }}">
+                        <input type="hidden" name="type_id" value="{{ $team->type_id }}">
+                    </div>
+
+                    <!-- Title Input -->
+                    <div class="col-12 mb-3 lang-field lang-english">
                          <label for="titleInput">Full Name</label>
                             <input class="form-control @error('name') is-invalid @enderror" id="titleInput" type="text"
                                 name="name" value="{{ old('name', $team->name) }}">
@@ -36,12 +45,16 @@
                             @enderror
                        
                     </div>
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_titleInput">フルネーム</label>
+                        <input class="form-control @error('jp_name') is-invalid @enderror" id="jp_titleInput" type="text"
+                            name="jp_name" value="{{ old('jp_name', $team->jp_name) }}">
+                        @error('jp_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                    
-
-
-
-                    <div class="col-12 mb-3">
+                    <div class="col-12 mb-3 lang-field lang-english">
                         <label for="titleInput">Position</label>
                             <input class="form-control @error('position') is-invalid @enderror" id="titleInput"
                                 type="text" name="position" placeholder="Position"
@@ -52,7 +65,15 @@
                             @enderror
                         
                     </div>
-
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_positionInput">役職</label>
+                        <input class="form-control @error('jp_position') is-invalid @enderror" id="jp_positionInput"
+                            type="text" name="jp_position" placeholder="役職"
+                            value="{{ old('jp_position', $team->jp_position) }}">
+                        @error('jp_position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <!-- Conditional Fields -->
 
@@ -110,8 +131,18 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
-        
-        // Toggle Conditional Fields
+        $(document).ready(function () {
+
+            function updateLangFields(lang) {
+                $('.lang-field').addClass('d-none');
+                $('.lang-' + lang).removeClass('d-none');
+            }
+
+            // Auto trigger language field toggle based on stored type
+            let currentLang = '{{ $team->type->type }}';
+            updateLangFields(currentLang);
+        });
+    
     </script>
 @endpush
 

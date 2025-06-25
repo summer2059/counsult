@@ -9,6 +9,11 @@
     @include('japan.component.index_about')
     <!-- About End -->
     
+     <!-- vision Start -->
+    @include('japan.component.vision')
+
+<!-- Mission Start -->
+@include('japan.component.mission')
 
     <!-- Services Start -->
     @include('japan.component.index_service')

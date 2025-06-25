@@ -8,8 +8,12 @@ use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
 use App\Models\FAQs;
+use App\Models\MisionBanner;
+use App\Models\Mission;
 use App\Models\Page;
 use App\Models\Service;
+use App\Models\Vision;
+use App\Models\VisionBanner;
 use App\Models\WeOffer;
 use App\Models\WhyUs;
 use App\Services\CrudService;
@@ -35,7 +39,11 @@ class JapanController extends Controller
         $consult = CosultDetail::where('status', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
-        return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
+        $vb = VisionBanner::first();
+        $vision = Vision::where('status', 1)->where('type_id', 2)->latest()->get();
+        $mb = MisionBanner::first();
+        $mission = Mission::where('status', 1)->where('type_id', 2)->latest()->get();
+        return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission'));
     }
     public function about()
     {
@@ -45,6 +53,7 @@ class JapanController extends Controller
         $consult = CosultDetail::where('status', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
+        
         return view('japan.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
     }
     public function services()

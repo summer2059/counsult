@@ -7,11 +7,11 @@
     <div class="col-sm-12 col-xl-12">
         <div class="card">
             <div class="card-header">
-                <h4>Testimonial Banner</h4>
+                <h4>Vision Banner</h4>
             </div>
             <div class="card-body">
                 <div class="row g-3">
-                    <form action="{{ route('testimonial-banner.update') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('vision-banner.update') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if (isset($tb))
                             <input type="text" name="id" id="id" value="{{ $tb->id }}" hidden>

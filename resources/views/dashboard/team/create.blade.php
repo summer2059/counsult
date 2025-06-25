@@ -22,8 +22,24 @@
                     id="bannerForm">
                     @csrf
 
-                    <!-- Title Input -->
                     <div class="col-12 mb-3">
+                        <label for="type_id">Language</label>
+                        <select name="type_id" id="typeSelect" class="form-control">
+                            @foreach($categories as $type)
+                                <option value="{{ $type->id }}"
+                                    data-lang="{{ $type->type }}"
+                                    {{ old('type_id') == $type->id ? 'selected' : ($type->type === 'english' ? 'selected' : '') }}>
+                                    {{ ucfirst($type->type) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Title Input -->
+                    <div class="col-12 mb-3 lang-field lang-english">
                          <label for="titleInput">Full Name</label>
                             <input class="form-control @error('name') is-invalid @enderror" id="titleInput" type="text"
                                 name="name" value="{{ old('name') }}">
@@ -34,10 +50,25 @@
                         
                     </div>
 
-                    
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_titleInput">フルネーム</label>
+                        <input class="form-control @error('jp_name') is-invalid @enderror" id="jp_titleInput" type="text"
+                            name="jp_name" value="{{ old('jp_name') }}">
+                        @error('jp_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_positionInput">役職</label>
+                        <input class="form-control @error('jp_position') is-invalid @enderror" id="jp_positionInput"
+                            type="text" name="jp_position" value="{{ old('jp_position') }}">
+                        @error('jp_position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                    <div class="col-12 mb-3">
+                    <div class="col-12 mb-3 lang-field lang-english">
                         <label for="titleInput">Position</label>
                             <input class="form-control @error('position') is-invalid @enderror" id="titleInput"
                                 type="text" name="position"  value="{{ old('position') }}">
@@ -138,6 +169,18 @@
                     previewElement.style.display = 'none';
                 }
             }
+            function updateLangFields(lang) {
+                $('.lang-field').addClass('d-none');
+                $('.lang-' + lang).removeClass('d-none');
+            }
+
+            $('#typeSelect').on('change', function () {
+                let selectedLang = $(this).find(':selected').data('lang');
+                updateLangFields(selectedLang);
+            });
+
+            // Trigger default view
+            $('#typeSelect').trigger('change');
         });
     </script>
 @endpush

@@ -10,12 +10,12 @@
         <div class="card">
             <div class="card-header border-1 pt-6">
                 <div class="card-title">
-                    <h4>Edit Career</h4>
+                    <h4>Edit Vision</h4>
                 </div>
             </div>
 
             <div class="card-body pt-0 mt-4">
-                <form action="{{ route('career.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('vision.update', $data->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 
@@ -40,60 +40,6 @@
                         <input class="form-control" name="jp_title" value="{{ old('jp_title', $data->jp_title) }}">
                     </div>
 
-                    <!-- Description Fields -->
-                    <div class="col-12 mb-3 lang-field lang-english">
-                        <label>Description (English)</label>
-                        <textarea class="form-control summernote" name="description">{{ old('description', $data->description) }}</textarea>
-                    </div>
-
-                    <div class="col-12 mb-3 lang-field lang-japanese">
-                        <label>Description (Japanese)</label>
-                        <textarea class="form-control summernote" name="jp_description">{{ old('jp_description', $data->jp_description) }}</textarea>
-                    </div>
-
-                    <!-- Position -->
-                    <div class="col-12 mb-3 lang-field lang-english">
-                        <label>Position (English)</label>
-                        <input class="form-control" name="position" value="{{ old('position', $data->position) }}">
-                    </div>
-
-                    <div class="col-12 mb-3 lang-field lang-japanese">
-                        <label>Position (Japanese)</label>
-                        <input class="form-control" name="jp_position" value="{{ old('jp_position', $data->jp_position) }}">
-                    </div>
-
-                    <!-- Location -->
-                    <div class="col-12 mb-3 lang-field lang-english">
-                        <label>Location (English)</label>
-                        <input class="form-control" name="location" value="{{ old('location', $data->location) }}">
-                    </div>
-
-                    <div class="col-12 mb-3 lang-field lang-japanese">
-                        <label>Location (Japanese)</label>
-                        <input class="form-control" name="jp_location" value="{{ old('jp_location', $data->jp_location) }}">
-                    </div>
-
-                    <!-- Dates -->
-                    <div class="col-12 mb-3 lang-field lang-english">
-                        <label>Start Date (English)</label>
-                        <input type="date" class="form-control" name="start_date" value="{{ old('start_date', $data->start_date) }}">
-                    </div>
-
-                    <div class="col-12 mb-3 lang-field lang-english">
-                        <label>End Date (English)</label>
-                        <input type="date" class="form-control" name="end_date" value="{{ old('end_date', $data->end_date) }}">
-                    </div>
-
-                    <div class="col-12 mb-3 lang-field lang-japanese">
-                        <label>Start Date (Japanese)</label>
-                        <input type="date" class="form-control" name="jp_start_date" value="{{ old('jp_start_date', $data->jp_start_date) }}">
-                    </div>
-
-                    <div class="col-12 mb-3 lang-field lang-japanese">
-                        <label>End Date (Japanese)</label>
-                        <input type="date" class="form-control" name="jp_end_date" value="{{ old('jp_end_date', $data->jp_end_date) }}">
-                    </div>
-
                     <!-- Status -->
                     <div class="col-12 mb-3">
                         <label>Status</label>
@@ -106,7 +52,7 @@
                     <!-- Submit -->
                     <div class="card-footer text-end">
                         <button class="btn btn-primary" type="submit">Update</button>
-                        <a href="{{ route('career.index') }}" class="btn btn-light">Cancel</a>
+                        <a href="{{ route('vision.index') }}" class="btn btn-light">Cancel</a>
                     </div>
 
                 </form>

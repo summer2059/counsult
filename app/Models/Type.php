@@ -21,4 +21,14 @@ class Type extends Model
     public function faqs(){
         return $this->hasMany(FAQs::class);
     }
+
+    public function teams(){
+        return $this->hasMany(Team::class);
+    }
+    public function visions(){
+        return $this->hasMany(Vision::class);
+    }
+    public function missions(){
+        return $this->hasMany(Mission::class);
+    }
 }

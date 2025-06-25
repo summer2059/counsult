@@ -48,6 +48,8 @@
                 class="nav-item nav-link {{ request()->routeIs('services') ? 'active' : '' }}">Service</a>
             <a href="{{ route('contact') }}"
                 class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
+            <a href="{{ route('jp.blog') }}"
+                class="nav-item nav-link {{ request()->routeIs('jp.blog') ? 'active' : '' }}">Blog</a>
 
             <!-- Language Dropdown -->
             <div class="nav-item dropdown">

@@ -14,6 +14,8 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EnquiryBannerController;
 use App\Http\Controllers\Dashboard\EnquiryMessageController;
 use App\Http\Controllers\Dashboard\FAQSController;
+use App\Http\Controllers\Dashboard\MisionBannerController;
+use App\Http\Controllers\Dashboard\MissionController;
 use App\Http\Controllers\Dashboard\PageController;
 use App\Http\Controllers\Dashboard\QuickLinksController;
 use App\Http\Controllers\Dashboard\ServiceCategoryController;
@@ -21,6 +23,8 @@ use App\Http\Controllers\Dashboard\ServicesController;
 use App\Http\Controllers\Dashboard\TeamController;
 use App\Http\Controllers\Dashboard\TestimonialBannerController;
 use App\Http\Controllers\Dashboard\TestimonialController;
+use App\Http\Controllers\Dashboard\VisionBannerController;
+use App\Http\Controllers\Dashboard\VisionController;
 use App\Http\Controllers\Dashboard\WeOfferController;
 use App\Http\Controllers\Dashboard\WhyUsBannerController;
 use App\Http\Controllers\Dashboard\WhyUsController;
@@ -78,7 +82,7 @@ Route::controller(NepaliController::class)->group(function () {
 
 Route::controller(JapanController::class)->group(function () {
     Route::get('/jp', 'jp_index')->name('jp.index');
-    Route::get('/jp/about', 'about')->name('jp.about');
+    Route::get('/jp/about', 'jpabout')->name('jp.about');
     Route::get('/jp/services', 'services')->name('jp.services');
     Route::get('/jp/contact', 'contact')->name('jp.contact');
     Route::post('/jp/store/contact',  'storeContact')->name('jp.store.contact');
@@ -137,4 +141,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::resource('/career-form', CareerFormController::class);
     Route::resource('/page', PageController::class);
     Route::resource('/faqs', FAQSController::class);
+    Route::get('/mission-banner', [MisionBannerController::class, 'index'])->name('mission-banner.index');
+    Route::post('/mission-banner/update', [MisionBannerController::class, 'update'])->name('mission-banner.update');
+    Route::get('/vision-banner', [VisionBannerController::class, 'index'])->name('vision-banner.index');
+    Route::post('/vision-banner/update', [VisionBannerController::class, 'update'])->name('vision-banner.update');
+    Route::resource('/vision', VisionController::class);
+    Route::resource('/mission', MissionController::class);
 });

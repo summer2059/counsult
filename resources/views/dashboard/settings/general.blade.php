@@ -66,7 +66,7 @@
                             @error('site_logo') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('site_logo'))
                                 <p class="mt-2">Current English Logo</p>
-                                <img src="{{ asset(getConfiguration('site_logo')) }}" width="150" height="110">
+                                <img src="{{ asset(getConfiguration('site_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
                         <div class="col-sm-5">
@@ -75,7 +75,7 @@
                             @error('jp_site_logo') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('jp_site_logo'))
                                 <p class="mt-2">Current Japanese Logo</p>
-                                <img src="{{ asset(getConfiguration('jp_site_logo')) }}" width="150" height="110">
+                                <img src="{{ asset(getConfiguration('jp_site_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                             @error('footer_logo') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('footer_logo'))
                                 <p class="mt-2">Current English Footer Logo</p>
-                                <img src="{{ asset(getConfiguration('footer_logo')) }}" width="150" height="110">
+                                <img src="{{ asset(getConfiguration('footer_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
                         <div class="col-sm-5">
@@ -121,7 +121,7 @@
                             @error('jp_footer_logo') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('jp_footer_logo'))
                                 <p class="mt-2">Current Japanese Footer Logo</p>
-                                <img src="{{ asset(getConfiguration('jp_footer_logo')) }}" width="150" height="110">
+                                <img src="{{ asset(getConfiguration('jp_footer_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
                     </div>
