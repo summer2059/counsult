@@ -13,10 +13,14 @@ use App\Models\MisionBanner;
 use App\Models\Mission;
 use App\Models\Page;
 use App\Models\Service;
+use App\Models\Team;
+use App\Models\Testimonial;
+use App\Models\TestimonialBanner;
 use App\Models\Vision;
 use App\Models\VisionBanner;
 use App\Models\WeOffer;
 use App\Models\WhyUs;
+use App\Models\WhyUsDetail;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 
@@ -35,7 +39,7 @@ class JapanController extends Controller
     public function jp_index()
     {
         $services = Service::where('status', 1)->latest()->get();
-        $banner = Banner::where('status', 1)->orderBy('priority', 'asc')->latest()->get();
+        $banner = Banner::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
         $consult = CosultDetail::where('status', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
@@ -45,7 +49,11 @@ class JapanController extends Controller
         $mb = MisionBanner::first();
         $mission = Mission::where('status', 1)->where('type_id', 2)->latest()->get();
         $message = Message::where('status',1)->where('type_id', 2)->orderBy('priority' ,'asc')->latest()->get();
-        return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message'));
+        $tb = TestimonialBanner::first();
+        $testimonial = Testimonial::where('status',1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
+        $team = Team::where('status',1)->where('type_id',2)->orderBy('priority', 'asc')->latest()->get();
+        $whyDetail = WhyUsDetail::where('status',1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
+        return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail'));
     }
     public function about()
     {

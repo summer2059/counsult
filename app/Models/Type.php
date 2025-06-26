@@ -37,4 +37,10 @@ class Type extends Model
     public function testimonials(){
         return $this->hasMany(Testimonial::class);
     }
+    public function whyusDetails(){
+        return $this->hasMany(WhyUsDetail::class);
+    }
+    public function banners(){
+        return $this->hasMany(Banner::class);
+    }
 }

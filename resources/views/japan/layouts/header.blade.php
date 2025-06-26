@@ -31,9 +31,11 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
     <a href="{{ route('jp.index') }}" class="navbar-brand p-0">
-        <h1 class="m-0 text-uppercase text-primary">
+        {{-- <h1 class="m-0 text-uppercase text-primary">
             <i class="far fa-smile text-primary me-2"></i>consult
-        </h1>
+        </h1> --}}
+        <img src="{{ asset(getConfiguration('jp_site_logo')) }}" alt=""
+                                style="width: 71px; height: auto; object-fit: cover" />
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
