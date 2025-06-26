@@ -14,6 +14,14 @@ class Testimonial extends Model
         'image',
         'description',
         'status',
-        'priority'
+        'priority',
+        'jp_name',
+        'jp_position',
+        'image2',
+        'jp_description',
+        'type_id'
     ];
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }

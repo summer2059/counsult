@@ -42,19 +42,20 @@ class CrudService
 
         if (isset($data['image'])) {
             $this->deleteImageIfExists($model->image);
-            $data['image'] = $this->uploadImage($data['image']);
+            $data['image'] = $this->uploadImage($data['image'], $modelClass); // Fix here
         }
 
         if (isset($data['image2'])) {
             $this->deleteImage2IfExists($model->image2);
-            $data['image2'] = $this->uploadImage2($data['image2']);
+            $data['image2'] = $this->uploadImage2($data['image2'], $modelClass); // Fix here
         }
 
         if (isset($data['images']) && is_array($data['images'])) {
-            $data['images'] = [];
+            $uploadedImages = [];
             foreach ($data['images'] as $image) {
-                $data['images'][] = $this->uploadImage($image);
+                $uploadedImages[] = $this->uploadImage($image, $modelClass); // Fix here
             }
+            $data['images'] = $uploadedImages;
         }
 
         if (isset($data['video'])) {
@@ -68,7 +69,6 @@ class CrudService
             $data['pdf_size'] = $pdfDetails['size'];
         }
 
-        // Generate/update slugs for all languages
         if (isset($data['title'])) {
             $data['slug'] = $this->generateSlug($data['title'], $modelClass);
         }
@@ -85,6 +85,7 @@ class CrudService
 
         return $model;
     }
+
 
     public function delete($modelName, $id)
     {

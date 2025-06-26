@@ -3,143 +3,158 @@
         <div class="card height-equal">
             <div class="card-body custom-input">
                 <div class="row g-3">
-                    <div class="form-group{{ $errors->has('site_title') ? ' has-error' : '' }}">
-                        <label for="site_title" class="col-sm-2 control-label">Site Title *</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="site_title" class="form-control" id="site_title"
-                                value="{{ getConfiguration('site_title') }}">
-                            @if ($errors->has('site_title'))
-                                <span class="help-block">
-                                    {{ $errors->first('site_title') }}
-                                </span>
-                            @endif
+
+                    {{-- Site Title --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Site Title *</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_title" class="form-control mb-3" placeholder="English" value="{{ getConfiguration('site_title') }}">
+                            @error('site_title') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" name="jp_site_title" class="form-control mb-3" placeholder="Japanese" value="{{ getConfiguration('jp_site_title') }}">
+                            @error('jp_site_title') <span class="help-block">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('site_description') ? ' has-error' : '' }}">
-                        <label for="site_description" class="col-sm-2 control-label">Site Description</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="site_description" class="form-control" id="site_description"
-                                value="{{ getConfiguration('site_description') }}">
+                    {{-- Site Description --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Site Description</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="site_description" class="form-control mb-3" placeholder="English" value="{{ getConfiguration('site_description') }}">
                             <small>In a few words, explain about your company.</small>
-                            @if ($errors->has('site_description'))
-                                <span class="help-block">
-                                    {{ $errors->first('site_description') }}
-                                </span>
-                            @endif
+                            @error('site_description') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" name="jp_site_description" class="form-control mb-3" placeholder="Japanese" value="{{ getConfiguration('jp_site_description') }}">
+                            @error('jp_site_description') <span class="help-block">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-
-
-                    <div class="form-group{{ $errors->has('site_address') ? ' has-error' : '' }}">
-                        <label for="site_address" class="col-sm-2 control-label">Office Address *</label>
-                        <div class="col-sm-10">
-                            <textarea name="site_address" id="site_address" class="form-control" rows="4">{{ getConfiguration('site_address') }}</textarea>
-                            @if ($errors->has('site_address'))
-                                <span class="help-block">
-                                    {{ $errors->first('site_address') }}
-                                </span>
-                            @endif
+                    {{-- Office Address --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Office Address *</label>
+                        <div class="col-sm-5">
+                            <textarea name="site_address" class="form-control mb-3" rows="4" placeholder="English">{{ getConfiguration('site_address') }}</textarea>
+                            @error('site_address') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <textarea name="jp_site_address" class="form-control mb-3" rows="4" placeholder="Japanese">{{ getConfiguration('jp_site_address') }}</textarea>
+                            @error('jp_site_address') <span class="help-block">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('map_link') ? ' has-error' : '' }}">
-                        <label for="map_link" class="col-sm-2 control-label">Google Map Address *</label>
-                        <div class="col-sm-10">
-                            <textarea name="map_link" id="map_link" class="form-control" rows="6">{{ getConfiguration('map_link') }}</textarea>
-                            @if ($errors->has('map_link'))
-                                <span class="help-block">
-                                    {{ $errors->first('map_link') }}
-                                </span>
-                            @endif
+                    {{-- Google Map Address --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Google Map Address *</label>
+                        <div class="col-sm-5">
+                            <textarea name="map_link" class="form-control mb-3" rows="4" placeholder="English">{{ getConfiguration('map_link') }}</textarea>
+                            @error('map_link') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <textarea name="jp_map_link" class="form-control mb-3" rows="4" placeholder="Japanese">{{ getConfiguration('jp_map_link') }}</textarea>
+                            @error('jp_map_link') <span class="help-block">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('site_logo') ? ' has-error' : '' }}">
-                        <label for="site_logo" class="col-sm-2 control-label">Site Logo</label>
-                        <div class="col-sm-10">
-                            <input type="file" name="site_logo" id="site_logo" class="form-control">
-                            <small>Preferred dimensions: <strong>150x110</strong></small>
-                            @if ($errors->has('site_logo'))
-                                <span class="help-block">
-                                    {{ $errors->first('site_logo') }}
-                                </span>
-                            @endif
-
+                    {{-- Site Logo --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Site Logo</label>
+                        <div class="col-sm-5">
+                            <input type="file" name="site_logo" class="form-control mb-3">
+                            <small>Preferred: <strong>150x110</strong></small>
+                            @error('site_logo') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('site_logo'))
-                                <div class="half-width" style="margin: 10px 0px;">
-                                    <p>Current logo</p>
-                                    <img src="{{ asset(getConfiguration('site_logo')) }}"
-                                        class="thumbnail img-responsive" width="150px" height="110px">
-                                </div>
+                                <p class="mt-2">Current English Logo</p>
+                                <img src="{{ asset(getConfiguration('site_logo')) }}" width="150" height="110" class="mb-3">
+                            @endif
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="file" name="jp_site_logo" class="form-control mb-3">
+                            <small>Preferred: <strong>150x110</strong></small>
+                            @error('jp_site_logo') <span class="help-block">{{ $message }}</span> @enderror
+                            @if (getConfiguration('jp_site_logo'))
+                                <p class="mt-2">Current Japanese Logo</p>
+                                <img src="{{ asset(getConfiguration('jp_site_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('site_favicon') ? ' has-error' : '' }}">
-                        <label for="site_favicon" class="col-sm-2 control-label">Site Favicon</label>
-                        <div class="col-sm-10">
-                            <input type="file" name="site_favicon" id="site_favicon" class="form-control">
-                            <small>Preferred dimensions: <strong>32x32</strong> or <strong>64x64</strong></small>
-                            @if ($errors->has('site_favicon'))
-                                <span class="help-block">
-                                    {{ $errors->first('site_favicon') }}
-                                </span>
-                            @endif
-
+                    {{-- Site Favicon --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Site Favicon</label>
+                        <div class="col-sm-5">
+                            <input type="file" name="site_favicon" class="form-control mb-3">
+                            <small>Preferred: <strong>32x32</strong> or <strong>64x64</strong></small>
+                            @error('site_favicon') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('site_favicon'))
-                                <div class="mt-15 half-width">
-                                    <p>Current favicon</p>
-                                    <img src="{{ asset(getConfiguration('site_favicon')) }}"
-                                        class="thumbnail img-responsive">
-                                </div>
+                                <p class="mt-2">Current English Favicon</p>
+                                <img src="{{ asset(getConfiguration('site_favicon')) }}" width="32">
+                            @endif
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="file" name="jp_site_favicon" class="form-control mb-3">
+                            <small>Preferred: <strong>32x32</strong> or <strong>64x64</strong></small>
+                            @error('jp_site_favicon') <span class="help-block">{{ $message }}</span> @enderror
+                            @if (getConfiguration('jp_site_favicon'))
+                                <p class="mt-2">Current Japanese Favicon</p>
+                                <img src="{{ asset(getConfiguration('jp_site_favicon')) }}" width="32">
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('footer_logo') ? ' has-error' : '' }}">
-                        <label for="footer_logo" class="col-sm-2 control-label">Footer Logo</label>
-                        <div class="col-sm-10">
-                            <input type="file" name="footer_logo" id="footer_logo" class="form-control">
-                            <small>Preferred dimensions: <strong>274x86</strong></small>
-                            @if ($errors->has('footer_logo'))
-                                <span class="help-block">
-                                    {{ $errors->first('footer_logo') }}
-                                </span>
-                            @endif
-
+                    {{-- Footer Logo --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Footer Logo</label>
+                        <div class="col-sm-5">
+                            <input type="file" name="footer_logo" class="form-control mb-3">
+                            <small>Preferred: <strong>274x86</strong></small>
+                            @error('footer_logo') <span class="help-block">{{ $message }}</span> @enderror
                             @if (getConfiguration('footer_logo'))
-                                <div class="half-width" style="margin: 10px 0px;">
-                                    <p>Current logo</p>
-                                    <img src="{{ asset(getConfiguration('footer_logo')) }}"
-                                        class="thumbnail img-responsive" width="150px" height="110px">
-                                </div>
+                                <p class="mt-2">Current English Footer Logo</p>
+                                <img src="{{ asset(getConfiguration('footer_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
-                    </div>
-                    <div class="form-group{{ $errors->has('footer_description') ? ' has-error' : '' }}">
-                        <label for="footer_description" class="col-sm-2 control-label">Footer Description</label>
-                        <div class="col-sm-10">
-                            <textarea name="footer_description" id="footer_description" class="form-control" rows="4">{{ getConfiguration('footer_description') }}</textarea>
-                            @if ($errors->has('footer_description'))
-                                <span class="help-block">
-                                    {{ $errors->first('footer_description') }}
-                                </span>
+                        <div class="col-sm-5">
+                            <input type="file" name="jp_footer_logo" class="form-control mb-3">
+                            <small>Preferred: <strong>274x86</strong></small>
+                            @error('jp_footer_logo') <span class="help-block">{{ $message }}</span> @enderror
+                            @if (getConfiguration('jp_footer_logo'))
+                                <p class="mt-2">Current Japanese Footer Logo</p>
+                                <img src="{{ asset(getConfiguration('jp_footer_logo')) }}" width="150" height="110" class="mb-3">
                             @endif
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('copyright_notice') ? ' has-error' : '' }}">
-                        <label for="copyright_notice" class="col-sm-2 control-label">Copyright Notice</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="copyright_notice" class="form-control" id="copyright_notice"
+                    {{-- Footer Description --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Footer Description</label>
+                        <div class="col-sm-5">
+                            <textarea name="footer_description" class="form-control mb-3" rows="4" placeholder="English">{{ getConfiguration('footer_description') }}</textarea>
+                            @error('footer_description') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <textarea name="jp_footer_description" class="form-control mb-3" rows="4" placeholder="Japanese">{{ getConfiguration('jp_footer_description') }}</textarea>
+                            @error('jp_footer_description') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    {{-- Copyright --}}
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label">Copyright Notice</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="copyright_notice" class="form-control mb-3" placeholder="English"
                                 value="{{ getConfiguration('copyright_notice') }}">
-                            @if ($errors->has('copyright_notice'))
-                                <span class="help-block">
-                                    {{ $errors->first('copyright_notice') }} 
-                                </span>
-                            @endif
+                            @error('copyright_notice')
+                                <span class="help-block">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" name="jp_copyright_notice" class="form-control mb-3"
+                                placeholder="Japanese" value="{{ getConfiguration('jp_copyright_notice') }}">
+                            @error('jp_copyright_notice')
+                                <span class="help-block">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 

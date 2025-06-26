@@ -28,11 +28,15 @@ class TestimonialBannerController extends Controller
 
     public function update(ConsultRequest $request)
     {
-        $dbData = ['title' => $request->title];
+        $dbData = ['title' => $request->title, 'jp_title' => $request->jp_title];
 
         if ($request->hasFile('image')) {
             // Check for an image and upload if it exists
             $dbData['image'] = $request->file('image');
+        }
+        if ($request->hasFile('image2')) {
+            // Check for an image and upload if it exists
+            $dbData['image2'] = $request->file('image2');
         }
 
         if ($request->id) {

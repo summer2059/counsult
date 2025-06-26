@@ -6,11 +6,11 @@
             <div class="carousel-inner">
                 @foreach($banner as $key => $ban)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img class="w-100" src="{{ asset('uploads/images/' . $ban->image) }}" alt="Image">
+                        <img class="w-100" src="{{ asset('uploads/images2/' . $ban->image2) }}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
-                                <h5 class="text-white text-uppercase">{{ $ban->title }}</h5>
-                                <h1 class="display-1 text-white mb-md-4">{!! $ban->description !!}</h1>
+                                <h5 class="text-white text-uppercase">{{ $ban->jp_title }}</h5>
+                                <h1 class="display-1 text-white mb-md-4">{!! $ban->jp_description !!}</h1>
                             </div>
                         </div>
                     </div>

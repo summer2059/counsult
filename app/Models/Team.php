@@ -13,6 +13,13 @@ class Team extends Model
         'position',
         'image',
         'priority',
-        'status'
+        'status',
+        'jp_name',
+        'jp_position',
+        'type_id',
     ];
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }

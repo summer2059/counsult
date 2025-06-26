@@ -143,5 +143,6 @@
             let currentLang = '{{ $data->type->type }}';
             updateLangFields(currentLang);
         });
+    
     </script>
 @endpush

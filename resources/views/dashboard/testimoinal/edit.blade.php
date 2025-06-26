@@ -23,73 +23,120 @@
                     id="bannerForm">
                     @csrf
                     @method('PATCH')
-
-                    <!-- Title Input -->
                     <div class="col-12 mb-3">
-                        <div class="form-floating mb-3">
-                            <input class="form-control @error('name') is-invalid @enderror" id="titleInput" type="text"
-                                name="name" placeholder="Full Name" value="{{ old('name', $testimonial->name) }}">
-                            <label for="titleInput">Full Name</label>
-                            @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <label for="type_id">Language</label>
+                        <select class="form-control" disabled>
+                            <option value="{{ $testimonial->type_id }}">{{ ucfirst($testimonial->type->type) }}</option>
+                        </select>
+                        <input type="hidden" name="type" value="{{ $testimonial->type->type }}">
+                        <input type="hidden" name="type_id" value="{{ $testimonial->type_id }}">
+                    </div>
+                    <!-- English Full Name -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="name">Full Name</label>
+                        <input class="form-control @error('name') is-invalid @enderror" id="name" type="text"
+                               name="name" value="{{ old('name', $testimonial->name) }}">
+                        @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    <!-- Description -->
-                    <div class="col-12 mb-3">
-                        <div class="form-floating mb-3">
-                            <textarea name="description" class="form-control" id="summernote">{{ old('description', $testimonial->description) }}</textarea>
-                            <label for="summernote">Message</label>
-                        </div>
+                    <!-- Japanese Full Name -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_name">フルネーム</label>
+                        <input class="form-control @error('jp_name') is-invalid @enderror" id="jp_name" type="text"
+                               name="jp_name" value="{{ old('jp_name', $testimonial->jp_name) }}">
+                        @error('jp_name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                   
-
-                    <div class="col-12 mb-3">
-                        <div class="form-floating mb-3">
-                            <input class="form-control @error('position') is-invalid @enderror" id="titleInput" type="text"
-                                name="position" placeholder="Position" value="{{ old('position', $testimonial->position) }}">
-                            <label for="titleInput">Position</label>
-                            @error('position')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    <!-- English Position -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="position">Position</label>
+                        <input class="form-control @error('position') is-invalid @enderror" id="position" type="text"
+                               name="position" value="{{ old('position', $testimonial->position) }}">
+                        @error('position')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
+                    <!-- Japanese Position -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_position">役職</label>
+                        <input class="form-control @error('jp_position') is-invalid @enderror" id="jp_position"
+                               type="text" name="jp_position" value="{{ old('jp_position', $testimonial->jp_position) }}">
+                        @error('jp_position')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                    <!-- Conditional Fields -->
-                    
-                        <!-- Image Upload -->
-                        <div class="col-12 mb-3">
-                            <div class="form-floating mb-3">
-                                <input class="form-control @error('image') is-invalid @enderror" id="imageInput"
-                                    type="file" name="image" accept="image/*">
-                                <label for="imageInput">Upload Image</label>
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                    <!-- English Message -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label>Message (English)</label>
+                        <textarea class="form-control summernote" name="description">{{ old('description', $testimonial->description) }}</textarea>
+                    </div>
+
+                    <!-- Japanese Message -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label>Message (Japanese)</label>
+                        <textarea class="form-control summernote" name="jp_description">{{ old('jp_description', $testimonial->jp_description) }}</textarea>
+                    </div>
+
+                    <!-- English Image Upload -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="image">Upload Image</label>
+                        <input class="form-control @error('image') is-invalid @enderror" id="image" type="file"
+                               name="image" accept="image/*">
+                        @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+                        @if ($testimonial->image)
+                            <div class="mt-2">
+                                <img id="imagePreview" src="{{ asset('uploads/images/' . $testimonial->image) }} "
+                                     alt="Preview" style="max-width: 200px;">
                             </div>
-                        </div>
+                        @endif
+                    </div>
 
-                        <!-- Image Preview -->
-                        <div class="col-12 mb-3">
-                            <img id="imagePreview" src="{{ asset('uploads/images/' . $testimonial->image) }}" alt=""
-                                style="max-width: 20%; height: auto;" />
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label for="priority" class="form-label">Priority</label>
-                            <input type="number" class="form-control" name="priority" required
-                                value="{{ old('priority', $testimonial->priority) }}">
-                            @error('priority')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-12 mb-3">
-                        <select name="status" id="status" class="form-select" required>
+                    <!-- Japanese Image2 Upload -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="image2">アップロード画像</label>
+                        <input class="form-control @error('image2') is-invalid @enderror" id="image2" type="file"
+                               name="image2" accept="image/*">
+                        @error('image2')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+                        @if ($testimonial->image2)
+                            <div class="mt-2">
+                                <img id="image2Preview" src="{{ asset('uploads/images2/' . $testimonial->image2) }}"
+                                     alt="Preview" style="max-width: 200px;">
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Priority -->
+                    <div class="col-12 mb-3">
+                        <label for="priority">Priority</label>
+                        <input type="number" class="form-control @error('priority') is-invalid @enderror"
+                               name="priority" value="{{ old('priority', $testimonial->priority) }}">
+                        @error('priority')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Status -->
+                    <div class="col-12 mb-3">
+                        <label for="status">Status</label>
+                        <select name="status" id="status" class="form-control">
                             <option value="1" {{ old('status', $testimonial->status) == 1 ? 'selected' : '' }}>Active</option>
                             <option value="0" {{ old('status', $testimonial->status) == 0 ? 'selected' : '' }}>Inactive</option>
                         </select>
+                        @error('status')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <!-- Submit & Cancel Buttons -->
                     <div class="card-footer text-end">
@@ -111,23 +158,35 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
     <script>
-        // Initialize Summernote
-        $('#summernote').summernote({
-            placeholder: 'Enter Description',
-            tabsize: 2,
-            height: 120,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'italic', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
+        $(document).ready(function () {
 
-        // Toggle Conditional Fields
-      
+            // Function to update the language fields visibility
+            function updateLangFields(lang) {
+                // Hide all language fields
+                $('.lang-field').addClass('d-none');
+                
+                // Show the fields for the selected language
+                $('.lang-' + lang).removeClass('d-none');
+            }
+
+            // Initialize Summernote
+            $('.summernote').summernote({
+                height: 120, // Set the height of the editor
+                placeholder: 'Enter description',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ]
+            });
+
+            // Get the current language type from the server-side variable
+            let currentLang = '{{ $testimonial->type->type }}';
+            
+            // Update language fields based on the stored type
+            updateLangFields(currentLang);
+        });
     </script>
 @endpush

@@ -7,9 +7,20 @@ use App\Models\Career;
 use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
+use App\Models\FAQs;
+use App\Models\Message;
+use App\Models\MisionBanner;
+use App\Models\Mission;
+use App\Models\Page;
 use App\Models\Service;
+use App\Models\Team;
+use App\Models\Testimonial;
+use App\Models\TestimonialBanner;
+use App\Models\Vision;
+use App\Models\VisionBanner;
 use App\Models\WeOffer;
 use App\Models\WhyUs;
+use App\Models\WhyUsDetail;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 
@@ -28,16 +39,31 @@ class FrontendController extends Controller
     public function index()
     {
         $services = Service::where('status', 1)->latest()->get();
+        $banner = Banner::where('status',1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
+        $cb = CosultBanner::first();
+        $consult = CosultDetail::where('status', 1)->latest()->get();
+        $offer = WeOffer::where('status', 1)->latest()->get();
+        $fb = WhyUs::first();
+        $vb = VisionBanner::first();
+        $vision = Vision::where('status', 1)->where('type_id', 1)->latest()->get();
+        $mb = MisionBanner::first();
+        $mission = Mission::where('status', 1)->where('type_id', 1)->latest()->get();
+        $message = Message::where('status',1)->where('type_id', 1)->orderBy('priority' ,'asc')->latest()->get();
+        $tb = TestimonialBanner::first();
+        $testimonial = Testimonial::where('status',1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
+        $team = Team::where('status',1)->where('type_id',1)->orderBy('priority', 'asc')->latest()->get();
+        $whyDetail = WhyUsDetail::where('status',1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
+        return view('frontend.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail'));
+    }
+    public function about()
+    {
+        $services = Service::where('status', 1)->latest()->get();
         $banner = Banner::where('status',1)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
         $consult = CosultDetail::where('status', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
-        return view('frontend.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
-    }
-    public function about()
-    {
-        return view('frontend.about');
+        return view('frontend.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
     }
     public function services(){
         return view('frontend.service');
@@ -79,7 +105,7 @@ class FrontendController extends Controller
     }
     public function career()
     {
-        $career = Career::where('status', 1)->where('type_id', 1)->latest()->get();
+        $career = Career::where('status', 1)->whereDate('end_date', '>=', now()->toDateString())->whereDate('start_date', '<=', now()->toDateString())->where('type_id', 1)->latest()->get();
         return view('frontend.career', compact('career'));
     }
     public function careerDetails($slug)
@@ -123,5 +149,15 @@ class FrontendController extends Controller
     }
 
         return redirect()->back();
+    }
+    public function page($slug)
+    {
+        $page = Page::where('slug', $slug)->first();
+        return view('frontend.page', compact('page'));
+
+    }
+    public function faqs(){
+        $faqs = FAQs::where('status', 1)->where('type_id', 1)->latest()->get();
+        return view('frontend.faqs', compact('faqs'));
     }
 }

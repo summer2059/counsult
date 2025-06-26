@@ -103,6 +103,7 @@
                     <thead>
                         <tr class="text-start text-black-500 fw-bold fs-7 text-uppercase gs-0">
                             <th>S.N</th>
+                            <th>Type</th>
                             <th>Full Name</th>
                             <th>Image</th>
                             <th>Position</th>
@@ -136,22 +137,16 @@
                         name: 'DT_RowIndex'
                     },
                     {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
                         data: 'name',
                         name: 'name'
                     },
                     {
                         data: 'image',
                         name: 'image',
-                        render: function(data, type, full, meta) {
-                            var defautltImageUrl = "{{ asset('uploads/image.png') }}";
-                            if (data) {
-                                return '<img src="/uploads/images/' + data +
-                                '" style="max-width: 100px; max-height: 100px;" />';
-                            }
-                            else
-                            return '<img src="' + defautltImageUrl + '" style="max-width: 100px; max-height: 50px;" />';
-                            
-                        },
                         orderable: false,
                         searchable: false
                     },

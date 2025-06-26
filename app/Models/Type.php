@@ -15,5 +15,32 @@ class Type extends Model
     public function careerforms(){
         return $this->hasMany(CareerForm::class);
     }
+    public function pages(){
+        return $this->hasMany(Page::class);
+    }
+    public function faqs(){
+        return $this->hasMany(FAQs::class);
+    }
 
+    public function teams(){
+        return $this->hasMany(Team::class);
+    }
+    public function visions(){
+        return $this->hasMany(Vision::class);
+    }
+    public function missions(){
+        return $this->hasMany(Mission::class);
+    }
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+    public function testimonials(){
+        return $this->hasMany(Testimonial::class);
+    }
+    public function whyusDetails(){
+        return $this->hasMany(WhyUsDetail::class);
+    }
+    public function banners(){
+        return $this->hasMany(Banner::class);
+    }
 }

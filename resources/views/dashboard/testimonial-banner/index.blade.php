@@ -11,39 +11,66 @@
             </div>
             <div class="card-body">
                 <div class="row g-3">
-                    <form action="{{ route('testimonial-banner.update') }}"  method="post" enctype="multipart/form-data">
+                    <form action="{{ route('testimonial-banner.update') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @if (isset($tb))
-                            <input type="text" name="id" id="id" value="{{$tb->id}}" hidden>
+                            <input type="text" name="id" id="id" value="{{ $tb->id }}" hidden>
                         @endif
-                        <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label">Title <span class="text-danger">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="text" name="title" class="form-control" id="title" value="{{ isset($tb) ? $tb->title : '' }}">
-                                @if ($errors->has('title'))
-                                    <span class="text-danger">
-                                        {{ $errors->first('title') }}
-                                    </span>
-                                @endif
+                        <div class="row">
+                            <!-- Left Column -->
+                            <div class="col-md-6">
+                                <!-- English Title -->
+                                <div class="form-group">
+                                    <label for="title">Title <span class="text-danger">*</span></label>
+                                    <input type="text" name="title" class="form-control" id="title"
+                                        value="{{ isset($tb) ? $tb->title : '' }}">
+                                    @if ($errors->has('title'))
+                                        <span class="text-danger">{{ $errors->first('title') }}</span>
+                                    @endif
+                                </div>
+
+                                <!-- English Image -->
+                                <div class="form-group">
+                                    <label for="image">Image <span class="text-danger">*</span></label>
+                                    <input type="file" name="image" id="image" class="form-control">
+                                    @if ($errors->has('image'))
+                                        <span class="text-danger">{{ $errors->first('image') }}</span>
+                                    @endif
+                                    @if (isset($tb->image))
+                                        <div class="mt-2">
+                                            <p>Current Image</p>
+                                            <img src="{{ $tb->getImage() }}" width="150" height="110">
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="image" class="col-sm-2 control-label">Image <span class="text-danger">*</span></label>
-                            <div class="col-sm-10">
-                                <input type="file" name="image" id="image" class="form-control">
-                                @if ($errors->has('image'))
-                                    <span class="help-block">
-                                        {{ $errors->first('image') }}
-                                    </span>
-                                @endif
-                                @if (isset($tb->image))
-                                    <div class="half-width" style="margin: 10px 0px;">
-                                        <p>Current Image</p>
-                                        <img src="{{ $tb->getImage() }}" class="thumbnail img-responsive"
-                                            width="150px" height="110px">
-                                    </div>
-                                @endif
+
+                            <!-- Right Column -->
+                            <div class="col-md-6">
+                                <!-- Japanese Title -->
+                                <div class="form-group">
+                                    <label for="jp_title">Japanese Title</label>
+                                    <input type="text" name="jp_title" class="form-control" id="jp_title"
+                                        value="{{ isset($tb) ? $tb->jp_title : '' }}">
+                                    @if ($errors->has('jp_title'))
+                                        <span class="text-danger">{{ $errors->first('jp_title') }}</span>
+                                    @endif
+                                </div>
+
+                                <!-- Japanese Image -->
+                                <div class="form-group">
+                                    <label for="image2">Japanese Image </label>
+                                    <input type="file" name="image2" id="image2" class="form-control">
+                                    @if ($errors->has('image2'))
+                                        <span class="text-danger">{{ $errors->first('image2') }}</span>
+                                    @endif
+                                    @if (isset($tb->image2))
+                                        <div class="mt-2">
+                                            <p>Current Image 2</p>
+                                            <img src="{{ $tb->getImage2() }}" width="150" height="110">
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
@@ -82,8 +109,7 @@
                 ]
             });
 
-            
+
         });
     </script>
-    
 @endpush

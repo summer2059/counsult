@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Configuration;
+use App\Models\Page;
+use App\Models\QuickLink;
 
 function getConfiguration($key){
     $config = Configuration::where('configuration_key', '=', $key)->first();
@@ -25,13 +27,19 @@ function getConfiguration($key){
 //     }
 //     return $number;
 // }
-// if(!function_exists('getPage')){
-//     function getPage(){
-//         return Page::where('status', 1)->orderBy('priority', 'asc')->latest()->get();
-//     }
-// }
-// if(!function_exists('getQuickLink')){
-//     function getQuickLink(){
-//         return QuickLinks::where('status', 1)->orderBy('priority', 'asc')->latest()->get();
-//     }
-// }
+if(!function_exists('getPage')){
+    function getPage(){
+        return Page::where('status', 1)->where('type_id', 1)->latest()->get();
+    }
+}
+
+if(!function_exists('getPageJP')){
+    function getPageJP(){
+        return Page::where('status', 1)->where('type_id', 2)->latest()->get();
+    }
+}
+if(!function_exists('getQuickLink')){
+    function getQuickLink(){
+        return QuickLink::where('status', 1)->orderBy('priority', 'asc')->latest()->get();
+    }
+}
