@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>CONSULT - Consultancy Website Template</title>
+    <title>{{getConfiguration('site_title')}}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    {{-- <link href="img/favicon.ico" rel="icon"> --}}
+    <link rel="icon" type="image/x-icon" href="{{asset(getConfiguration('site_favicon'))}}" />
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -19,6 +19,20 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label for="linkedin_link" class="col-sm-2 control-label">Linkedin Link</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="linkedin_link" class="form-control mb-3" id="linkedin_link"
+                                placeholder="English" value="{{ getConfiguration('linkedin_link') }}">
+                            @error('linkedin_link') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" name="jp_linkedin_link" class="form-control mb-3" id="jp_linkedin_link"
+                                placeholder="Japanese" value="{{ getConfiguration('jp_linkedin_link') }}">
+                            @error('jp_linkedin_link') <span class="help-block">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
                     {{-- Twitter Link --}}
                     <div class="form-group row">
                         <label for="twitter_link" class="col-sm-2 control-label">Twitter Link</label>

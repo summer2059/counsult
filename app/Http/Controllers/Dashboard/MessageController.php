@@ -8,26 +8,28 @@ use App\Services\CrudService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
-class TestimonialController extends Controller
+class MessageController extends Controller
 {
     protected $crudService;
     protected $modelName;
 
-    public function __construct(CrudService $crudService) {
+    public function __construct(CrudService $crudService)
+    {
         $this->crudService = $crudService;
-        $this->modelName = 'Testimonial'; 
+        $this->modelName = 'Message';
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $title = 'Delete Data!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
-        
+
         if ($request->ajax()) {
-            $data = $this->crudService->all($this->modelName);  
+            $data = $this->crudService->all($this->modelName);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('type', function ($data) {
@@ -51,28 +53,31 @@ class TestimonialController extends Controller
                         : 'N/A';
                 })
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="/dashboard/testimoinal/' . $data->id . '/edit" class="btn btn-sm btn-primary"> Edit</a>
-                     <a href="/dashboard/testimoinal/' . $data->id . '" class="btn btn-sm btn-danger" data-confirm-delete="true"> Delete</a>';
+                    $actionBtn = '<a href="/dashboard/message/' . $data->id . '/edit" class="btn btn-sm btn-primary"> Edit</a>
+                     <a href="/dashboard/message/' . $data->id . '" class="btn btn-sm btn-danger" data-confirm-delete="true"> Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action', 'image'])
                 ->make(true);
         }
-        return view('dashboard.testimoinal.index');  
+
+        return view('dashboard.message.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
-        $categories = Type::orderBy('type', 'asc')->get();
-        return view('dashboard.testimoinal.create', compact('categories'));  
+    public function create()
+    {
+        $categories = Type::orderby('type', 'asc')->get();
+        return view('dashboard.message.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'type_id' => 'required|exists:types,id',
         ]);
@@ -89,11 +94,11 @@ class TestimonialController extends Controller
             $request->validate([
                 'jp_name' => 'required|string',
                 'jp_position' => 'required|string',
-                'jp_description' => 'required|string',
+                'jp_message' => 'required|string',
                 'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            $data += $request->only(['jp_name', 'jp_position', 'jp_description']);
+            $data += $request->only(['jp_name', 'jp_position', 'jp_message']);
 
             if ($request->hasFile('image2')) {
                 $data['image2'] = $request->file('image2'); // pass file, not string
@@ -102,44 +107,45 @@ class TestimonialController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'position' => 'required|string',
-                'description' => 'required|string',
+                'message' => 'required|string',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            $data += $request->only(['name', 'position', 'description']);
+            $data += $request->only(['name', 'position', 'message']);
 
             if ($request->hasFile('image')) {
                 $data['image'] = $request->file('image'); // pass file, not string
             }
         }
 
-        
         $this->crudService->create($this->modelName, $data);
 
-        
-        toast('Testimonial Added!', 'success');
-        return redirect()->route('testimoinal.index');  
+        toast('Message Added!', 'success');
+        return redirect()->route('message.index');
     }
+
+
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
-        //
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {
-        $testimonial = $this->crudService->find($this->modelName, $id);
-        return view('dashboard.testimoinal.edit', compact('testimonial'));  
+    public function edit(string $id)
+    {
+        $team = $this->crudService->find($this->modelName, $id);
+        $categories = Type::orderby('type', 'asc')->get();
+        return view('dashboard.message.edit', compact('team', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
+    public function update(Request $request, string $id)
+    {
         $request->validate([
             'type_id' => 'required|exists:types,id',
         ]);
@@ -156,11 +162,11 @@ class TestimonialController extends Controller
             $request->validate([
                 'jp_name' => 'required|string',
                 'jp_position' => 'required|string',
-                'jp_description' => 'required|string',
+                'jp_message' => 'required|string',
                 'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            $data += $request->only(['jp_name', 'jp_position', 'jp_description']);
+            $data += $request->only(['jp_name', 'jp_position', 'jp_message']);
 
             if ($request->hasFile('image2')) {
                 $data['image2'] = $request->file('image2'); // pass file, not string
@@ -169,28 +175,32 @@ class TestimonialController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'position' => 'required|string',
-                'description' => 'required|string',
+                'message' => 'required|string',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
-            $data += $request->only(['name', 'position', 'description']);
+            $data += $request->only(['name', 'position', 'message']);
 
             if ($request->hasFile('image')) {
                 $data['image'] = $request->file('image'); // pass file, not string
             }
         }
+
         $this->crudService->update($this->modelName, $id, $data);
-        toast('Testimonial Updated!', 'success');
-        return redirect()->route('testimoinal.index');
+
+        toast('Message Updated!', 'success');
+        return redirect()->route('message.index');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) {
+    public function destroy(string $id)
+    {
         $this->crudService->delete($this->modelName, $id);
-        toast('Testimonial Deleted!', 'success');
-        return redirect()->route('testimoinal.index');
+        toast('Message Deleted!', 'success');
+        return redirect()->route('message.index');
     }
-
 }

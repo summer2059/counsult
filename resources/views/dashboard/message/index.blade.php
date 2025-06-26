@@ -1,82 +1,84 @@
 @extends('dashboard.layouts.app')
 @push('css')
-<style>
-    /* Custom Toggle Switch */
-    .toggle-status {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
+    <style>
+        /* Custom Toggle Switch */
+        .toggle-status {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
 
-    .toggle-status input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+        .toggle-status input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        transition: 0.4s;
-        border-radius: 34px;
-    }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
 
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        border-radius: 50%;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        transition: 0.4s;
-    }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+        }
 
-    /* When the switch is checked */
-    input:checked + .slider {
-        background-color: #4CAF50;
-    }
+        /* When the switch is checked */
+        input:checked+.slider {
+            background-color: #4CAF50;
+        }
 
-    input:checked + .slider:before {
-        transform: translateX(26px);
-    }
+        input:checked+.slider:before {
+            transform: translateX(26px);
+        }
 
-    .off-text {
-        position: absolute;
-        top: 6px;
-        left: 10px;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: bold;
-    }
+        .off-text {
+            position: absolute;
+            top: 6px;
+            left: 10px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+        }
 
-    .on-text {
-        position: absolute;
-        top: 6px;
-        right: 10px;
-        color: #ffffff;
-        font-size: 12px;
-        font-weight: bold;
-    }
-</style>
+        .on-text {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
 @endpush
 @section('content')
     <div id="kt_app_content_container" class="app-container  container-xxl ">
+
         <div class="card-toolbar mb-4">
             <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
 
-                <a href="{{ route('testimoinal.create') }}" class="btn btn-sm btn-primary">
-                    Add Testimoinal
+                <a href="{{ route('message.create') }}" class="btn btn-sm btn-primary">
+                    Add Message
                 </a>
             </div>
         </div>
+
         <div class="card">
             <!--begin::Card header-->
             <div class="card-header border-1 pt-6">
@@ -84,7 +86,7 @@
                 <div class="card-title">
                     <!--begin::Search-->
                     <div class="d-flex align-items-center position-relative my-1">
-                        <h4>Testimoinal List</h4>
+                        <h4>Message List</h4>
                     </div>
                     <!--end::Search-->
                 </div>
@@ -103,7 +105,6 @@
                     <thead>
                         <tr class="text-start text-black-500 fw-bold fs-7 text-uppercase gs-0">
                             <th>S.N</th>
-                            <th>Type</th>
                             <th>Full Name</th>
                             <th>Image</th>
                             <th>Position</th>
@@ -124,21 +125,16 @@
 @endsection
 
 @push('js')
-
     <script type="text/javascript">
         $(function() {
 
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('testimoinal.index') }}",
+                ajax: "{{ route('message.index') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'type',
-                        name: 'type'
                     },
                     {
                         data: 'name',
@@ -150,7 +146,7 @@
                         orderable: false,
                         searchable: false
                     },
-                    
+
 
                     {
                         data: 'position',
@@ -164,7 +160,7 @@
                                         <label class="toggle-status">
                                             <input type="checkbox" class="status-toggle" 
                                             data-id="${row.id}" 
-                                            data-model="testimonial" 
+                                            data-model="message" 
                                             ${data ? 'checked' : ''} />
                                             <span class="slider">
                                             <span class="off-text">Off</span>
@@ -179,9 +175,9 @@
                     {
                         data: 'created_at',
                         name: 'created_at',
-                        render: function(data, type, row){
-                        return data ? new Date(data). toISOString().split('T')[0]: '';
-                    }
+                        render: function(data, type, row) {
+                            return data ? new Date(data).toISOString().split('T')[0] : '';
+                        }
                     },
                     {
                         data: 'action',
@@ -232,7 +228,8 @@
                     }
                 });
             });
-             
-            });
+
+
+        });
     </script>
 @endpush

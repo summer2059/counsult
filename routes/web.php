@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EnquiryBannerController;
 use App\Http\Controllers\Dashboard\EnquiryMessageController;
 use App\Http\Controllers\Dashboard\FAQSController;
+use App\Http\Controllers\Dashboard\MessageController;
 use App\Http\Controllers\Dashboard\MisionBannerController;
 use App\Http\Controllers\Dashboard\MissionController;
 use App\Http\Controllers\Dashboard\PageController;
@@ -82,7 +83,7 @@ Route::controller(NepaliController::class)->group(function () {
 
 Route::controller(JapanController::class)->group(function () {
     Route::get('/jp', 'jp_index')->name('jp.index');
-    Route::get('/jp/about', 'jpabout')->name('jp.about');
+    Route::get('/jp/about', 'about')->name('jp.about');
     Route::get('/jp/services', 'services')->name('jp.services');
     Route::get('/jp/contact', 'contact')->name('jp.contact');
     Route::post('/jp/store/contact',  'storeContact')->name('jp.store.contact');
@@ -147,4 +148,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::post('/vision-banner/update', [VisionBannerController::class, 'update'])->name('vision-banner.update');
     Route::resource('/vision', VisionController::class);
     Route::resource('/mission', MissionController::class);
+    Route::resource('/message', MessageController::class);
 });

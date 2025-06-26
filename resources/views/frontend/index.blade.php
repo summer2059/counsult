@@ -12,6 +12,8 @@
     @include('frontend.component.vision')
 <!-- Mission Start -->
 @include('frontend.component.mission')
+
+@include('frontend.component.message')
     <!-- Services Start -->
     @include('frontend.component.index_service')
     <!-- Services End -->

@@ -8,6 +8,7 @@ use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
 use App\Models\FAQs;
+use App\Models\Message;
 use App\Models\MisionBanner;
 use App\Models\Mission;
 use App\Models\Page;
@@ -43,7 +44,8 @@ class JapanController extends Controller
         $vision = Vision::where('status', 1)->where('type_id', 2)->latest()->get();
         $mb = MisionBanner::first();
         $mission = Mission::where('status', 1)->where('type_id', 2)->latest()->get();
-        return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission'));
+        $message = Message::where('status',1)->where('type_id', 2)->orderBy('priority' ,'asc')->latest()->get();
+        return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message'));
     }
     public function about()
     {

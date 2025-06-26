@@ -41,6 +41,7 @@ class ConfigurationController extends Controller
             'video_description',    'jp_video_description',
             'site_video', 'jp_site_video',
             'pdf', 'jp_pdf',
+            'linkedin_link', 'jp_linkedin_link',
         );
 
         foreach ( $inputs as $inputKey => $inputValue ) {

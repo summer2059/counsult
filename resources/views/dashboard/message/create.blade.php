@@ -12,21 +12,22 @@
             <div class="card-header border-1 pt-6">
                 <div class="card-title">
                     <div class="d-flex align-items-center position-relative my-1">
-                        <h4>Add New Testimonial</h4>
+                        <h4>Add New Team</h4>
                     </div>
                 </div>
             </div>
             <!-- Card Body -->
             <div class="card-body pt-0 mt-4">
-                <form action="{{ route('testimoinal.store') }}" method="POST" enctype="multipart/form-data"
+                <form action="{{ route('message.store') }}" method="POST" enctype="multipart/form-data"
                     id="bannerForm">
                     @csrf
 
                     <div class="col-12 mb-3">
                         <label for="type_id">Language</label>
                         <select name="type_id" id="typeSelect" class="form-control">
-                            @foreach ($categories as $type)
-                                <option value="{{ $type->id }}" data-lang="{{ $type->type }}"
+                            @foreach($categories as $type)
+                                <option value="{{ $type->id }}"
+                                    data-lang="{{ $type->type }}"
                                     {{ old('type_id') == $type->id ? 'selected' : ($type->type === 'english' ? 'selected' : '') }}>
                                     {{ ucfirst($type->type) }}
                                 </option>
@@ -37,70 +38,61 @@
                         @enderror
                     </div>
 
-                    <!-- Title Input -->
+                    <!-- English Language Fields -->
                     <div class="col-12 mb-3 lang-field lang-english">
-                        <div class="form-floating mb-3">
+                         <label for="titleInput">Full Name</label>
                             <input class="form-control @error('name') is-invalid @enderror" id="titleInput" type="text"
-                                name="name" placeholder="Full Name" value="{{ old('name') }}">
-                            <label for="titleInput">Full Name</label>
+                                name="name" value="{{ old('name') }}">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
                     </div>
-
-                    <!-- Description with Summernote -->
-                    <div class="col-12 mb-3 lang-field lang-english">
-                        <div class="form-floating mb-3">
-                            <textarea name="description" class="form-control summernote" id="summernote-en">{{ old('description') }}</textarea>
-                            <label for="summernote">Message</label>
-                        </div>
-                    </div>
-
 
                     <div class="col-12 mb-3 lang-field lang-english">
-                        <div class="form-floating mb-3">
-                            <input class="form-control @error('position') is-invalid @enderror" id="titleInput"
-                                type="text" name="position" placeholder="Position" value="{{ old('position') }}">
-                            <label for="titleInput">Position</label>
-                            @error('position')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <label for="positionInput">Position</label>
+                        <input class="form-control @error('position') is-invalid @enderror" id="positionInput" 
+                            type="text" name="position" value="{{ old('position') }}">
+                        @error('position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="message">Message (English)</label>
+                        <textarea name="message" class="form-control summernote">{{ old('message') }}</textarea>
+                        @error('message')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    
+
+                    <!-- Japanese Language Fields -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_titleInput">フルネーム</label>
+                        <input class="form-control @error('jp_name') is-invalid @enderror" id="jp_titleInput" type="text"
+                            name="jp_name" value="{{ old('jp_name') }}">
+                        @error('jp_name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-12 mb-3 lang-field lang-japanese">
-                        <div class="form-floating mb-3">
-                            <input class="form-control @error('jp_name') is-invalid @enderror" id="titleInput"
-                                type="text" name="jp_name" placeholder="Full Name" value="{{ old('jp_name') }}">
-                            <label for="titleInput">Full Name(Japan)</label>
-                            @error('jp_name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                        <label for="jp_positionInput">役職</label>
+                        <input class="form-control @error('jp_position') is-invalid @enderror" id="jp_positionInput"
+                            type="text" name="jp_position" value="{{ old('jp_position') }}">
+                        @error('jp_position')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
-
-                    <!-- Description with Summernote -->
                     <div class="col-12 mb-3 lang-field lang-japanese">
-                        <div class="form-floating mb-3">
-                            <textarea name="jp_description" class="form-control summernote" id="summernote-jp">{{ old('jp_description') }}</textarea>
-                            <label for="summernote">Message</label>
-                        </div>
+                        <label for="jp_message">Message (Japanese)</label>
+                        <textarea name="jp_message" class="form-control summernote">{{ old('jp_message') }}</textarea>
+                        @error('jp_message')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-
-                    <div class="col-12 mb-3 lang-field lang-japanese">
-                        <div class="form-floating mb-3">
-                            <input class="form-control @error('jp_position') is-invalid @enderror" id="titleInput"
-                                type="text" name="jp_position" placeholder="Position" value="{{ old('jp_position') }}">
-                            <label for="titleInput">Position</label>
-                            @error('jp_position')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Conditional Fields -->
+                    <!-- Conditional Fields for Image Upload -->
                     <div id="conditionalFields">
                         <!-- Upload Image (for English) -->
                         <div class="col-12 mb-3 lang-field lang-english">
@@ -140,19 +132,21 @@
 
                     </div>
 
+                    <!-- Priority Field -->
                     <div class="col-12 mb-3">
                         <label for="priority" class="form-label">Priority</label>
-                        <input type="number" class="form-control" name="priority">
+                        <input type="number" class="form-control" name="priority" value="{{ old('priority') }}">
                         @error('priority')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
+                    <!-- Status Field -->
                     <div class="col-12 mb-3">
                         <label for="status">Status</label>
                         <select name="status" id="status" class="form-control">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
+                            <option value="1" {{ old('status') == 1 ? 'selected' : '' }}>Active</option>
+                            <option value="0" {{ old('status') == 0 ? 'selected' : '' }}>Inactive</option>
                         </select>
                         @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -163,7 +157,7 @@
                     <div class="card-footer text-end">
                         <div class="col-sm-9 offset-sm-3">
                             <button class="btn btn-primary me-3" type="submit">Submit</button>
-                            <a href="{{ route('testimoinal.index') }}" class="btn btn-light">Cancel</a>
+                            <a href="{{ route('team.index') }}" class="btn btn-light">Cancel</a>
                         </div>
                     </div>
                 </form>
@@ -173,7 +167,6 @@
 @endsection
 
 @push('js')
-    <!-- JS Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -182,50 +175,36 @@
     <script>
         $(document).ready(function() {
 
-            function initSummernote(selector) {
-                $(selector).summernote({
-                    placeholder: 'Enter description...',
-                    tabsize: 2,
-                    height: 120,
-                    toolbar: [
-                        ['style', ['style']],
-                        ['font', ['bold', 'underline', 'italic', 'clear']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['table', ['table']],
-                        ['insert', ['link', 'picture', 'video']],
-                        ['view', ['fullscreen', 'codeview', 'help']]
-                    ]
-                });
-            }
-
-            function destroySummernote() {
-                $('.summernote').each(function() {
-                    if ($(this).next().hasClass('note-editor')) {
-                        $(this).summernote('destroy');
-                    }
-                });
-            }
-
-            function updateLangFields(lang) {
-                $('.lang-field').addClass('d-none');
-                destroySummernote();
-                $('.lang-' + lang).removeClass('d-none');
-
-                // Re-initialize Summernote for the visible language only
-                $('.lang-' + lang + ' .summernote').each(function() {
-                    initSummernote(this);
-                });
-            }
-
-            $('#typeSelect').on('change', function() {
-                const selectedLang = $(this).find(':selected').data('lang');
-                updateLangFields(selectedLang);
+            $('.summernote').summernote({
+                placeholder: 'Enter description...',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ]
             });
 
-            $('#typeSelect').trigger('change'); // init on page load
+            // Image Preview functionality for Image and Image2
+            const imageInput = document.getElementById('imageInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const image2Input = document.getElementById('image2Input');
+            const image2Preview = document.getElementById('image2Preview');
 
-            // Image Previews
+            // When user selects an image file for English
+            imageInput.addEventListener('change', function(event) {
+                previewFile(event, imagePreview);
+            });
+
+            // When user selects an image file for Japanese
+            image2Input.addEventListener('change', function(event) {
+                previewFile(event, image2Preview);
+            });
+
+            // Preview selected image
             function previewFile(event, previewElement) {
                 const file = event.target.files[0];
                 if (file && file.type.startsWith('image/')) {
@@ -241,14 +220,20 @@
                 }
             }
 
-            document.getElementById('imageInput').addEventListener('change', function(e) {
-                previewFile(e, document.getElementById('imagePreview'));
+            // Update language-specific fields visibility
+            function updateLangFields(lang) {
+                $('.lang-field').addClass('d-none');
+                $('.lang-' + lang).removeClass('d-none');
+            }
+
+            // Change language based on the selection
+            $('#typeSelect').on('change', function () {
+                let selectedLang = $(this).find(':selected').data('lang');
+                updateLangFields(selectedLang);
             });
 
-            document.getElementById('image2Input').addEventListener('change', function(e) {
-                previewFile(e, document.getElementById('image2Preview'));
-            });
-
+            // Trigger default view
+            $('#typeSelect').trigger('change');
         });
     </script>
 @endpush

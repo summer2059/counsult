@@ -1,46 +1,48 @@
  @extends('japan.layouts.app')
  @section('content')
- <!-- Carousel Start -->
-    @include('japan.component.banner')
-    <!-- Carousel End -->
+     <!-- Carousel Start -->
+     @include('japan.component.banner')
+     <!-- Carousel End -->
 
 
-    <!-- About Start -->
-    @include('japan.component.index_about')
-    <!-- About End -->
-    
+     <!-- About Start -->
+     @include('japan.component.index_about')
+     <!-- About End -->
+
      <!-- vision Start -->
-    @include('japan.component.vision')
+     @include('japan.component.vision')
 
-<!-- Mission Start -->
-@include('japan.component.mission')
+     <!-- Mission Start -->
+     @include('japan.component.mission')
 
-    <!-- Services Start -->
-    @include('japan.component.index_service')
-    <!-- Services End -->
+     @include('japan.component.message')
 
-
-    <!-- Features Start -->
-    @include('japan.component.feature')
-    <!-- Features Start -->
+     <!-- Services Start -->
+     @include('japan.component.index_service')
+     <!-- Services End -->
 
 
-    <!-- Quote Start -->
-    @include('japan.component.quote')
-    <!-- Quote End -->
+     <!-- Features Start -->
+     @include('japan.component.feature')
+     <!-- Features Start -->
 
 
-    <!-- Team Start -->
-    @include('japan.component.team')
-    <!-- Team End -->
+     <!-- Quote Start -->
+     @include('japan.component.quote')
+     <!-- Quote End -->
 
 
-    <!-- Testimonial Start -->
-    @include('japan.component.testimonial')
-    <!-- Testimonial End -->
+     <!-- Team Start -->
+     @include('japan.component.team')
+     <!-- Team End -->
 
 
-    <!-- Blog Start -->
-    
-    <!-- Blog End -->
-@endsection
+     <!-- Testimonial Start -->
+     @include('japan.component.testimonial')
+     <!-- Testimonial End -->
+
+
+     <!-- Blog Start -->
+
+     <!-- Blog End -->
+ @endsection

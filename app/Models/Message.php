@@ -5,23 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Testimonial extends Model
+class Message extends Model
 {
     use HasFactory;
     protected $fillable = [
         'name',
         'position',
+        'message',
         'image',
-        'description',
-        'status',
-        'priority',
         'jp_name',
         'jp_position',
+        'jp_message',
         'image2',
-        'jp_description',
-        'type_id'
+        'status',
+        'priority',
+        'type_id',
     ];
-    public function type(){
+    public function type()
+    {
         return $this->belongsTo(Type::class);
     }
 }

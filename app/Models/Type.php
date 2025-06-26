@@ -31,4 +31,10 @@ class Type extends Model
     public function missions(){
         return $this->hasMany(Mission::class);
     }
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+    public function testimonials(){
+        return $this->hasMany(Testimonial::class);
+    }
 }
