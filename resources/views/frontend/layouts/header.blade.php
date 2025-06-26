@@ -3,10 +3,10 @@
         <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
             <div class="d-inline-flex align-items-center">
                 <a class="text-body py-2 pe-3 border-end" href="{{ route('faqs') }}"><small>FAQs</small></a>
-                @foreach (getPage() as $page)
+                {{-- @foreach (getPage() as $page)
                     <a class="text-body py-2 px-3 border-end"
                         href="{{ route('page', $page->slug) }}"><small>{{ $page->title }}</small></a>
-                @endforeach
+                @endforeach --}}
                 {{-- <a class="text-body py-2 px-3 border-end" href=""><small>Support</small></a>
                 <a class="text-body py-2 px-3 border-end" href=""><small>Privacy</small></a>
                 <a class="text-body py-2 px-3 border-end" href=""><small>Policy</small></a> --}}
@@ -16,13 +16,25 @@
         <div class="col-md-6 d-lg-block d-none text-center text-lg-end">
             <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
                 <div class="me-3 pe-3 border-end py-2">
-                    <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                    <p class="m-0">
+                        <i class="fa fa-envelope-open me-2"></i>
+                        <a href="mailto:{{ getConfiguration('email_address') }}"
+                            class="text-white text-decoration-none">
+                            {{ getConfiguration('email_address') }}
+                        </a>
+                    </p>
                 </div>
                 <div class="py-2">
-                    <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+012 345 6789</p>
+                    <p class="m-0">
+                        <i class="fa fa-phone-alt me-2"></i>
+                        <a href="tel:{{ getConfiguration('office_number') }}" class="text-white text-decoration-none">
+                            {{ getConfiguration('office_number') }}
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <!-- Topbar End -->
@@ -35,7 +47,7 @@
             <i class="far fa-smile text-primary me-2"></i>consult
         </h1> --}}
         <img src="{{ asset(getConfiguration('site_logo')) }}" alt=""
-                                style="width: 71px; height: auto; object-fit: cover" />
+            style="width: 71px; height: auto; object-fit: cover" />
 
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -52,8 +64,8 @@
                 class="nav-item nav-link {{ request()->routeIs('services') ? 'active' : '' }}">Service</a>
             <a href="{{ route('contact') }}"
                 class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
-            <a href="{{ route('jp.blog') }}"
-                class="nav-item nav-link {{ request()->routeIs('jp.blog') ? 'active' : '' }}">Blog</a>
+            <a href="{{ route('blog') }}"
+                class="nav-item nav-link {{ request()->routeIs('blog') ? 'active' : '' }}">Blog</a>
 
             <!-- Language Dropdown -->
             {{-- <div class="nav-item dropdown">

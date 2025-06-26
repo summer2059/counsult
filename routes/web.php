@@ -65,7 +65,9 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::post('store/contact',  'storeContact')->name('store.contact');
     Route::get('/blog', 'blog')->name('blog');
-    Route::get('/blogdetail', 'blogDetails')->name('blogdetail');
+    Route::get('/search-blog',  'searchBlog')->name('search.blog');
+    Route::get('/blog/{slug}', 'blogDetails')->name('blog.detail');
+    Route::get('/search-blog-json', 'searchBlogJson')->name('search.blog.json');
     Route::get('/career', 'career')->name('career');
     Route::get('/career-detail/{slug}', 'careerDetails')->name('career-detail');
     Route::post('/store/career', 'storeCareer')->name('store.career');
@@ -87,15 +89,15 @@ Route::controller(JapanController::class)->group(function () {
     Route::get('/jp/services', 'services')->name('jp.services');
     Route::get('/jp/contact', 'contact')->name('jp.contact');
     Route::post('/jp/store/contact',  'storeContact')->name('jp.store.contact');
-    Route::get('/jp/blog', 'blog')->name('jp.blog');
-    Route::get('/jp/blogdetail', 'blogDetails')->name('jp.blogdetail');
+    Route::get('jp/blog', 'blog')->name('jp.blog');
+    Route::get('jp/search-blog',  'searchBlog')->name('jp.search.blog');
+    Route::get('jp/blog/{slug}', 'blogDetails')->name('jp.blog.detail');
+    Route::get('jp/search-blog-json', 'searchBlogJson')->name('jp.search.blog.json');
     Route::get('/jp/career', 'career')->name('jp.career');
     Route::get('/jp/career-detail/{slug}', 'careerDetails')->name('jp.career-detail');
     Route::post('/jp/store/career', 'storeCareer')->name('jp.store.career');
     Route::get('/jp/page/{slug}', 'page')->name('jp.page');
     Route::get('/jp/faqs', 'jpFaqs')->name('jp.faqs');
-    Route::get('/jp/blog', 'jpBlog')->name('jp.blog');
-    Route::get('/jp/blogdetail', 'jpBlogDetails')->name('jp.blogdetail');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

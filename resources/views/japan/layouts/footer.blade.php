@@ -35,11 +35,33 @@
 
         <!-- Get In Touch -->
         <div class="col-lg-3 col-md-6 footer-column">
-            <h3 class="text-white mb-4">Get In Touch</h3>
-            <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>{{ getConfiguration('jp_site_address') }}</p>
-            <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>{{ getConfiguration('jp_email_address') }}</p>
-            <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>{{ getConfiguration('jp_office_number') }}</p>
-        </div>
+                <h3 class="text-white mb-4">Get In Touch</h3>
+
+                {{-- Address clickable (Google Maps) --}}
+                <p class="mb-2">
+                    <i class="bi bi-geo-alt text-primary me-2"></i>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode(getConfiguration('jp_site_address')) }}"
+                        target="_blank" class="text-white text-decoration-none">
+                        {{ getConfiguration('jp_site_address') }}
+                    </a>
+                </p>
+
+                {{-- Email clickable --}}
+                <p class="mb-2">
+                    <i class="bi bi-envelope-open text-primary me-2"></i>
+                    <a href="mailto:{{ getConfiguration('jp_email_address') }}" class="text-white text-decoration-none">
+                        {{ getConfiguration('jp_email_address') }}
+                    </a>
+                </p>
+
+                {{-- Phone clickable --}}
+                <p class="mb-0">
+                    <i class="bi bi-telephone text-primary me-2"></i>
+                    <a href="tel:{{ getConfiguration('office_number') }}" class="text-white text-decoration-none">
+                        {{ getConfiguration('jp_office_number') }}
+                    </a>
+                </p>
+            </div>
 
         <!-- Follow Us -->
         <div class="col-lg-3 col-md-12 footer-column">

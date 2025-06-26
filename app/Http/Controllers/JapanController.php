@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Career;
 use App\Models\CareerForm;
 use App\Models\CosultBanner;
@@ -97,13 +99,75 @@ class JapanController extends Controller
 
         return redirect()->back();
     }
-    public function blog()
-    {
-        return view('japan.blog');
+    public function blog(Request $request)
+{
+    $query = Blog::with('blogCategory')
+        ->where('status', 1)
+        ->where('type', 'japanese');
+
+    if ($request->filled('category')) {
+        $category = BlogCategory::where('jp_slug', $request->category)->first();
+        if ($category) {
+            $query->where('blog_category_id', $category->id);
+        }
     }
-    public function blogDetails()
+
+    $blogs = $query->latest()->paginate(6);
+    $categories = BlogCategory::where('status', 1)->get();
+
+    return view('japan.blog', compact('blogs', 'categories'));
+}
+
+
+    public function searchBlog(Request $request)
     {
-        return view('japan.blogdetail');
+        $query = Blog::with('blogCategory')
+            ->where('status', 1)
+            ->where('type', 'japanese');
+
+        if ($request->filled('category')) {
+            $category = BlogCategory::where('jp_slug', $request->category)->first();
+            if ($category) {
+                $query->where('blog_category_id', $category->id);
+            }
+        }
+
+        if ($request->filled('keyword')) {
+            $query->where('jp_title', 'like', '%' . $request->keyword . '%');
+        }
+
+        $blogs = $query->latest()->paginate(6);
+        return view('japan.partials.blog-list', compact('blogs'))->render();
+    }
+
+    public function blogDetails($slug)
+    {
+        $blog = Blog::where('jp_slug', $slug)->where('type', 'japanese')->firstOrFail();
+
+        $recentBlogs = Blog::where('id', '!=', $blog->id)
+            ->where('status', 1)
+            ->where('type', 'japanese')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $categories = BlogCategory::where('status', 1)->get();
+
+        return view('japan.blogdetail', compact('blog', 'recentBlogs', 'categories'));
+    }
+
+    public function searchBlogJson(Request $request)
+    {
+        $query = Blog::where('status', 1)
+            ->where('type', 'japanese');
+
+        if ($request->filled('q')) {
+            $query->where('jp_title', 'like', '%' . $request->q . '%');
+        }
+
+        $results = $query->select('jp_title', 'jp_slug')->take(10)->get();
+
+        return response()->json($results);
     }
     public function career()
     {
@@ -162,12 +226,12 @@ class JapanController extends Controller
         $faqs = FAQs::where('status', 1)->where('type_id', 2)->latest()->get();
         return view('japan.faqs', compact('faqs'));
     }
-    public function jpBlog()
-    {
-        return view('japan.blog');
-    }
-    public function jpBlogDetails()
-    {
-        return view('japan.blogdetail');
-    }
+    // public function jpBlog()
+    // {
+    //     return view('japan.blog');
+    // }
+    // public function jpBlogDetails()
+    // {
+    //     return view('japan.blogdetail');
+    // }
 }
