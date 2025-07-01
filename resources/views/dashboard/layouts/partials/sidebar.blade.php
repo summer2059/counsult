@@ -109,7 +109,7 @@
                             <li><a style="{{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit') ? 'background-color: #708090;' : '' }}"
                                     href="{{ route('consult-banner.index') }}">Counsult Banner </a></li>
                             <li><a style="{{ request()->routeIs('consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'background-color: #708090;' : '' }}"
-                                    href="{{ route('consult-detail.index') }}">Counsult Banner</a></li>
+                                    href="{{ route('consult-detail.index') }}">Counsult Detail</a></li>
 
                         </ul>
                     </li>

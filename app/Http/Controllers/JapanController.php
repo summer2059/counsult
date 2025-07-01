@@ -43,7 +43,7 @@ class JapanController extends Controller
         $services = Service::where('status', 1)->latest()->get();
         $banner = Banner::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
-        $consult = CosultDetail::where('status', 1)->latest()->get();
+        $consult = CosultDetail::where('status', 1)->where('type_id', 2)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
         $vb = VisionBanner::first();

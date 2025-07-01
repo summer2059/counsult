@@ -73,6 +73,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::post('/store/career', 'storeCareer')->name('store.career');
     Route::get('/page/{slug}', 'page')->name('page');
     Route::get('/faqs', 'faqs')->name('faqs');
+    Route::get('/gallery', 'gallery')->name('gallery');
 });
 
 Route::controller(EnquiryMessageController::class)->group(function(){

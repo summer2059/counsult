@@ -43,7 +43,7 @@ class FrontendController extends Controller
         $services = Service::where('status', 1)->latest()->get();
         $banner = Banner::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
-        $consult = CosultDetail::where('status', 1)->latest()->get();
+        $consult = CosultDetail::where('status', 1)->where('type_id', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
         $vb = VisionBanner::first();
@@ -225,5 +225,9 @@ class FrontendController extends Controller
     {
         $faqs = FAQs::where('status', 1)->where('type_id', 1)->latest()->get();
         return view('frontend.faqs', compact('faqs'));
+    }
+
+    public function gallery(){
+        return view('frontend.gallery');
     }
 }

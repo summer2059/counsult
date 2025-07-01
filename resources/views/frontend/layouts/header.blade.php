@@ -66,6 +66,8 @@
                 class="nav-item nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
             <a href="{{ route('blog') }}"
                 class="nav-item nav-link {{ request()->routeIs('blog') ? 'active' : '' }}">Blog</a>
+            <a href="{{ route('gallery') }}"
+                class="nav-item nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a>
 
             <!-- Language Dropdown -->
             {{-- <div class="nav-item dropdown">

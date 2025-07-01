@@ -127,7 +127,7 @@
         <form class="login-form" action="{{ route('login') }}" method="POST">
             @csrf
             <div class="logo">
-                <img src="{{ asset('frontend/img/logo.png') }}" alt="Logo" />
+                <img src="{{ asset(getConfiguration('site_logo')) }}" alt="Logo" />
             </div>
             <h2>Login</h2>
             <div class="input-group">

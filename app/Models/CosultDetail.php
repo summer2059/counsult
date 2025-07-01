@@ -13,6 +13,15 @@ class CosultDetail extends Model
         'slug',
         'description',
         'status',
-        'image'
+        'image',
+        'jp_title',
+        'jp_slug',
+        'jp_description',
+        'image2',
+        'type_id',
     ];
+
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }

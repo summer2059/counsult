@@ -43,4 +43,7 @@ class Type extends Model
     public function banners(){
         return $this->hasMany(Banner::class);
     }
+    public function consultDetails(){
+        return $this->hasMany(CosultDetail::class);
+    }
 }
