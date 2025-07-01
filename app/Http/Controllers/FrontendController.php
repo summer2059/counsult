@@ -15,6 +15,7 @@ use App\Models\MisionBanner;
 use App\Models\Mission;
 use App\Models\Page;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\TestimonialBanner;
@@ -69,7 +70,20 @@ class FrontendController extends Controller
     }
     public function services()
     {
-        return view('frontend.service');
+        $service = ServiceCategory::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
+        $services = Service::where('status', 1)->latest()->get();
+        return view('frontend.service', compact('service', 'services'));
+    }
+    public function serviceDetail($slug)
+    {
+        $category = ServiceCategory::where('slug', $slug)->where('status', 1)->where('type_id', 1)->firstOrFail();
+        $relatedServices = Service::where('service_category_id', $category->id)
+            ->where('status', 1)
+            ->where('type_id', 1)
+            ->get();
+        $hasMenu = $relatedServices->whereNotNull('price')->count() > 0;
+
+        return view('frontend.service-detail', compact('category', 'relatedServices', 'hasMenu'));
     }
     public function contact()
     {
@@ -227,7 +241,8 @@ class FrontendController extends Controller
         return view('frontend.faqs', compact('faqs'));
     }
 
-    public function gallery(){
+    public function gallery()
+    {
         return view('frontend.gallery');
     }
 }

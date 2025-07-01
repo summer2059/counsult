@@ -74,6 +74,8 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/page/{slug}', 'page')->name('page');
     Route::get('/faqs', 'faqs')->name('faqs');
     Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/service/{slug}', 'serviceDetail')->name('service.detail');
+
 });
 
 Route::controller(EnquiryMessageController::class)->group(function(){
@@ -99,6 +101,7 @@ Route::controller(JapanController::class)->group(function () {
     Route::post('/jp/store/career', 'storeCareer')->name('jp.store.career');
     Route::get('/jp/page/{slug}', 'page')->name('jp.page');
     Route::get('/jp/faqs', 'jpFaqs')->name('jp.faqs');
+    Route::get('/jp/service/{slug}', 'serviceDetail')->name('jp.service.detail');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -135,6 +138,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     //service category
     Route::resource('/service-category', ServiceCategoryController::class);
     Route::resource('/services', ServicesController::class);
+    Route::get('/categories-by-language', 
+    [ServicesController::class, 'getByLanguage'])
+    ->name('services.getByLanguage');
+
     Route::resource('/testimoinal', TestimonialController::class);
     Route::resource('/team', TeamController::class);
     Route::resource('/quick-links', QuickLinksController::class);

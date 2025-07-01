@@ -406,3 +406,37 @@ h6,
         text-align: center;
     }
 }
+
+.cursor-pointer {
+      cursor: pointer;
+    }
+    .list-hover:hover,
+    #service-list .active {
+      background-color: #ffe5e6;
+      color: var(--primary);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .menu-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 15px rgba(243, 82, 90, 0.4);
+    }
+    .menu-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+    .menu-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }

@@ -17,6 +17,11 @@ class Service extends Model
         'status',
         'priority',
         'price',
+        'jp_title',
+        'jp_slug',
+        'jp_description',
+        'image2',
+        'type_id',
     ];
     public function serviceCategory()
     {
@@ -25,5 +30,8 @@ class Service extends Model
     public function enquiryMessages()
     {
         return $this->hasMany(EnquiryMessage::class);
+    }
+    public function type(){
+        return $this->belongsTo(Type::class);
     }
 }

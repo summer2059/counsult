@@ -46,4 +46,10 @@ class Type extends Model
     public function consultDetails(){
         return $this->hasMany(CosultDetail::class);
     }
+    public function serviceCategories(){
+        return $this->hasMany(ServiceCategory::class);
+    }
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
 }

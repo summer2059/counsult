@@ -14,10 +14,18 @@ class ServiceCategory extends Model
         'description',
         'image',
         'status',
-        'priority'
+        'priority',
+        'jp_title',
+        'jp_slug',
+        'jp_description',
+        'image2',
+        'type_id',
     ];
     public function services()
     {
         return $this->hasMany(Service::class);
+    }
+    public function type(){
+        return $this->belongsTo(Type::class);
     }
 }

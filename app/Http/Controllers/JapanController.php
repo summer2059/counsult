@@ -15,6 +15,7 @@ use App\Models\MisionBanner;
 use App\Models\Mission;
 use App\Models\Page;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\Team;
 use App\Models\Testimonial;
 use App\Models\TestimonialBanner;
@@ -50,11 +51,11 @@ class JapanController extends Controller
         $vision = Vision::where('status', 1)->where('type_id', 2)->latest()->get();
         $mb = MisionBanner::first();
         $mission = Mission::where('status', 1)->where('type_id', 2)->latest()->get();
-        $message = Message::where('status',1)->where('type_id', 2)->orderBy('priority' ,'asc')->latest()->get();
+        $message = Message::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         $tb = TestimonialBanner::first();
-        $testimonial = Testimonial::where('status',1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
-        $team = Team::where('status',1)->where('type_id',2)->orderBy('priority', 'asc')->latest()->get();
-        $whyDetail = WhyUsDetail::where('status',1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
+        $testimonial = Testimonial::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
+        $team = Team::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
+        $whyDetail = WhyUsDetail::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         return view('japan.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail'));
     }
     public function about()
@@ -65,12 +66,25 @@ class JapanController extends Controller
         $consult = CosultDetail::where('status', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
-        
+
         return view('japan.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
     }
     public function services()
     {
-        return view('japan.service');
+        $service = ServiceCategory::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
+        $services = Service::where('status', 1)->latest()->get();
+        return view('japan.service', compact('service', 'services'));
+    }
+    public function serviceDetail($slug)
+    {
+        $category = ServiceCategory::where('jp_slug', $slug)->where('status', 1)->where('type_id', 2)->firstOrFail();
+        $relatedServices = Service::where('service_category_id', $category->id)
+            ->where('status', 1)
+            ->where('type_id', 2)
+            ->get();
+        $hasMenu = $relatedServices->whereNotNull('price')->count() > 0;
+
+        return view('japan.service-detail', compact('category', 'relatedServices', 'hasMenu'));
     }
     public function contact()
     {
@@ -100,23 +114,23 @@ class JapanController extends Controller
         return redirect()->back();
     }
     public function blog(Request $request)
-{
-    $query = Blog::with('blogCategory')
-        ->where('status', 1)
-        ->where('type', 'japanese');
+    {
+        $query = Blog::with('blogCategory')
+            ->where('status', 1)
+            ->where('type', 'japanese');
 
-    if ($request->filled('category')) {
-        $category = BlogCategory::where('jp_slug', $request->category)->first();
-        if ($category) {
-            $query->where('blog_category_id', $category->id);
+        if ($request->filled('category')) {
+            $category = BlogCategory::where('jp_slug', $request->category)->first();
+            if ($category) {
+                $query->where('blog_category_id', $category->id);
+            }
         }
+
+        $blogs = $query->latest()->paginate(6);
+        $categories = BlogCategory::where('status', 1)->get();
+
+        return view('japan.blog', compact('blogs', 'categories'));
     }
-
-    $blogs = $query->latest()->paginate(6);
-    $categories = BlogCategory::where('status', 1)->get();
-
-    return view('japan.blog', compact('blogs', 'categories'));
-}
 
 
     public function searchBlog(Request $request)
@@ -171,7 +185,7 @@ class JapanController extends Controller
     }
     public function career()
     {
-        $career = Career::where('status', 1)->whereDate('end_date', '>=', now()->toDateString())->whereDate('start_date', '<=', now()->toDateString())->where('type_id', 2)->latest()->get();
+        $career = Career::where('status', 1)->whereDate('jp_end_date', '>=', now()->toDateString())->whereDate('jp_start_date', '<=', now()->toDateString())->where('type_id', 2)->latest()->get();
         return view('japan.career', compact('career'));
     }
     public function careerDetails($slug)

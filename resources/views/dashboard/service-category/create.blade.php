@@ -11,9 +11,7 @@
             <!-- Card Header -->
             <div class="card-header border-1 pt-6">
                 <div class="card-title">
-                    <div class="d-flex align-items-center position-relative my-1">
-                        <h4>Add New Service Category</h4>
-                    </div>
+                    <h4>Add New Service Category</h4>
                 </div>
             </div>
             <!-- Card Body -->
@@ -21,74 +19,100 @@
                 <form action="{{ route('service-category.store') }}" method="POST" enctype="multipart/form-data" id="bannerForm">
                     @csrf
 
-                    <!-- Title Input -->
+                    <!-- Language Selector -->
                     <div class="col-12 mb-3">
-                        <label for="titleInput">Title</label>
-                        <input class="form-control @error('title') is-invalid @enderror" id="titleInput" type="text"
-                            name="title" value="{{ old('title') }}">
+                        <label for="typeSelect">Language</label>
+                        <select name="type_id" id="typeSelect" class="form-control @error('type_id') is-invalid @enderror">
+                            @foreach ($categories as $type)
+                                <option value="{{ $type->id }}" data-lang="{{ $type->type }}"
+                                    {{ old('type_id', $categories->firstWhere('type', 'english')->id) == $type->id ? 'selected' : '' }}>
+                                    {{ ucfirst($type->type) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('type_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
 
+                    <!-- English Fields -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="titleInputEn">Title (EN)</label>
+                        <input class="form-control @error('title') is-invalid @enderror" id="titleInputEn" name="title" type="text"
+                               placeholder="Title in English" value="{{ old('title') }}">
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-
+                    </div>
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="descInputEn">Description (EN)</label>
+                        <textarea class="form-control summernote" id="descInputEn" name="description"
+                                  placeholder="Enter description in English">{{ old('description') }}</textarea>
                     </div>
 
-                    <!-- Description with Summernote -->
+                    <!-- Japanese Fields -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="titleInputJp">Title (JP)</label>
+                        <input class="form-control @error('jp_title') is-invalid @enderror" id="titleInputJp" name="jp_title" type="text"
+                               placeholder="タイトル" value="{{ old('jp_title') }}">
+                        @error('jp_title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="descInputJp">Description (JP)</label>
+                        <textarea class="form-control summernote" id="descInputJp" name="jp_description"
+                                  placeholder="日本語の説明">{{ old('jp_description') }}</textarea>
+                    </div>
+
+                    <!-- Image Uploads -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="imageInputEn">Upload Image (EN)</label>
+                        <input class="form-control @error('image') is-invalid @enderror" id="imageInputEn" name="image"
+                               type="file" accept="image/*">
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <img id="imagePreviewEn" src="#" alt="Preview English" class="mt-2" style="display:none; max-width:200px;">
+                    </div>
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="imageInputJp">アップロード画像 (JP)</label>
+                        <input class="form-control @error('image2') is-invalid @enderror" id="imageInputJp" name="image2"
+                               type="file" accept="image/*">
+                        @error('image2')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                        <img id="imagePreviewJp" src="#" alt="Preview Japanese" class="mt-2" style="display:none; max-width:200px;">
+                    </div>
+
+                    <!-- Priority -->
                     <div class="col-12 mb-3">
-                        <div class="form-floating mb-3">
-                            <textarea name="description" class="form-control" id="summernote">{{ old('description') }}</textarea>
-
-                        </div>
-                    </div>
-
-                    <!-- Conditional Fields -->
-                    <div id="conditionalFields">
-                        <!-- Upload Image -->
-                        <div class="col-12 mb-3">
-                            <div class="form-floating mb-3">
-                                <input class="form-control @error('image') is-invalid @enderror" id="imageInput"
-                                    type="file" name="image" accept="image/*">
-                                <label for="imageInput">Upload Image</label>
-                                @error('image')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Image Preview -->
-                        <div class="col-12 mb-3">
-                            <img id="imagePreview" src="#" alt="Image Preview"
-                                style="display: none; max-width: 50%; height: auto;" />
-                        </div>
-
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label for="priority" class="form-label">Priority</label>
-                        <input type="number" class="form-control" name="priority">
+                        <label for="priorityInput">Priority</label>
+                        <input class="form-control @error('priority') is-invalid @enderror" id="priorityInput" name="priority"
+                               type="number" value="{{ old('priority') }}">
                         @error('priority')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
-
+                    <!-- Status -->
                     <div class="col-12 mb-3">
-                        <label for="status">Status</label>
-                        <select name="status" id="status" class="form-control">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
+                        <label for="statusSelect">Status</label>
+                        <select name="status" id="statusSelect" class="form-control @error('status') is-invalid @enderror">
+                            <option value="1" {{ old('status', 1) == 1 ? 'selected' : '' }}>Active</option>
+                            <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive</option>
                         </select>
                         @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <!-- Submit & Cancel Buttons -->
+                    <!-- Actions -->
                     <div class="card-footer text-end">
-                        <div class="col-sm-9 offset-sm-3">
-                            <button class="btn btn-primary me-3" type="submit">Submit</button>
-                            <a href="{{ route('service-category.index') }}" class="btn btn-light">Cancel</a>
-                        </div>
+                        <button class="btn btn-primary me-3" type="submit">Submit</button>
+                        <a href="{{ route('service-category.index') }}" class="btn btn-light">Cancel</a>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -96,7 +120,6 @@
 @endsection
 
 @push('js')
-    <!-- JS Libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -104,46 +127,46 @@
 
     <script>
         $(document).ready(function() {
-            // Initialize Summernote
-            $('#summernote').summernote({
-                placeholder: 'Enter Description',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'italic', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-
-            // Image Preview functionality
-            const imageInput = document.getElementById('imageInput');
-            const imagePreview = document.getElementById('imagePreview');
-
-            // When user selects an image file
-            imageInput.addEventListener('change', function(event) {
-                previewFile(event, imagePreview);
-            });
-
-            // Preview selected image
-            function previewFile(event, previewElement) {
-                const file = event.target.files[0];
-                if (file && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        previewElement.src = e.target.result;
-                        previewElement.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    previewElement.src = '#';
-                    previewElement.style.display = 'none';
-                }
+            function initEditor() {
+                $('.summernote').summernote({
+                    height: 120,
+                    placeholder: 'Enter description...',
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'underline', 'italic', 'clear']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['insert', ['link', 'picture', 'video']],
+                        ['view', ['fullscreen', 'codeview', 'help']]
+                    ]
+                });
             }
+
+            function updateLang(lang) {
+                $('.lang-field').addClass('d-none');
+                $('.lang-' + lang).removeClass('d-none');
+            }
+
+            // Init editors and default language view
+            initEditor();
+            updateLang($('#typeSelect').find(':selected').data('lang'));
+
+            $('#typeSelect').change(function() {
+                updateLang($(this).find(':selected').data('lang'));
+            });
+
+            // Image preview helper
+            function preview(input, previewEl) {
+                var file = input.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    var reader = new FileReader();
+                    reader.onload = e => previewEl.src = e.target.result;
+                    reader.onloadend = () => previewEl.style.display = 'block';
+                    reader.readAsDataURL(file);
+                } else previewEl.style.display = 'none';
+            }
+
+            $('#imageInputEn').change(function() { preview(this, document.getElementById('imagePreviewEn')); });
+            $('#imageInputJp').change(function() { preview(this, document.getElementById('imagePreviewJp')); });
         });
     </script>
 @endpush
