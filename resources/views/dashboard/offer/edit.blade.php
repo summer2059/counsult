@@ -24,46 +24,88 @@
                     @csrf
                     @method('PATCH')
 
-                    <!-- Title Input -->
                     <div class="col-12 mb-3">
+                        <label for="type_id">Language</label>
+                        <select id="languageSelect" class="form-control" disabled>
+                            <option value="{{ $banner->type_id }}">{{ ucfirst($banner->type->type) }}</option>
+                        </select>
+                        <input type="hidden" name="type" value="{{ $banner->type->type }}">
+                        <input type="hidden" name="type_id" value="{{ $banner->type_id }}">
+                    </div>
+
+                    <!-- Language Switcher -->
+                    <div class="col-12 mb-3">
+                        <label for="languageSelect">Select Language</label>
+                        <select id="languageSelect" class="form-control">
+                            <option value="english" {{ $banner->type->type == 'english' ? 'selected' : '' }}>English</option>
+                            <option value="japanese" {{ $banner->type->type == 'japanese' ? 'selected' : '' }}>Japanese</option>
+                        </select>
+                    </div>
+
+                    <!-- Title Input - English -->
+                    <div class="col-12 mb-3 lang-field lang-english">
                         <label for="titleInput">Title</label>
                         <input class="form-control @error('title') is-invalid @enderror" id="titleInput" type="text"
-                            name="title" placeholder="Title" value="{{ old('title', $banner->title) }}">
+                               name="title" placeholder="Title" value="{{ old('title', $banner->title) }}">
                         @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
-                    <!-- Description -->
-                    <div class="col-12 mb-3">
+                    <!-- Description - English -->
+                    <div class="col-12 mb-3 lang-field lang-english">
                         <label for="descriptionInput">Description:</label>
-                        <textarea name="description" class="form-control" id="summernote">{{ old('description', $banner->description) }}</textarea>
+                        <textarea name="description" class="form-control summernote" id="summernote">{{ old('description', $banner->description) }}</textarea>
                     </div>
 
-                    <!-- Image Upload -->
-                    <div class="col-12 mb-3">
-                        <div class="form-floating mb-3">
-                            <input class="form-control @error('image') is-invalid @enderror" id="imageInput" type="file"
-                                name="image" accept="image/*">
-                            <label for="imageInput">Upload Icon</label>
-                            @error('image')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+                    <!-- Title Input - Japanese -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_titleInput">Title (Japanese)</label>
+                        <input class="form-control @error('jp_title') is-invalid @enderror" id="jp_titleInput" type="text"
+                               name="jp_title" placeholder="Title (Japanese)" value="{{ old('jp_title', $banner->jp_title) }}">
+                        @error('jp_title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
-                    <!-- Current Image Preview -->
-                    <div class="col-12 mb-3">
-                        <label>Current Icon:</label><br>
-                        <img id="currentImage" src="{{ asset('uploads/images/' . $banner->image) }}" alt="Current Image"
-                            style="max-width: 20%; height: auto;" />
+                    <!-- Description - Japanese -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="jp_descriptionInput">Description (Japanese):</label>
+                        <textarea name="jp_description" class="form-control summernote" id="jp_summernote">{{ old('jp_description', $banner->jp_description) }}</textarea>
                     </div>
 
-                    <!-- New Selected Image Preview -->
-                    <div class="col-12 mb-3" id="newImagePreviewContainer" style="display: none;">
-                        <label>New Selected Icon:</label><br>
-                        <img id="newImagePreview" src="#" alt="New Image Preview"
-                            style="max-width: 20%; height: auto;" />
+                    <!-- Image Upload - English -->
+                    <div class="col-12 mb-3 lang-field lang-english">
+                        <label for="image">Upload Image</label>
+                        <input class="form-control @error('image') is-invalid @enderror" id="image" type="file"
+                               name="image" accept="image/*">
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+                        @if ($banner->image)
+                            <div class="mt-2">
+                                <img id="imagePreview" src="{{ asset('uploads/images/' . $banner->image) }} "
+                                     alt="Preview" style="max-width: 200px;">
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Image Upload - Japanese -->
+                    <div class="col-12 mb-3 lang-field lang-japanese">
+                        <label for="image2">アップロード画像</label>
+                        <input class="form-control @error('image2') is-invalid @enderror" id="image2" type="file"
+                               name="image2" accept="image/*">
+                        @error('image2')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+                        @if ($banner->image2)
+                            <div class="mt-2">
+                                <img id="image2Preview" src="{{ asset('uploads/images2/' . $banner->image2) }}"
+                                     alt="Preview" style="max-width: 200px;">
+                            </div>
+                        @endif
                     </div>
 
                     <!-- Status -->
@@ -95,34 +137,60 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
     <script>
-        // Initialize Summernote
-        $('#summernote').summernote({
-            placeholder: 'Enter Description',
-            tabsize: 2,
-            height: 120,
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'underline', 'italic', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
-                ['view', ['fullscreen', 'codeview', 'help']]
-            ]
-        });
+        $(document).ready(function () {
 
-        // Preview new selected image
-        document.getElementById("imageInput").addEventListener("change", function (event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const preview = document.getElementById("newImagePreview");
-                    preview.src = e.target.result;
-                    document.getElementById("newImagePreviewContainer").style.display = "block";
-                };
-                reader.readAsDataURL(file);
+            // Function to update the language fields visibility
+            function updateLangFields(lang) {
+                // Hide all language fields
+                $('.lang-field').addClass('d-none');
+                
+                // Show the fields for the selected language
+                $('.lang-' + lang).removeClass('d-none');
             }
+
+            // Initialize Summernote for both languages
+            $('.summernote').summernote({
+                height: 120, // Set the height of the editor
+                placeholder: 'Enter description',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture']],
+                    ['view', ['fullscreen', 'codeview']]
+                ]
+            });
+
+            // Get the current language type from the server-side variable
+            let currentLang = '{{ $banner->type->type }}';
+            
+            // Update language fields based on the stored type
+            updateLangFields(currentLang);
+
+            // Listen for language change and update fields accordingly
+            $('#languageSelect').on('change', function() {
+                let selectedLang = $(this).val();
+                updateLangFields(selectedLang);
+            });
+
+            // Handle image upload preview
+            $('#image').on('change', function (e) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    $('#newImagePreview').attr('src', event.target.result).show();
+                    $('#newImagePreviewContainer').show();
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            $('#image2').on('change', function (e) {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    $('#newImage2Preview').attr('src', event.target.result).show();
+                    $('#newImage2PreviewContainer').show();
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
         });
     </script>
 @endpush

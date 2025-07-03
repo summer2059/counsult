@@ -14,5 +14,14 @@ class WeOffer extends Model
         'image',
         'description',
         'status',
+        'jp_title',
+        'jp_slug',
+        'jp_description',
+        'image2',
+        'type_id',
     ];
+
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }

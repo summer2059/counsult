@@ -52,4 +52,7 @@ class Type extends Model
     public function services(){
         return $this->hasMany(Service::class);
     }
+    public function weOffer(){
+        return $this->hasMany(WeOffer::class);
+    }
 }

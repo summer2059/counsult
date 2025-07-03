@@ -46,7 +46,7 @@ class JapanController extends Controller
         $banner = Banner::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
         $consult = CosultDetail::where('status', 1)->where('type_id', 2)->latest()->get();
-        $offer = WeOffer::where('status', 1)->latest()->get();
+        $offer = WeOffer::where('status', 1)->where('type_id', 2)->latest()->get();
         $fb = WhyUs::first();
         $vb = VisionBanner::first();
         $vision = Vision::where('status', 1)->where('type_id', 2)->latest()->get();
@@ -66,7 +66,7 @@ class JapanController extends Controller
         $banner = Banner::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
         $consult = CosultDetail::where('status', 1)->where('type_id', 2)->latest()->get();
-        $offer = WeOffer::where('status', 1)->latest()->get();
+        $offer = WeOffer::where('status', 1)->where('type_id', 2)->latest()->get();
         $fb = WhyUs::first();
         $team = Team::where('status', 1)->where('type_id', 2)->orderBy('priority', 'asc')->latest()->get();
         return view('japan.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'team'));
@@ -79,23 +79,23 @@ class JapanController extends Controller
         return view('japan.service', compact('service', 'services', 'eb'));
     }
     public function serviceDetail($slug)
-{
-    $category = ServiceCategory::where('jp_slug', $slug)
-        ->where('status', 1)
-        ->where('type_id', 2)
-        ->firstOrFail();
+    {
+        $category = ServiceCategory::where('jp_slug', $slug)
+            ->where('status', 1)
+            ->where('type_id', 2)
+            ->firstOrFail();
 
-    $allServices = Service::where('service_category_id', $category->id)
-        ->where('status', 1)
-        ->where('type_id', 2)
-        ->get();
+        $allServices = Service::where('service_category_id', $category->id)
+            ->where('status', 1)
+            ->where('type_id', 2)
+            ->get();
 
-    $menuServices = $allServices->whereNotNull('price');
-    $nonMenuServices = $allServices->whereNull('price');
-    $hasMenu = $menuServices->count() > 0;
+        $menuServices = $allServices->whereNotNull('price');
+        $nonMenuServices = $allServices->whereNull('price');
+        $hasMenu = $menuServices->count() > 0;
 
-    return view('japan.service-detail', compact('category', 'menuServices', 'nonMenuServices', 'hasMenu'));
-}
+        return view('japan.service-detail', compact('category', 'menuServices', 'nonMenuServices', 'hasMenu'));
+    }
     public function contact()
     {
         return view('japan.contact');

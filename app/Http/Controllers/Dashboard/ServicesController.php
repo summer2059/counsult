@@ -175,60 +175,60 @@ class ServicesController extends Controller
     }
 
     public function update(Request $request, string $id)
-{
-    $request->validate([
-        'type_id' => 'required|exists:types,id',
-        'service_category_id' => 'required|exists:service_categories,id',
-    ]);
-
-    $type = Type::find($request->type_id)?->type;
-    $serviceCategory = ServiceCategory::find($request->service_category_id)?->name; // Assuming 'name' is the category name.
-
-    // List of categories where price should be shown
-    $categoriesWithPrice = ['Restaurant', 'Halal Food', 'レストラン', 'ハラール 食品'];
-
-    // Set price based on the category
-    $price = in_array($serviceCategory, $categoriesWithPrice) ? $request->price : null;
-
-    $data = [
-        'type_id' => $request->type_id,
-        'service_category_id' => $request->service_category_id,
-        'status' => $request->status ?? 0,
-        'priority' => $request->priority ?? 0,
-        'price' => $price,
-    ];
-
-    if ($type === 'japanese') {
+    {
         $request->validate([
-            'jp_title' => 'required|string',
-            'jp_description' => 'required|string',
-            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'type_id' => 'required|exists:types,id',
+            'service_category_id' => 'required|exists:service_categories,id',
         ]);
 
-        $data += $request->only(['jp_title', 'jp_description']);
+        $type = Type::find($request->type_id)?->type;
+        $serviceCategory = ServiceCategory::find($request->service_category_id)?->name; // Assuming 'name' is the category name.
 
-        if ($request->hasFile('image2')) {
-            $data['image2'] = $request->file('image2');
+        // List of categories where price should be shown
+        $categoriesWithPrice = ['Restaurant', 'Halal Food', 'レストラン', 'ハラール 食品'];
+
+        // Set price based on the category
+        $price = in_array($serviceCategory, $categoriesWithPrice) ? $request->price : null;
+
+        $data = [
+            'type_id' => $request->type_id,
+            'service_category_id' => $request->service_category_id,
+            'status' => $request->status ?? 0,
+            'priority' => $request->priority ?? 0,
+            'price' => $price,
+        ];
+
+        if ($type === 'japanese') {
+            $request->validate([
+                'jp_title' => 'required|string',
+                'jp_description' => 'required|string',
+                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $data += $request->only(['jp_title', 'jp_description']);
+
+            if ($request->hasFile('image2')) {
+                $data['image2'] = $request->file('image2');
+            }
+        } else {
+            $request->validate([
+                'title' => 'required|string',
+                'description' => 'required|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $data += $request->only(['title', 'description']);
+
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image');
+            }
         }
-    } else {
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
 
-        $data += $request->only(['title', 'description']);
+        $this->crudService->update($this->modelName, $id, $data);
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image');
-        }
+        toast('Service Updated!', 'success');
+        return redirect()->route('services.index');
     }
-
-    $this->crudService->update($this->modelName, $id, $data);
-
-    toast('Service Updated!', 'success');
-    return redirect()->route('services.index');
-}
 
 
 
