@@ -28,17 +28,21 @@ class EnquiryBannerController extends Controller
 
     public function update(ConsultRequest $request)
     {
-        $dbData = ['title' => $request->title, 'description' => $request->description];
+        $dbData = ['title' => $request->title, 'description' => $request->description, 'jp_title' => $request->jp_title, 'jp_description' => $request->jp_description];
 
         if ($request->hasFile('image')) {
             // Check for an image and upload if it exists
             $dbData['image'] = $request->file('image');
         }
+        if ($request->hasFile('image2')) {
+            // Check for an image and upload if it exists
+            $dbData['image2'] = $request->file('image2');
+        }
 
         if ($request->id) {
             try {
                 $data = $this->crudService->update($this->modelName, $request->id, $dbData);
-                toast('Consult Banner updated successfully', 'success');
+                toast('Enquiry Banner updated successfully', 'success');
                 return back()->withInput();
             } catch (\Exception $e) {
                 Log::error('Error: ' . $e->getMessage(), ['exception' => $e, 'trace' => $e->getTraceAsString()]);

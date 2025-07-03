@@ -1,8 +1,11 @@
 <div class="container-fluid bg-secondary px-0">
         <div class="row g-0">
             <div class="col-lg-6 py-6 px-5">
-                <h1 class="display-5 mb-4">Request A Free Quote</h1>
-                <p class="mb-4">Kasd vero erat ea amet justo no stet, et elitr no dolore no elitr sea kasd et dolor diam tempor. Nonumy sed dolore no eirmod sit nonumy vero lorem amet stet diam at. Ea at lorem sed et, lorem et rebum ut eirmod gubergren, dolor ea duo diam justo dolor diam ipsum dolore stet stet elitr ut. Ipsum amet labore lorem lorem diam magna sea, eos sed dolore elitr.</p>
+            @if($eb && $eb->title && $eb->description)
+                <h1 class="display-5 mb-4">{{$eb->title}}</h1>
+                <p class="mb-4">{!!$eb->description!!}</p>
+            @endif
+                
                 <form method="post" action="{{ route('store.enquiry-message')}}">
                     @csrf
                     <div class="row gx-3">
@@ -34,10 +37,13 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-6" style="min-height: 400px;">
+            @if($eb && $eb->image)
+                <div class="col-lg-6" style="min-height: 400px;">
                 <div class="position-relative h-100">
-                    <img class="position-absolute w-100 h-100" src="{{asset('frontend/img/quote.jpg')}}" style="object-fit: cover;">
+                    <img class="position-absolute w-100 h-100" src="{{asset('uploads/images/'. $eb->image)}}" style="object-fit: cover;">
                 </div>
             </div>
+            @endif
+            
         </div>
     </div>

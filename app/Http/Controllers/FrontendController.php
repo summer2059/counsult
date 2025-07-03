@@ -9,6 +9,7 @@ use App\Models\Career;
 use App\Models\CareerForm;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
+use App\Models\EnquiryBanner;
 use App\Models\FAQs;
 use App\Models\Message;
 use App\Models\MisionBanner;
@@ -56,35 +57,46 @@ class FrontendController extends Controller
         $testimonial = Testimonial::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $team = Team::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $whyDetail = WhyUsDetail::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
-        return view('frontend.index', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail'));
+        $eb = EnquiryBanner::first();
+        return view('frontend.index', compact('services', 'banner', 'eb', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail'));
     }
     public function about()
     {
         $services = Service::where('status', 1)->latest()->get();
-        $banner = Banner::where('status', 1)->orderBy('priority', 'asc')->latest()->get();
+        $banner = Banner::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
-        $consult = CosultDetail::where('status', 1)->latest()->get();
+        $consult = CosultDetail::where('status', 1)->where('type_id', 1)->latest()->get();
         $offer = WeOffer::where('status', 1)->latest()->get();
         $fb = WhyUs::first();
-        return view('frontend.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb'));
+        $team = Team::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
+        return view('frontend.about', compact('services', 'banner', 'cb', 'consult', 'offer', 'fb', 'team'));
     }
     public function services()
     {
         $service = ServiceCategory::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $services = Service::where('status', 1)->latest()->get();
-        return view('frontend.service', compact('service', 'services'));
+        $eb = EnquiryBanner::first();
+        return view('frontend.service', compact('service', 'services', 'eb'));
     }
     public function serviceDetail($slug)
-    {
-        $category = ServiceCategory::where('slug', $slug)->where('status', 1)->where('type_id', 1)->firstOrFail();
-        $relatedServices = Service::where('service_category_id', $category->id)
-            ->where('status', 1)
-            ->where('type_id', 1)
-            ->get();
-        $hasMenu = $relatedServices->whereNotNull('price')->count() > 0;
+{
+    $category = ServiceCategory::where('slug', $slug)
+        ->where('status', 1)
+        ->where('type_id', 1)
+        ->firstOrFail();
 
-        return view('frontend.service-detail', compact('category', 'relatedServices', 'hasMenu'));
-    }
+    $allServices = Service::where('service_category_id', $category->id)
+        ->where('status', 1)
+        ->where('type_id', 1)
+        ->get();
+
+    $menuServices = $allServices->whereNotNull('price');
+    $nonMenuServices = $allServices->whereNull('price');
+    $hasMenu = $menuServices->count() > 0;
+
+    return view('frontend.service-detail', compact('category', 'menuServices', 'nonMenuServices', 'hasMenu'));
+}
+
     public function contact()
     {
         return view('frontend.contact');

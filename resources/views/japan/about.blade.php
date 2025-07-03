@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h1 class="display-4 text-white">About Us</h1>
-                <a href="{{route('home-page')}}">Home</a>
+                <a href="{{route('jp.index')}}">Home</a>
                 <i class="far fa-square text-primary px-2"></i>
                 <a href="">About</a>
             </div>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div> --}}
-    @include('frontend.component.index_about')
+    @include('japan.component.index_about')
     <!-- About End -->
 
 
@@ -98,6 +98,6 @@
             </div>
         </div>
     </div> --}}
-    @include('frontend.component.team')
+    @include('japan.component.team')
     <!-- Team End -->
 @endsection

@@ -137,7 +137,7 @@ $(function() {
 
 
   // Price toggler based on category name
-  const priceCategories = ['Restaurant', 'Halal Food'];
+  const priceCategories = ['Restaurant', 'Halal Food', 'レストラン', 'ハラール 食品'];
   function togglePrice() {
     const sel = $('#categorySelect option:selected').text().trim();
     $('#priceContainer').toggle(priceCategories.includes(sel));

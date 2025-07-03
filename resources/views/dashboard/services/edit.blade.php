@@ -143,7 +143,7 @@
                 height: 120
             });
 
-            const priceCategories = ['Restaurant', 'Halal Food'];
+            const priceCategories = ['Restaurant', 'Halal Food', 'レストラン', 'ハラール 食品'];
 
             function togglePrice() {
                 const selectedText = $('#categorySelect option:selected').text().trim();
