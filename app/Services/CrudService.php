@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Log;
-
 class CrudService
 {
     public function create($modelName, $data)
@@ -120,27 +118,12 @@ class CrudService
     }
 
     public function uploadImage($image)
-{
-    try {
-        // Check if the uploaded file is actually an image
-        if (!$image->isValid() || !in_array($image->getMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
-            throw new \Exception("Invalid image file.");
-        }
-
+    {
         $destinationPath = 'uploads/images/';
         $imageName = uniqid(date('YmdHis') . "_", true) . "." . $image->getClientOriginalExtension();
-
-        if ($image->move($destinationPath, $imageName)) {
-            return $imageName;
-        } else {
-            throw new \Exception("Image upload failed.");
-        }
-    } catch (\Exception $e) {
-        Log::error('Error uploading image: ' . $e->getMessage());
-        throw new \Exception("The image failed to upload.");
+        $image->move($destinationPath, $imageName);
+        return $imageName;
     }
-}
-
 
     public function uploadImage2($image2)
     {

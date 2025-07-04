@@ -86,7 +86,7 @@ class ServiceCategoryController extends Controller
             $request->validate([
                 'jp_title' => 'required|string',
                 'jp_description' => 'required|string',
-                'image2' => 'nullable|image',
+                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
             $data += $request->only(['jp_title', 'jp_description']);
@@ -98,7 +98,7 @@ class ServiceCategoryController extends Controller
             $request->validate([
                 'title' => 'required|string',
                 'description' => 'required|string',
-                'image' => 'nullable|image',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
             $data += $request->only(['title', 'description']);
@@ -149,7 +149,7 @@ class ServiceCategoryController extends Controller
             $request->validate([
                 'jp_title' => 'required|string',
                 'jp_description' => 'required|string',
-                'image2' => 'nullable|image',
+                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
             $data += $request->only(['jp_title', 'jp_description']);
@@ -161,7 +161,7 @@ class ServiceCategoryController extends Controller
             $request->validate([
                 'title' => 'required|string',
                 'description' => 'required|string',
-                'image' => 'nullable|image',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
 
             $data += $request->only(['title', 'description']);
