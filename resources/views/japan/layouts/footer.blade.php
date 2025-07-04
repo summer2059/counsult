@@ -17,8 +17,8 @@
         <div class="col-lg-2 col-md-6 footer-column">
             <h3 class="text-white mb-4">Popular Links</h3>
             <div class="d-flex flex-column justify-content-start">
-                @foreach(getQuickLink() as $gq)
-                    <a class="text-secondary mb-2" target="_blank" href="{{ $gq->url }}"><i class="bi bi-arrow-right text-primary me-2"></i>{{ $gq->title }}</a>
+                @foreach(getQuickLinkJP() as $gq)
+                    <a class="text-secondary mb-2" target="_blank" href="{{ $gq->jp_url }}"><i class="bi bi-arrow-right text-primary me-2"></i>{{ $gq->jp_title }}</a>
                 @endforeach
             </div>
         </div>

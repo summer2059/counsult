@@ -55,4 +55,10 @@ class Type extends Model
     public function weOffer(){
         return $this->hasMany(WeOffer::class);
     }
+    public function quickLinks(){
+        return $this->hasMany(QuickLink::class);
+    }
+    public function enquiryMessages(){
+        return $this->hasMany(EnquiryMessage::class);
+    }
 }

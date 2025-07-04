@@ -23,7 +23,7 @@ class ConsultRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'image' => 'nullable|mimes:jpg,jpeg,png,webp,svg',
+            'image' => 'nullable',
         ];
     }
 }

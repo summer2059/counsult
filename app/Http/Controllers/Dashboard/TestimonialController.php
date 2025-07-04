@@ -90,7 +90,7 @@ class TestimonialController extends Controller
                 'jp_name' => 'required|string',
                 'jp_position' => 'required|string',
                 'jp_description' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image2' => 'nullable|image',
             ]);
 
             $data += $request->only(['jp_name', 'jp_position', 'jp_description']);
@@ -103,7 +103,7 @@ class TestimonialController extends Controller
                 'name' => 'required|string',
                 'position' => 'required|string',
                 'description' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image',
             ]);
 
             $data += $request->only(['name', 'position', 'description']);
@@ -157,7 +157,7 @@ class TestimonialController extends Controller
                 'jp_name' => 'required|string',
                 'jp_position' => 'required|string',
                 'jp_description' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image2' => 'nullable|image',
             ]);
 
             $data += $request->only(['jp_name', 'jp_position', 'jp_description']);
@@ -170,7 +170,7 @@ class TestimonialController extends Controller
                 'name' => 'required|string',
                 'position' => 'required|string',
                 'description' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image',
             ]);
 
             $data += $request->only(['name', 'position', 'description']);

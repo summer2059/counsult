@@ -103,6 +103,7 @@
                     <thead>
                         <tr class="text-start text-black-500 fw-bold fs-7 text-uppercase gs-0">
                             <th>S.N</th>
+                            <th>Type</th>
                             <th>Title</th>
                             <th>Link</th>
                             <th>Status</th>
@@ -132,6 +133,10 @@
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
                     },
                     {
                         data: 'title',

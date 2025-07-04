@@ -40,6 +40,11 @@ if(!function_exists('getPageJP')){
 }
 if(!function_exists('getQuickLink')){
     function getQuickLink(){
-        return QuickLink::where('status', 1)->orderBy('priority', 'asc')->latest()->get();
+        return QuickLink::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
+    }
+}
+if(!function_exists('getQuickLinkJP')){
+    function getQuickLinkJP(){
+        return QuickLink::where('status', 1)->where('type_id',2)->orderBy('priority', 'asc')->latest()->get();
     }
 }

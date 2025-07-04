@@ -95,7 +95,7 @@ class MessageController extends Controller
                 'jp_name' => 'required|string',
                 'jp_position' => 'required|string',
                 'jp_message' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image2' => 'nullable|image',
             ]);
 
             $data += $request->only(['jp_name', 'jp_position', 'jp_message']);
@@ -108,7 +108,7 @@ class MessageController extends Controller
                 'name' => 'required|string',
                 'position' => 'required|string',
                 'message' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image',
             ]);
 
             $data += $request->only(['name', 'position', 'message']);
@@ -163,7 +163,7 @@ class MessageController extends Controller
                 'jp_name' => 'required|string',
                 'jp_position' => 'required|string',
                 'jp_message' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image2' => 'nullable|image',
             ]);
 
             $data += $request->only(['jp_name', 'jp_position', 'jp_message']);
@@ -176,7 +176,7 @@ class MessageController extends Controller
                 'name' => 'required|string',
                 'position' => 'required|string',
                 'message' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image',
             ]);
 
             $data += $request->only(['name', 'position', 'message']);

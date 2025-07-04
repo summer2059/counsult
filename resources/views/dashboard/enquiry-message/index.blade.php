@@ -24,8 +24,11 @@
                     <thead>
                         <tr class="text-start text-black-500 fw-bold fs-7 text-uppercase gs-0">
                             <th>No</th>
+                            <th>Type</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone</th>
+                            <th>Address</th>
                             <th>Service Name</th>
                             <th class="min-w-70px">Actions</th>
                         </tr>
@@ -45,8 +48,11 @@
                 ajax: "{{ route('enquiry-message.index') }}",
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+                    { data: 'type', name: 'type'},
                     { data: 'name', name: 'name' },
                     { data: 'email', name: 'email' },
+                    { data: 'phone', name: 'phone'},
+                    { data: 'address', name: 'address'},
                     { data: 'service_name', name: 'service_name' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ]

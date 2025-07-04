@@ -14,5 +14,13 @@ class QuickLink extends Model
         'url',
         'status',
         'priority',
+        'jp_title',
+        'jp_slug',
+        'jp_url',
+        'type_id',
     ];
+
+    public function type(){
+        return $this->belongsTo(Type::class);
+    }
 }

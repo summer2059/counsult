@@ -87,7 +87,7 @@ class ConsultDetailController extends Controller
             $request->validate([
                 'jp_title' => 'required|string',
                 'jp_description' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image2' => 'nullable|image',
             ]);
 
             $data += $request->only(['jp_title', 'jp_description']);
@@ -99,7 +99,7 @@ class ConsultDetailController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'description' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image',
             ]);
 
             $data += $request->only(['name', 'description']);
@@ -150,7 +150,7 @@ class ConsultDetailController extends Controller
             $request->validate([
                 'jp_title' => 'required|string',
                 'jp_description' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image2' => 'nullable|image',
             ]);
 
             $data += $request->only(['jp_title', 'jp_description']);
@@ -162,7 +162,7 @@ class ConsultDetailController extends Controller
             $request->validate([
                 'name' => 'required|string',
                 'description' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image' => 'nullable|image',
             ]);
 
             $data += $request->only(['name', 'description']);

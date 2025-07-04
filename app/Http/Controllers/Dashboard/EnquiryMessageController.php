@@ -26,6 +26,9 @@ class EnquiryMessageController extends Controller
             $data = $this->crudService->all($this->modelName);
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('type', function ($data) {
+                    return $data->type ? ucfirst($data->type->type) : 'N/A';
+                })
                 ->addColumn('service_name', function ($data) {
                     return $data->service ? $data->service->title : 'N/A';
                 })
@@ -50,6 +53,8 @@ class EnquiryMessageController extends Controller
             $request->validate([
                 'name' => 'required|string|regex:/^[a-zA-Z\s]+$/|max:255',
                 'email' => 'required|email|max:255',
+                'phone' => 'required|integer',
+                'address'=> 'required|string',
                 'service_id' => 'required|integer|exists:services,id',
             ]);
 

@@ -12,9 +12,15 @@ class EnquiryMessage extends Model
         'name',
         'email',
         'service_id',
+        'phone',
+        'type_id',
+        'address',
     ];
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+    public function type(){
+        return $this->belongsTo(Type::class);
     }
 }

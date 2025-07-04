@@ -16,10 +16,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $user = User::create([
-            'name' => 'consultancy admin',
-            'email' => 'consultancy@admin.com',
-            'password' => bcrypt('cons@123')
-        ]);
+        // $user = User::create([
+        //     'name' => 'consultancy admin',
+        //     'email' => 'consultancy@admin.com',
+        //     'password' => bcrypt('cons@123')
+        // ]);
+        $this->call(UserTableSeeder::class);
+        $this->call(TypeSeeder::class);
+        
     }
 }
