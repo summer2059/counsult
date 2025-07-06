@@ -155,6 +155,17 @@
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>FAQ'S </span></a>
                     </li>
+                    <li class="sidebar-list"
+                        style="{{ request()->routeIs('message.index', 'message.create', 'message.edit') ? 'background-color: #708090;' : '' }}">
+                        <i class="fa fa-thumb-tack"> </i><a class="sidebar-link sidebar-title link-nav"
+                            href="{{ route('message.index') }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-board"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
+                            </svg><span>Leadership Message </span></a>
+                    </li>
                     <li
                         class="sidebar-list {{ request()->routeIs('mission-banner.index', 'mission.index', 'mission.create', 'mission.edit') ? 'open' : '' }}">
                         <a class="sidebar-link sidebar-title" data-toggle="dropdown">

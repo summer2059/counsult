@@ -20,9 +20,6 @@ class WhyUsDetailController extends Controller
         $this->modelName = 'WhyUsDetail';
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $title = 'Delete Data!';
@@ -33,163 +30,166 @@ class WhyUsDetailController extends Controller
             $data = $this->crudService->all($this->modelName);
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('type', function ($data) {
-                    return $data->type ? ucfirst($data->type->type) : 'N/A';
-                })
-                ->addColumn('title', function ($data) {
-                    return $data->type && $data->type->type === 'japanese' ? ($data->jp_title ?? 'N/A') : ($data->title ?? 'N/A');
-                })
+                ->addColumn('type', fn($data) => $data->type ? ucfirst($data->type->type) : 'N/A')
+                ->addColumn('title', fn($data) =>
+                    $data->type && $data->type->type === 'japanese'
+                        ? ($data->jp_title ?? 'N/A')
+                        : ($data->title ?? 'N/A'))
                 ->addColumn('image', function ($data) {
-                    if ($data->type && $data->type->type === 'japanese') {
-                        $imagePath = $data->image2 ? asset('uploads/images2/' . $data->image2) : null;
-                    } else {
-                        $imagePath = $data->image ? asset('uploads/images/' . $data->image) : null;
-                    }
+                    $imagePath = $data->type && $data->type->type === 'japanese'
+                        ? ($data->image2 ? asset('uploads/images2/' . $data->image2) : null)
+                        : ($data->image ? asset('uploads/images/' . $data->image) : null);
 
                     return $imagePath
                         ? '<img src="' . $imagePath . '" alt="Image" height="50">'
                         : 'N/A';
                 })
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="/dashboard/whyus-detail/' . $data->id . '/edit" class="btn btn-sm btn-primary"> Edit</a>
-                     <a href="/dashboard/whyus-detail/' . $data->id . '" class="btn btn-sm btn-danger" data-confirm-delete="true"> Delete</a>';
-                    return $actionBtn;
+                    return '<a href="/dashboard/whyus-detail/' . $data->id . '/edit" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="/dashboard/whyus-detail/' . $data->id . '" class="btn btn-sm btn-danger" data-confirm-delete="true">Delete</a>';
                 })
                 ->rawColumns(['action', 'image'])
                 ->make(true);
         }
+
         return view('dashboard.whyus-detail.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Type::orderBy('type', 'asc')->get();
         return view('dashboard.whyus-detail.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'type_id' => 'required|exists:types,id',
-        ]);
-
-        $type = Type::find($request->type_id)?->type;
-
-        $data = [
-            'type_id' => $request->type_id,
-            'status' => $request->status ?? 0,
-            'priority' => $request->priority ?? 0,
-        ];
-
-        if ($type === 'japanese') {
+        try {
             $request->validate([
-                'jp_title' => 'required|string',
-                'jp_description' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'type_id' => 'required|exists:types,id',
             ]);
 
-            $data += $request->only(['jp_title', 'jp_description']);
+            $type = Type::find($request->type_id)?->type;
 
-            if ($request->hasFile('image2')) {
-                $data['image2'] = $request->file('image2'); // pass file, not string
+            $data = [
+                'type_id' => $request->type_id,
+                'status' => $request->status ?? 0,
+                'priority' => $request->priority ?? 0,
+            ];
+
+            if ($type === 'japanese') {
+                $request->validate([
+                    'jp_title' => 'required|string',
+                    'jp_description' => 'required|string',
+                    'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+                $data += $request->only(['jp_title', 'jp_description']);
+
+                if ($request->hasFile('image2')) {
+                    $data['image2'] = $request->file('image2');
+                }
+            } else {
+                $request->validate([
+                    'title' => 'required|string',
+                    'description' => 'required|string',
+                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+                $data += $request->only(['title', 'description']);
+
+                if ($request->hasFile('image')) {
+                    $data['image'] = $request->file('image');
+                }
             }
-        } else {
-            $request->validate([
-                'title' => 'required|string',
-                'description' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
 
-            $data += $request->only(['title', 'description']);
-
-            if ($request->hasFile('image')) {
-                $data['image'] = $request->file('image'); // pass file, not string
-            }
+            $this->crudService->create($this->modelName, $data);
+            toast('Why Us Detail Added!', 'success');
+        } catch (\Throwable $e) {
+            Log::error('Error in WhyUsDetailController@store: ' . $e->getMessage(), ['exception' => $e]);
+            toast('Failed to add data. Please try again.', 'error');
         }
 
-        $this->crudService->create($this->modelName, $data);
-
-        toast('Whys Us Detail Added!', 'success');
         return redirect()->route('whyus-detail.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $why = $this->crudService->find($this->modelName, $id);
-        return view('dashboard.whyus-detail.edit', compact('why'));
+        try {
+            $why = $this->crudService->find($this->modelName, $id);
+            return view('dashboard.whyus-detail.edit', compact('why'));
+        } catch (\Throwable $e) {
+            Log::error('Error in WhyUsDetailController@edit: ' . $e->getMessage(), ['exception' => $e]);
+            toast('Unable to load edit form.', 'error');
+            return redirect()->route('whyus-detail.index');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'type_id' => 'required|exists:types,id',
-        ]);
-
-        $type = Type::find($request->type_id)?->type;
-
-        $data = [
-            'type_id' => $request->type_id,
-            'status' => $request->status ?? 0,
-            'priority' => $request->priority ?? 0,
-        ];
-
-        if ($type === 'japanese') {
+        try {
             $request->validate([
-                'jp_title' => 'required|string',
-                'jp_description' => 'required|string',
-                'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'type_id' => 'required|exists:types,id',
             ]);
 
-            $data += $request->only(['jp_title', 'jp_description']);
+            $type = Type::find($request->type_id)?->type;
 
-            if ($request->hasFile('image2')) {
-                $data['image2'] = $request->file('image2'); // pass file, not string
+            $data = [
+                'type_id' => $request->type_id,
+                'status' => $request->status ?? 0,
+                'priority' => $request->priority ?? 0,
+            ];
+
+            if ($type === 'japanese') {
+                $request->validate([
+                    'jp_title' => 'required|string',
+                    'jp_description' => 'required|string',
+                    'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+                $data += $request->only(['jp_title', 'jp_description']);
+
+                if ($request->hasFile('image2')) {
+                    $data['image2'] = $request->file('image2');
+                }
+            } else {
+                $request->validate([
+                    'title' => 'required|string',
+                    'description' => 'required|string',
+                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+
+                $data += $request->only(['title', 'description']);
+
+                if ($request->hasFile('image')) {
+                    $data['image'] = $request->file('image');
+                }
             }
-        } else {
-            $request->validate([
-                'title' => 'required|string',
-                'description' => 'required|string',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
 
-            $data += $request->only(['title', 'description']);
-
-            if ($request->hasFile('image')) {
-                $data['image'] = $request->file('image'); // pass file, not string
-            }
+            $this->crudService->update($this->modelName, $id, $data);
+            toast('Why Us Detail Updated!', 'success');
+        } catch (\Throwable $e) {
+            Log::error('Error in WhyUsDetailController@update: ' . $e->getMessage(), ['exception' => $e]);
+            toast('Update failed. Please try again.', 'error');
         }
-        $this->crudService->update($this->modelName, $id, $data);
-        toast('why Us Detail Updated!', 'success');
+
         return redirect()->route('whyus-detail.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $this->crudService->delete($this->modelName, $id);
-        toast('why Us Detail Deleted!', 'success');
+        try {
+            $this->crudService->delete($this->modelName, $id);
+            toast('Why Us Detail Deleted!', 'success');
+        } catch (\Throwable $e) {
+            Log::error('Error in WhyUsDetailController@destroy: ' . $e->getMessage(), ['exception' => $e]);
+            toast('Delete failed. Please try again.', 'error');
+        }
+
         return redirect()->route('whyus-detail.index');
     }
 }

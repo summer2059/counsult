@@ -7,6 +7,7 @@ use App\Models\Type;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Log;
 
 class TeamController extends Controller
 {
@@ -19,9 +20,6 @@ class TeamController extends Controller
         $this->modelName = 'Team';
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $title = 'Delete Data!';
@@ -50,69 +48,61 @@ class TeamController extends Controller
         return view('dashboard.Team.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Type::orderby('type', 'asc')->get();
         return view('dashboard.Team.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'type_id' => 'required|exists:types,id',
-        ]);
+        try {
+            $request->validate([
+                'type_id' => 'required|exists:types,id',
+            ]);
 
-        $type = Type::find($request->type_id)?->type;
+            $type = Type::find($request->type_id)?->type;
 
-        $data = [
-            'type_id' => $request->type_id,
-            'status' => $request->status ?? 0,
-            'image' => $request->image,
-            'priority' => $request->priority ?? 0,
-        ];
+            $data = [
+                'type_id' => $request->type_id,
+                'status' => $request->status ?? 0,
+                'priority' => $request->priority ?? 0,
+            ];
 
-        switch ($type) {
-            case 'japanese':
-                $request->validate([
-                    'jp_name' => 'required|string',
-                    'jp_position' => 'required|string',
-                ]);
-                $data += $request->only([
-                    'jp_name',
-                    'jp_position',
-                ]);
-                break;
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image');
+            }
 
-            default:
-                $request->validate([
-                    'name' => 'required|string',
-                    'position' => 'required|string',
-                ]);
-                $data += $request->only([
-                    'name',
-                    'position',
-                ]);
-                break;
+            switch ($type) {
+                case 'japanese':
+                    $request->validate([
+                        'jp_name' => 'required|string',
+                        'jp_position' => 'required|string',
+                    ]);
+                    $data += $request->only(['jp_name', 'jp_position']);
+                    break;
+
+                default:
+                    $request->validate([
+                        'name' => 'required|string',
+                        'position' => 'required|string',
+                    ]);
+                    $data += $request->only(['name', 'position']);
+                    break;
+            }
+
+            $this->crudService->create($this->modelName, $data);
+            toast('Team Added!', 'success');
+        } catch (\Exception $e) {
+            Log::error('Error adding team: ' . $e->getMessage());
+            toast('An error occurred while adding the team.', 'error');
         }
-        $this->crudService->create($this->modelName, $data);
-        toast('Team Added!', 'success');
+
         return redirect()->route('team.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id) {}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $team = $this->crudService->find($this->modelName, $id);
@@ -120,61 +110,63 @@ class TeamController extends Controller
         return view('dashboard.Team.edit', compact('team', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'type_id' => 'required|exists:types,id',
-        ]);
+        try {
+            $request->validate([
+                'type_id' => 'required|exists:types,id',
+            ]);
 
-        $type = Type::find($request->type_id)?->type;
+            $type = Type::find($request->type_id)?->type;
 
-        $data = [
-            'type_id' => $request->type_id,
-            'status' => $request->status ?? 0,
-            'priority' => $request->priority ?? 0,
-        ];
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image'); // This will be passed to CrudService and uploaded
+            $data = [
+                'type_id' => $request->type_id,
+                'status' => $request->status ?? 0,
+                'priority' => $request->priority ?? 0,
+            ];
+
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image');
+            }
+
+            switch ($type) {
+                case 'japanese':
+                    $request->validate([
+                        'jp_name' => 'required|string',
+                        'jp_position' => 'required|string',
+                    ]);
+                    $data += $request->only(['jp_name', 'jp_position']);
+                    break;
+
+                default:
+                    $request->validate([
+                        'name' => 'required|string',
+                        'position' => 'required|string',
+                    ]);
+                    $data += $request->only(['name', 'position']);
+                    break;
+            }
+
+            $this->crudService->update($this->modelName, $id, $data);
+            toast('Team Updated!', 'success');
+        } catch (\Exception $e) {
+            Log::error('Error updating team: ' . $e->getMessage());
+            toast('An error occurred while updating the team.', 'error');
         }
 
-        switch ($type) {
-            case 'japanese':
-                $request->validate([
-                    'jp_name' => 'required|string',
-                    'jp_position' => 'required|string',
-                ]);
-                $data += $request->only([
-                    'jp_name',
-                    'jp_position',
-                ]);
-                break;
-
-            default:
-                $request->validate([
-                    'name' => 'required|string',
-                    'position' => 'required|string',
-                ]);
-                $data += $request->only([
-                    'name',
-                    'position',
-                ]);
-                break;
-        }
-        $this->crudService->update($this->modelName, $id, $data);
-        toast('Team Updated!', 'success');
         return redirect()->route('team.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $this->crudService->delete($this->modelName, $id);
-        toast('Team Deleted!', 'success');
+        try {
+            $this->crudService->delete($this->modelName, $id);
+            toast('Team Deleted!', 'success');
+        } catch (\Exception $e) {
+            Log::error('Error deleting team: ' . $e->getMessage());
+            toast('An error occurred while deleting the team.', 'error');
+        }
+
         return redirect()->route('team.index');
     }
 }
