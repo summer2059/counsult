@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EnquiryMail;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Mail;
 
 class EnquiryMessageController extends Controller
 {
@@ -60,9 +62,19 @@ class EnquiryMessageController extends Controller
 
 
             $data = $request->all();
-            $this->crudService->create($this->modelName, $data);
+            $enquiry=$this->crudService->create($this->modelName, $data);
+            $enquiry->load('service');
 
-            toast('Message Sent!', 'success');
+            // Prepare data for email
+            $data = $enquiry->toArray();
+            $data['service_name'] = $enquiry->service ? $enquiry->service->title : 'N/A';
+            $data['form_name'] = 'Home Page Enquiry Form';
+
+                // Send email
+                Mail::to(['sg2045016@gmail.com'])
+                    ->send(new EnquiryMail($data));
+
+                toast('Message Sent!', 'success');
         } catch (\Illuminate\Validation\ValidationException $e) {
             toast("Message isn't sent", 'error');
             return redirect()->back()->withErrors($e->errors())->withInput();

@@ -94,6 +94,26 @@
                         </ul>
                     </li>
                     <li
+                        class="sidebar-list {{ request()->routeIs('city-banner.index', 'city-banner.create', 'city-banner.edit', 'city.index', 'city.create', 'city.edit') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
+                            </svg>
+                            <span>City</span>
+                        </a>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('city-banner.index', 'city-banner.create', 'city-banner.edit', 'city.index', 'city.create', 'city.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('city-banner.index', 'city-banner.create', 'city-banner.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('city-banner.index') }}">City Banner </a></li>
+                            <li><a style="{{ request()->routeIs('city.index', 'city.create', 'city.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('city.index') }}">City</a></li>
+
+                        </ul>
+                    </li>
+                    <li
                         class="sidebar-list {{ request()->routeIs('consult-banner.index', 'consult-banner.create', 'consult-banner.edit', 'consult-detail.index', 'consult-detail.create', 'consult-detail.edit') ? 'open' : '' }}">
                         <a class="sidebar-link sidebar-title" data-toggle="dropdown">
                             <svg class="stroke-icon">
@@ -154,6 +174,26 @@
                             <svg class="fill-icon">
                                 <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-board"></use>
                             </svg><span>FAQ'S </span></a>
+                    </li>
+                    <li
+                        class="sidebar-list {{ request()->routeIs('intake-banner.index', 'intake-banner.create', 'intake-banner.edit', 'intake.index', 'intake.create', 'intake.edit') ? 'open' : '' }}">
+                        <a class="sidebar-link sidebar-title" data-toggle="dropdown">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#stroke-gallery"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('dashboard/assets/svg/icon-sprite.svg') }}#fill-gallery"></use>
+                            </svg>
+                            <span>Intake</span>
+                        </a>
+                        <ul
+                            class="sidebar-submenu {{ request()->routeIs('intake-banner.index', 'intake-banner.create', 'intake-banner.edit', 'intake.index', 'intake.create', 'intake.edit') ? 'd-block' : '' }}">
+                            <li><a style="{{ request()->routeIs('intake-banner.index', 'intake-banner.create', 'intake-banner.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('intake-banner.index') }}">Intake Banner </a></li>
+                            <li><a style="{{ request()->routeIs('intake.index', 'intake.create', 'intake.edit') ? 'background-color: #708090;' : '' }}"
+                                    href="{{ route('intake.index') }}">Intake Detail</a></li>
+
+                        </ul>
                     </li>
                     <li class="sidebar-list"
                         style="{{ request()->routeIs('message.index', 'message.create', 'message.edit') ? 'background-color: #708090;' : '' }}">

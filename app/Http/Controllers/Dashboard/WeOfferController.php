@@ -179,36 +179,4 @@ class WeOfferController extends Controller
             return redirect()->route('offer.index')->with('error', 'Failed to delete offer.');
         }
     }
-
-    public function toggleStatus(Request $request, $id)
-    {
-        try {
-            $banner = $this->crudService->find($this->modelName, $id);
-
-            if ($banner) {
-                $banner->status = !$banner->status;
-                $banner->save();
-
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Status updated successfully',
-                    'status' => $banner->status,
-                ]);
-            }
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Offer not found',
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Error toggling status: ' . $e->getMessage(), [
-                'trace' => $e->getTraceAsString()
-            ]);
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to toggle status. Please try again.',
-            ]);
-        }
-    }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CareerController;
 use App\Http\Controllers\Dashboard\CareerFormController;
+use App\Http\Controllers\Dashboard\CityController;
+use App\Http\Controllers\Dashboard\CityDetailController;
 use App\Http\Controllers\Dashboard\ConfigurationController;
 use App\Http\Controllers\Dashboard\ConsultBannerController;
 use App\Http\Controllers\Dashboard\ConsultDetailController;
@@ -14,6 +16,8 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\EnquiryBannerController;
 use App\Http\Controllers\Dashboard\EnquiryMessageController;
 use App\Http\Controllers\Dashboard\FAQSController;
+use App\Http\Controllers\Dashboard\IntakeBannerController;
+use App\Http\Controllers\Dashboard\IntakeController;
 use App\Http\Controllers\Dashboard\MessageController;
 use App\Http\Controllers\Dashboard\MisionBannerController;
 use App\Http\Controllers\Dashboard\MissionController;
@@ -112,11 +116,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::post('/update-profile', [DashboardController::class, 'update'])->name('profile.update');
     //banner
     Route::resource('/banner', BannerController::class);
+    Route::resource('/city', CityController::class);
+    Route::resource('/intake', IntakeController::class);
+    Route::resource('/intake-banner', IntakeBannerController::class);
     //consult-banner
     Route::get('/consult-banner', [ConsultBannerController::class, 'index'])->name('consult-banner.index');
     Route::post('/consult-banner/update', [ConsultBannerController::class, 'update'])->name('consult-banner.update');
     Route::get('/enquiry-banner', [EnquiryBannerController::class,'index'])->name('enquiry-banner.index');
     Route::post('/enquiry-banner/update', [EnquiryBannerController::class, 'update'])->name('enquiry-banner.update');
+    Route::get('/city-banner', [CityDetailController::class, 'index'])->name('city-banner.index');
+    Route::post('/city-banner/update', [CityDetailController::class, 'update'])->name('city-banner.update');
     //why-us
     //consult-detail
     Route::resource('/consult-detail', ConsultDetailController::class);

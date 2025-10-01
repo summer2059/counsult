@@ -8,8 +8,13 @@
     <!-- About Start -->
     @include('frontend.component.index_about')
     <!-- About End -->
+    {{-- Intake Start --}}
+    @include('frontend.component.intake')
+    {{-- Intake End --}}
     <!-- vision Start -->
     @include('frontend.component.vision')
+    
+    @include('frontend.component.city')
 <!-- Mission Start -->
 @include('frontend.component.mission')
 

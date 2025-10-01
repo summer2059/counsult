@@ -61,4 +61,13 @@ class Type extends Model
     public function enquiryMessages(){
         return $this->hasMany(EnquiryMessage::class);
     }
+    public function intakes(){
+        return $this->hasMany(Intake::class);
+    }
+    public function intakeBanners(){
+        return $this->hasMany(IntakeBanner::class);
+    }
+    public function cities(){
+        return $this->hasMany(City::class);
+    }
 }

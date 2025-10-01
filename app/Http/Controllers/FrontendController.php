@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Career;
 use App\Models\CareerForm;
+use App\Models\City;
+use App\Models\CityDetail;
 use App\Models\CosultBanner;
 use App\Models\CosultDetail;
 use App\Models\EnquiryBanner;
 use App\Models\FAQs;
+use App\Models\Intake;
+use App\Models\IntakeBanner;
 use App\Models\Message;
 use App\Models\MisionBanner;
 use App\Models\Mission;
@@ -27,6 +32,7 @@ use App\Models\WhyUs;
 use App\Models\WhyUsDetail;
 use App\Services\CrudService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -58,7 +64,11 @@ class FrontendController extends Controller
         $team = Team::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $whyDetail = WhyUsDetail::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $eb = EnquiryBanner::first();
-        return view('frontend.index', compact('services', 'banner', 'eb', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail'));
+        $intakebanner = IntakeBanner::where('status', 1)->where('type_id', 1)->latest()->get();
+        $intakes = Intake::where('status', 1)->where('type_id', 1)->latest()->get();
+        $cd = CityDetail::first();
+        $city = City::where('status', 1)->where('type_id', 1)->latest()->get();
+        return view('frontend.index', compact('services', 'banner', 'eb', 'cb', 'consult', 'offer', 'fb', 'vb', 'vision', 'mb', 'mission', 'message', 'tb', 'testimonial', 'team', 'whyDetail', 'intakebanner', 'intakes', 'cd', 'city'));
     }
     public function about()
     {
@@ -114,6 +124,12 @@ class FrontendController extends Controller
 
             $data = $request->all();
             $this->crudService->create($this->modelName, $data);
+            // Send email
+            // Mail::to(['manishsingh980087@gmail.com', 'sg2045016@gmail.com'])
+            //     ->send(new ContactMail($data));
+            
+            Mail::to(['chandracoltd147@gmail.com'])
+                ->send(new ContactMail($data));
 
             toast('Message Sent!', 'success');
         } catch (\Illuminate\Validation\ValidationException $e) {
