@@ -1,5 +1,5 @@
 <section class="py-6 text-center">
-  <div class="container">
+  <div class="container-fluid py-6 px-5">
     @if ($cd && $cd->title && $cd->description)
       <h2 class="text-uppercase font-weight-bold mb-4" style="color: var(--primary);">{{$cd->title}}</h2>
       <p class="mb-5" style="color: var(--dark); font-size: 1.1rem;">
