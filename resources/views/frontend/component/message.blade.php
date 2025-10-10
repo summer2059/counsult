@@ -9,7 +9,7 @@
                 <h4>{{$me->name}}</h4>
                 <p><strong>{{$me->position}}</strong></p>
                 <p>
-                    "{!!$me->message!!}"
+                    {!!$me->message!!}
                 </p>
             </div>
         </div>
