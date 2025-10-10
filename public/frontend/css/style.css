@@ -364,13 +364,14 @@ h6,
 }
 
 .message-box {
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 30px;
-    border-radius: 12px;
+    border-radius: 10px;
     background-color: var(--secondary);
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.01);
     transition: transform 0.3s;
 }
 
@@ -379,9 +380,14 @@ h6,
 }
 
 .message-box img {
-    max-width: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
+  width: 280px;                 /* Adjust to your preferred size */
+  height: 300px;                /* Same as width → perfect circle */
+  border-radius: 50%;           /* Makes the image circular */
+  object-fit: cover;            /* Crops nicely without distortion */
+  object-position: center;      /* Ensures the face stays centered */
+  display: block;
+  margin: 0 auto 15px auto;     /* Centers horizontally + space below */
+  box-shadow: 0 4px 50px rgba(0, 0, 0, 0.044); /* Optional: neat subtle shadow */
 }
 
 .message-box h4 {
@@ -393,7 +399,10 @@ h6,
 .message-box p {
     color: var(--dark);
     font-size: 1.1rem;
-    line-height: 1.6;
+    line-height: 1.8;       /* More breathing room between lines */
+    text-align: justify;     /* Makes it look like a paragraph */
+    margin: 0;               /* Remove extra spacing for uniformity */
+    white-space: normal;
 }
 
 .message-section {
