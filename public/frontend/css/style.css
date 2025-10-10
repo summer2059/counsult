@@ -15,7 +15,7 @@ h2,
 h3,
 h4,
 .font-weight-semi-bold {
-    font-weight: 600 !important;
+    font-weight: 700 !important;
 }
 
 h5,
@@ -433,10 +433,52 @@ h6,
       color: var(--primary);
       font-size: 1.2rem;
     }
+
+    .menu-card-body {
+      padding: 15px;
+      text-align: center;
+    } 
+
     .menu-card img {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
+    width: 100%;
+    height: auto;                  /* Mobile/tablet: natural ratio */
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    }
+
+    /* ✅ Desktop (≥1024px) */
+    @media (min-width: 1024px) {
+    .menu-card img {
+        height: 280px;              /* Standard desktop */
+    }
+    }
+
+    /* ✅ Large Desktop / 2K (≥1600px) */
+    @media (min-width: 1600px) {
+    .menu-card img {
+        height: 420px;              /* Slightly taller for 2K screens */
+    }
+    }
+
+    /* ✅ 3K Resolution (≥2560px) */
+    @media (min-width: 2560px) {
+    .menu-card img {
+        height: 600px;
+    }
+    }
+
+    /* ✅ 4K Resolution (≥3840px) */
+    @media (min-width: 3840px) {
+    .menu-card img {
+        height: 800px;
+    }
+    }
+
+    /* ✅ 5K Resolution (≥5120px) */
+    @media (min-width: 5120px) {
+    .menu-card img {
+        height: 1000px;
+    }
     }
