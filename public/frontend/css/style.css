@@ -491,3 +491,128 @@ h6,
         height: 1000px;
     }
     }
+
+/* vision  */
+/* 🌿 Vision Section Image Styles */
+.vision-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.vision-image .main-img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: none;
+}
+
+/* 📱 Mobile (small devices) */
+@media (max-width: 575.98px) {
+    .vision-image .main-img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+}
+
+/* 💻 Tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .vision-image .main-img {
+        max-width: 480px;
+    }
+}
+
+/* 🖥️ Large desktop */
+@media (min-width: 1280px) {
+    .vision-image .main-img {
+        max-width: 650px;
+    }
+}
+
+/* 🖥️ Wide screen */
+@media (min-width: 1600px) {
+    .vision-image .main-img {
+        max-width: 700px;
+    }
+}
+
+/* 🖥️ Ultra-wide (4K, 5K monitors) */
+@media (min-width: 2560px) {
+    .vision-image .main-img {
+        max-width: 900px;
+    }
+}
+/* 🌍 Mission Section */
+.mission {
+    overflow-x: hidden;
+}
+
+.mission-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mission-image .main-img {
+    width: 100%;
+    height: auto;
+    max-width: 550px;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: none; /* No hover animation */
+}
+
+/* ✍️ Mission Text Styling */
+.mission-text .section-header h2 {
+    color: var(--primary);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.mission-text .section-header h3 {
+    color: var(--dark);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 575.98px) {
+    .mission-image .main-img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    .mission-text {
+        text-align: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mission-image .main-img {
+        max-width: 480px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .mission-image .main-img {
+        max-width: 600px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .mission-image .main-img {
+        max-width: 700px;
+    }
+}
+
+@media (min-width: 2560px) {
+    .mission-image .main-img {
+        max-width: 900px;
+    }
+}

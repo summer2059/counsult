@@ -1,5 +1,5 @@
 <section class="vision py-6" style="overflow-x: hidden;">
-    <div class="container">
+    <div class="container-fluid px-5 py-6">
         <div class="row g-xl-5 g-4 align-items-center">
             <!-- Vision Text Section -->
             <div class="col-lg-6 col-12" data-aos="fade-right">
@@ -34,9 +34,10 @@
 
             <!-- Vision Image Section -->
             @if ($vb && $vb->image)
-                <div class="col-lg-6 col-12" data-aos="fade-left">
-                    <img src="{{ asset('uploads/images/' . $vb->image) }}" alt="Vision Image"
-                        class="img-fluid rounded-3 main-img" width="536" height="600">
+                <div class="col-lg-6 col-12 vision-image" data-aos="fade-left">
+                    <img src="{{ asset('uploads/images/' . $vb->image) }}" 
+                        alt="Vision Image"
+                        class="img-fluid rounded-3 main-img">
                 </div>
             @endif
         </div>

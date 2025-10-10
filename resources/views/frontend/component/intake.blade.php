@@ -3,7 +3,7 @@
 
 <!-- Banner Section -->
 @if (!$intakebanner->isEmpty())
-  <div class="position-relative overflow-hidden" style="height: 400px;">
+  <div class="position-relative overflow-hidden >
     <div class="swiper">
       <div class="swiper-wrapper">
         @foreach ($intakebanner as $ib)
