@@ -48,7 +48,8 @@ class FrontendController extends Controller
 
     public function index()
     {
-        $services = Service::where('status', 1)->latest()->get();
+        // $services = Service::where('status', 1)->latest()->get();
+        $services = Service::where('status', 1)->where('service_category_id', 6)->latest()->get();
         $banner = Banner::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
         $consult = CosultDetail::where('status', 1)->where('type_id', 1)->latest()->get();
@@ -72,7 +73,8 @@ class FrontendController extends Controller
     }
     public function about()
     {
-        $services = Service::where('status', 1)->latest()->get();
+        // $services = Service::where('status', 1)->latest()->get();
+        $services = Service::where('status', 1)->where('service_category_id', 6)->latest()->get();
         $banner = Banner::where('status', 1)->where('type_id', 1)->orderBy('priority', 'asc')->latest()->get();
         $cb = CosultBanner::first();
         $consult = CosultDetail::where('status', 1)->where('type_id', 1)->latest()->get();

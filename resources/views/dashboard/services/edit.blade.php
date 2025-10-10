@@ -143,7 +143,7 @@
                 height: 120
             });
 
-            const priceCategories = ['Restaurant', 'Halal Food', 'レストラン', 'ハラール 食品'];
+            const priceCategories = ['Gaule Restaurant & Bar', 'Chandra Mart', 'ゴール レストラン＆バー', 'チャンドラ マート'];
 
             function togglePrice() {
                 const selectedText = $('#categorySelect option:selected').text().trim();

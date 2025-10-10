@@ -169,17 +169,8 @@ h6,
     box-shadow: 0px -10px 5px #EEEEEE;
     transition: .5s;
 }
-
-.service-item:hover::after {
-    bottom: -25px;
-}
-
 .service-item p {
     transition: .3s;
-}
-
-.service-item:hover p {
-    margin-bottom: 25px !important;
 }
 
 .team-item img {
